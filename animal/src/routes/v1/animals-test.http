@@ -1,0 +1,40 @@
+###
+
+GET {{host}}/v1/animals
+
+###
+
+GET {{host}}/v1/animals/65e366735cfda5f11b930c5d
+
+###
+
+POST {{host}}/v1/animals
+Content-Type: application/json
+
+{
+    "species": "krokodýl",
+    "sex": "male",
+    "name": "Honza",
+    "birthDate": "2010-03-10T23:44:56.289Z",
+    "deathDate": null,
+    "owner": "65e352d6d67152adb841fde2"
+}
+
+###
+
+PUT {{host}}/v1/animals/65e366735cfda5f11b930c5d
+Content-Type: application/json
+
+{
+    "species": "krokodýl",
+    "sex": "male",
+    "name": "Pežot",
+    "birthDate": "2010-03-10T23:44:56.289Z",
+    "deathDate": null,
+    "owner": "65e352d6d67152adb841fde2"
+}
+
+
+###
+
+DELETE {{host}}/v1/animals/65e366735cfda5f11b930c5d
