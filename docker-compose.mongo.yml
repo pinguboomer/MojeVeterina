@@ -1,0 +1,18 @@
+version: '3.8'
+services:
+  mongo: #název kontejneru - spíš slouží jako odkaz v rámci docker compose (pro spojování kontejnerů, ...)
+    image: mongo:6.0.4
+    container_name: mongodb #název kontejneru
+    restart: always
+    ports:
+      - '27017:27017'
+    volumes:
+      - mongodb:/data/db  # mongodb: představuje odkaz na volume mongodb, to za dvojtečkou je cesta v kontejneru a určuje co se má do volume ukládat
+      - mongodb_config:/data/configdb
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: my-secret-pw
+
+volumes:  #slouží k perzistentnímu ukládání obsahu kontejnerů / images - pouze deklarace umístění záznamů, provázání v samotném kontejneru
+  mongodb:
+  mongodb_config:
