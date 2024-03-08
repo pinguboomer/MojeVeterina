@@ -2,9 +2,9 @@
     import SideNavigation from "$lib/components/SideNavigation.svelte";
 </script>
 
-<div class="flex">
-    <SideNavigation/>
-    <main class="w-full m-4">
+<div class="flex justify-center items-center">
+<!--    <SideNavigation/>-->
+    <main class=" ">
         <slot/>
     </main>
 </div>
