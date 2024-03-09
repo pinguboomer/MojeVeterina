@@ -5,6 +5,8 @@ GET {{host}}/v1/animals
 ###
 
 GET {{host}}/v1/animals/65e366735cfda5f11b930c5d
+Authorization: Bearer {{token}}
+
 
 ###
 

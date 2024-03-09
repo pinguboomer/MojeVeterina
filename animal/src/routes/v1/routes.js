@@ -1,5 +1,8 @@
 const {Router} = require('express');
+const auth = require("../../_lib/auth/auth");
 const router = Router();
+
+router.use(auth)
 
 // Animals
 router.get('/animals/:id', require('./animals/getAnimal'))
