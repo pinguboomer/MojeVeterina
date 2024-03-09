@@ -1,0 +1,44 @@
+###
+
+GET {{host}}/v1/animal-examinations
+
+###
+
+GET {{host}}/v1/animal-examinations/65e470e5b3d1e0dbd69fc101
+
+###
+
+POST {{host}}/v1/animal-examinations
+Content-Type: application/json
+
+{
+  "author": "65e352d6d67152adb841fde2",
+  "animal": "65e352d6d67152adb841fde2",
+  "subject": "Test examination",
+  "date": "2021-01-01T00:00:00.000Z",
+  "weight": 15.3,
+  "diagnose": "Test diagnose",
+  "text": "Examination description",
+  "recommendation": "Test recommendations"
+}
+
+###
+
+PUT {{host}}/v1/animal-examinations/65e470e5b3d1e0dbd69fc101
+Content-Type: application/json
+
+{
+  "author": "65e352d6d67152adb841fde2",
+  "animal": "65e352d6d67152adb841fde2",
+  "subject": "Test examination",
+  "date": "2021-01-01T00:00:00.000Z",
+  "weight": null,
+  "diagnose": null,
+  "text": "Examination description",
+  "recommendation": null
+}
+
+###
+
+DELETE {{host}}/v1/animal-examinations/65e470e5b3d1e0dbd69fc101
+
