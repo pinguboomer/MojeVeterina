@@ -1,0 +1,42 @@
+version: '3.8'
+services:
+  mv_mongo: #název kontejneru - spíš slouží jako odkaz v rámci docker compose (pro spojování kontejnerů, ...)
+    image: mongo:6.0.4
+    container_name: mv_mongo #název kontejneru
+    restart: always
+    ports:
+      - '27017:27017'
+    volumes:
+      - mv_mongodb:/data/db  # mongodb: představuje odkaz na volume mongodb, to za dvojtečkou je cesta v kontejneru a určuje co se má do volume ukládat
+      - mv_mongodb_config:/data/configdb
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${DB_USER}
+      MONGO_INITDB_ROOT_PASSWORD: ${DB_PASSWORD}
+    stdin_open: true
+    tty: true
+
+  mv_animal_examinations_node:
+    build:  #použití dockerfile pro vytvoření image
+      dockerfile: animal/Dockerfile
+      args:
+          NODE_ENV: development
+          PROJECT_PATH: ./animal
+    command: npm run dev
+    container_name: mv_animal_examinations_node
+    restart: always
+    ports:
+      - '3000:3000'
+    environment:
+      MONGO_URI: mongodb://${DB_USER}:${DB_PASSWORD}@mv_mongo:27017/animals_examinations
+      JWT_SECRET: ${JWT_SECRET}
+    depends_on:
+      - mv_mongo
+    volumes:
+      - ./animal/:/home/node/app
+      - /home/node/app/node_modules
+      - ./_lib:/home/node/app/src/_lib
+
+
+volumes:  #slouží k perzistentnímu ukládání obsahu kontejnerů / images - pouze deklarace umístění záznamů, provázání v samotném kontejneru
+  mv_mongodb:
+  mv_mongodb_config:
