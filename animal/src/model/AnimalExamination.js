@@ -14,7 +14,7 @@ const AnimalExamination = new Schema({
         type: ObjectId,
         required: true,
     },
-    animal: {
+    patient: {
         type: ObjectId,
         required: true,
     },
@@ -48,7 +48,7 @@ const AnimalExamination = new Schema({
 // JOI validation - https://gist.github.com/stongo/6359042
 const joiSchema = Joi.object({
     author: Joi.string().hex().length(24).required(), // ObjectId
-    animal: Joi.string().hex().length(24).required(), // ObjectId
+    patient: Joi.string().hex().length(24).required(), // ObjectId
     subject: Joi.string().required(),
     date: Joi.date().required(),
     weight: Joi.number().allow(null),

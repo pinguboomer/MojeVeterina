@@ -7,7 +7,7 @@ async function deleteExamination(req, res) {
             return res.sendStatus(400)
         }
 
-        const deleted = await AnimalExamination.deleteOne({_id: req.params.id})
+        const deleted = await AnimalExamination.deleteMany({patient: req.params.id})
 
         res.status(200).send(deleted)
     }

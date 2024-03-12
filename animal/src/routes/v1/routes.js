@@ -17,6 +17,7 @@ router.get('/animal-examinations', require('./animal-examinations/getExamination
 router.post('/animal-examinations', require('./animal-examinations/createExamination'))
 router.put('/animal-examinations/:id', require('./animal-examinations/updateExamination'))
 router.delete('/animal-examinations/:id', require('./animal-examinations/deleteExamination'))
+router.delete('/animal-examinations/patient/:id', require('./animal-examinations/deleteExaminationsOfPatient'))
 
 router.get('/', (req, res) => {
     res.send('Welcome to the animal files API.')
