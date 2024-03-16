@@ -1,15 +1,16 @@
 const {Router} = require('express');
 const router = Router();
 
+
+
 // Animals
-router.get('/animals/:id', require('./animals/getAnimal'))
-router.get('/animals', require('./animals/getAnimals'))
-router.post('/animals', require('./animals/createAnimal'))
-router.put('/animals/:id', require('./animals/updateAnimal'))
-router.delete('/animals/:id', require('./animals/deleteAnimal'))
+router.get('/invoices/:id', require('./invoices/getInvoice'));
+router.post('/invoices', require('./invoices/createInvoice'));
+router.get('/invoices', require('./invoices/getInvoices'));
+router.post('/webhooks/revolut', require('./webhooks/revolutPaymentWebhook'));
 
 router.get('/', (req, res) => {
-    res.send('Welcome to the animal files API.')
+    res.send('Welcome to the invoice API.')
 })
 
 module.exports = router;
