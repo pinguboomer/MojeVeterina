@@ -1,5 +1,6 @@
 <script>
     import {
+        Avatar,
         Sidebar,
         SidebarDropdownItem,
         SidebarDropdownWrapper,
@@ -7,46 +8,59 @@
         SidebarItem,
         SidebarWrapper
     } from "flowbite-svelte";
-    import {ArrowRightToBracketSolid, GridSolid, MailBoxSolid, UserSolid} from "flowbite-svelte-icons";
-    let spanClass = 'flex-1 ms-3 whitespace-nowrap';
+    import {
+        HomeSolid,
+        CalendarMonthSolid,
+        ClipboardSolid,
+        FileIcvoiceSolid
+    } from "flowbite-svelte-icons";
 </script>
 
 <Sidebar class="">
-    <SidebarWrapper class="h-[100dvh] m-4">
+    <SidebarWrapper class="h-[95dvh] m-4 flex flex-col  items-center">
+        <img src="src/lib/images/logo_veterina.png" class=" mb-5 me-3 h-28" alt="Logo Moje veterina"/>
+
         <SidebarGroup>
-            <SidebarItem label="Dashboard"></SidebarItem>
-            <SidebarDropdownWrapper label="E-commerce">
-                <SidebarDropdownItem label="Products" />
-                <SidebarDropdownItem label="Billing" />
-                <SidebarDropdownItem label="Invoice" />
+            <div class="flex  mb-12">
+                <Avatar id="avatar-menu" class=""/>
+                <SidebarDropdownWrapper label="Václav Buřil" class="mr-4 font-bold">
+                    <!--                    TODO odkaz-->
+                    <SidebarDropdownItem label="Účet"/>
+                    <SidebarDropdownItem label="Odhlásit"/>
+                </SidebarDropdownWrapper>
+            </div>
+            <SidebarItem href="/" label="Domů">
+                <svelte:fragment slot="icon">
+                    <HomeSolid
+                            class="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"/>
+                </svelte:fragment>
+            </SidebarItem>
+            <!--            TODO odkaz-->
+            <SidebarItem href="/calendar" label="Calendář">
+                <svelte:fragment slot="icon">
+                    <CalendarMonthSolid
+                            class="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"/>
+                </svelte:fragment>
+            </SidebarItem>
+
+            <SidebarDropdownWrapper label="Kartotéka">
+                <svelte:fragment slot="icon">
+                    <ClipboardSolid
+                            class="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"/>
+                </svelte:fragment>
+                <SidebarDropdownItem label="Nové vyšetření"/>
+                <SidebarDropdownItem label="Přidat zvíře"/>
+                <SidebarDropdownItem label="Vyhledat zvíře"/>
             </SidebarDropdownWrapper>
-            <SidebarItem label="Kanban" {spanClass}>
+            <SidebarDropdownWrapper label="Faktůry">
                 <svelte:fragment slot="icon">
-                    <GridSolid class="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
+                    <FileIcvoiceSolid
+                            class="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"/>
                 </svelte:fragment>
-                <svelte:fragment slot="subtext">
-                    <span class="inline-flex justify-center items-center px-2 ms-3 text-sm font-medium text-gray-800 bg-gray-200 rounded-full dark:bg-gray-700 dark:text-gray-300"> Pro </span>
-                </svelte:fragment>
-            </SidebarItem>
-            <SidebarItem label="Inbox" {spanClass}>
-                <svelte:fragment slot="icon">
-                    <MailBoxSolid class="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
-                </svelte:fragment>
-                <svelte:fragment slot="subtext">
-                    <span class="inline-flex justify-center items-center p-3 ms-3 w-3 h-3 text-sm font-medium text-primary-600 bg-primary-200 rounded-full dark:bg-primary-900 dark:text-primary-200"> 3 </span>
-                </svelte:fragment>
-            </SidebarItem>
-            <SidebarItem label="Users">
-                <svelte:fragment slot="icon">
-                    <UserSolid class="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
-                </svelte:fragment>
-            </SidebarItem>
-            <SidebarItem label="Sign In">
-                <svelte:fragment slot="icon">
-                    <ArrowRightToBracketSolid class="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
-                </svelte:fragment>
-            </SidebarItem>
-            <SidebarItem label="Sign Up"></SidebarItem>
+                <SidebarDropdownItem label="Nová faktura"/>
+                <SidebarDropdownItem label="Vyhledání faktury"/>
+                <SidebarDropdownItem label="Zobrazeni faktur"/>
+            </SidebarDropdownWrapper>
         </SidebarGroup>
     </SidebarWrapper>
 </Sidebar>

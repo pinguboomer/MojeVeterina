@@ -2,7 +2,7 @@
 
 </script>
 
-<div class="flex justify-center items-center ">
+<div class="justify-center ">
     <main class=" ">
         <slot/>
     </main>
