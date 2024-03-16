@@ -1,6 +1,37 @@
-<script>import "../app.pcss";
-import Nav from "$lib/components/header/Nav.svelte";</script>
+<script>
+    import "../app.pcss";
+    import Nav from "$lib/components/header/Nav.svelte";
+    import SideNavigation from "$lib/components/SideNavigation.svelte";
+    import {onMount} from "svelte";
 
-<Nav></Nav>
+    const smallDevice = '(max-width: 767px)'
 
-<slot></slot>
+
+    let isSmallDevice ;//= window.matchMedia(smallDevice).matches;
+
+    onMount(() => {
+        isSmallDevice = matches(smallDevice)
+    });
+
+    function matches(query) {
+        return window.matchMedia(query).matches;
+    }
+
+    function handelResize() {
+        isSmallDevice = matches(smallDevice);
+    }
+
+</script>
+<svelte:window on:resize={handelResize}/>
+
+{#if isSmallDevice}
+    <Nav></Nav>
+    <slot></slot>
+{:else if isSmallDevice !== undefined}
+    <div class="flex">
+    <SideNavigation></SideNavigation>
+        <slot></slot>
+    </div>
+{/if}
+
+

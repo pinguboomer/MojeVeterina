@@ -12,6 +12,8 @@
 
 <script>
     import {Card, Heading, Label, Button, Input, P} from 'flowbite-svelte';
+    import NewAnimal from "$lib/components/forms/modal/NewAnimal.svelte";
+    import Reservetions from "$lib/components/Reservetions.svelte";
 
     let date = (new Date()).toJSON().slice(0, 10);
 </script>
@@ -19,7 +21,8 @@
          customSize="text-4xl font-extrabold  md:text-5xl lg:text-6xl content-center flex justify-center items-center">
     Rychlé rozhraní
 </Heading>
-<Card padding="none" size="xl" class="grid md:grid-cols-2">
+<div class="">
+<Card padding="none" size="2xl" class="grid md:grid-cols-2">
 
     <!--    Zobrazit rezervace-->
     <div class="flex flex-col justify-center items-center p-8 text-center bg-white rounded-t-lg border-b border-gray-200 md:rounded-t-none md:rounded-tl-lg md:border-e dark:bg-gray-800 dark:border-gray-700">
@@ -27,14 +30,16 @@
         <Label for="date-input" class="my-4 font-light">Vyberte datum</Label>
         <Input class="mb-4" id="date-input" type="date" value={date} on:input={e => date = e.target.value || date}/>
         <!--        TODO dodělat odkaz-->
-        <Button href="/reservations/{date}">Vyhledej</Button>
+        <Reservetions date={date}/>
+<!--        <Button href="/reservations/{date}">Vyhledej</Button>-->
     </div>
 
     <!--    Přidat zvíře-->
     <div class="flex flex-col justify-center items-center p-8 text-center bg-white rounded-tr-lg border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
         <Heading tag="h3" class="text-lg font-semibold text-gray-900 dark:text-white">Přidat nové zvíře</Heading>
         <P class="mb-4">Vytvoření nového záznamu do kartotéky</P>
-        <Button href="/addAnimal">Přidat</Button>
+        <NewAnimal></NewAnimal>
+<!--        <Button href="/addAnimal">Přidat</Button>-->
     </div>
 
     <!--    Nové vyšetření-->
@@ -51,3 +56,4 @@
         <Button href="/addInvoice">Přidat</Button>
     </div>
 </Card>
+</div>
