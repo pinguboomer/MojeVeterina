@@ -17,7 +17,8 @@ app.use(cors())
 
 // Logging
 const accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' })
-app.use(morgan(':method :url :status :response-time ms - :res[content-length]', { stream: accessLogStream }))
+app.use(morgan(':method :url :status :response-time ms - :res[content-length]',
+    { stream: accessLogStream }))
 
 // Routes
 app.use(require('./src/routes/routes'))

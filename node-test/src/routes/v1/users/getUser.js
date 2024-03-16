@@ -1,19 +1,19 @@
-const {Animal} = require("../../../model/Animal");
+const {User} = require("../../../model/User");
 const ObjectId = require('mongoose').Types.ObjectId;
 
-async function deleteAnimal(req, res) {
+async function getUser(req, res) {
     try {
         if(!ObjectId.isValid(req.params.id)) {
             return res.sendStatus(400)
         }
 
-        const deleted = await Animal.deleteOne({_id: req.params.id})
+        const user = await User.findOne({_id: req.params.id})
 
-        if (deleted.deletedCount === 0) {
+        if (!user) {
             return res.sendStatus(404)
         }
 
-        res.sendStatus(204)
+        res.status(200).json(user)
     }
     catch (e) {
         console.error(e)
@@ -21,4 +21,4 @@ async function deleteAnimal(req, res) {
     }
 }
 
-module.exports = deleteAnimal;
+module.exports = getUser

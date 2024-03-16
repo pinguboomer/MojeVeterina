@@ -1,15 +1,15 @@
 const {Router} = require('express');
 const router = Router();
 
-// Animals
-router.get('/animals/:id', require('./animals/getAnimal'))
-router.get('/animals', require('./animals/getAnimals'))
-router.post('/animals', require('./animals/createAnimal'))
-router.put('/animals/:id', require('./animals/updateAnimal'))
-router.delete('/animals/:id', require('./animals/deleteAnimal'))
+// Users
+router.get('/users/:id', require('./users/getUser'))
+router.get('/users', require('./users/getUsers'))
+router.post('/users', require('./users/createUser'))
+router.put('/users/:id', require('./users/updateUser'))
+router.delete('/users/:id', require('./users/deleteUser'))
 
 router.get('/', (req, res) => {
-    res.send('Welcome to the animal files API.')
+    res.send('Welcome to the users files API.')
 })
 
 module.exports = router;

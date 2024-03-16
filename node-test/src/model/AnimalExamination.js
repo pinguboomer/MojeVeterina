@@ -4,7 +4,6 @@ const Joi = require("joi");
 const Schema = mongoose.Schema;
 const ObjectId = Schema.ObjectId;
 
-// TODO
 const AnimalExamination = new Schema({
     author: ObjectId,
     animal: ObjectId,

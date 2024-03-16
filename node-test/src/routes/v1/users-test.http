@@ -1,0 +1,52 @@
+###
+
+GET {{host}}/v1/users
+
+###
+
+GET {{host}}/v1/users/65e366735cfda5f11b930c5d
+
+###
+
+POST {{host}}/v1/users
+Content-Type: application/json
+
+{
+    "typ": "CUSTOMER",
+    "name": "Pepa",
+    "surname": "Novák",
+    "email": "pepanovak@gmail.com",
+    "phone": "+420777111222",
+    "password": "heslo",
+    "address": "Hradecká 10",
+    "city": "Hradec Králové",
+    "zip_code": "264 01",
+    "google_access_token_timestamp": "2010-03-10T23:44:56.289Z",
+    "google_refresh_token": "google_refresh_token",
+    "google_refresh_token_timestamp": "2010-03-10T23:44:56.289Z",
+}
+
+###
+
+PUT {{host}}/v1/users/65e366735cfda5f11b930c5d
+Content-Type: application/json
+
+{
+  "typ": "CUSTOMER",
+  "name": "Honza",
+  "surname": "Novotný",
+  "email": "honzanovotny@gmail.com",
+  "phone": "+420777333444",
+  "password": "heslo2",
+  "address": "Hradecká 12",
+  "city": "Hradec Králové",
+  "zip_code": "264 01",
+  "google_access_token_timestamp": "2010-03-10T23:44:56.289Z",
+  "google_refresh_token": "google_refresh_token",
+  "google_refresh_token_timestamp": "2010-03-10T23:44:56.289Z",
+}
+
+
+###
+
+DELETE {{host}}/v1/users/65e366735cfda5f11b930c5d
