@@ -23,10 +23,14 @@ app.use(morgan(':method :url :status :response-time ms - :res[content-length]', 
 app.use(require('./src/routes/routes'))
 
 /** Mongoose initialization */
+const {INVOICE_NUMBER_COUNTER} = require("./src/constants");
+const {Counter, createCounter} = require('./src/model/Counter')
 const mongoose = require('mongoose')
 mongoose.connect(process.env.DB_URI)
-    .then(() => {
+    .then(async () => {
         console.log('Connected to MongoDB')
+
+        await createCounter(INVOICE_NUMBER_COUNTER)
 
         // Start the Express server
         app.listen(process.env.PORT, () => {
