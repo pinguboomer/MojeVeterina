@@ -11,6 +11,7 @@ const User = new Schema({
     name: String,
     surname: String,
     email: String,
+    phone: String,
     password: String,
     address: String,
     city: String,
@@ -26,6 +27,7 @@ const joiSchema = Joi.object({
     name: Joi.string().allow(null),
     surname: Joi.string().allow(null),
     email: Joi.string().allow(null),
+    phone: Joi.string().allow(null),
     password: Joi.string().allow(null),
     address: Joi.string().allow(null),
     city: Joi.string().allow(null),
@@ -38,4 +40,4 @@ const joiSchema = Joi.object({
 
 // Exports
 module.exports.User = mongoose.model('User', User)
-module.exports.AnimalSchema = joiSchema
+module.exports.UserSchema = joiSchema

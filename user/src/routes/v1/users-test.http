@@ -1,14 +1,14 @@
 ###
 
-GET {{host}}/v1/users
+GET localhost:3000/v1/users
 
 ###
 
-GET {{host}}/v1/users/65e366735cfda5f11b930c5d
+GET localhost:3000/v1/users/65f6ad0265eaff925f1d149e
 
 ###
 
-POST {{host}}/v1/users
+POST localhost:3000/v1/users
 Content-Type: application/json
 
 {
@@ -23,12 +23,12 @@ Content-Type: application/json
     "zip_code": "264 01",
     "google_access_token_timestamp": "2010-03-10T23:44:56.289Z",
     "google_refresh_token": "google_refresh_token",
-    "google_refresh_token_timestamp": "2010-03-10T23:44:56.289Z",
+    "google_refresh_token_timestamp": "2010-03-10T23:44:56.289Z"
 }
 
 ###
 
-PUT {{host}}/v1/users/65e366735cfda5f11b930c5d
+PUT localhost:3000/v1/users/65e366735cfda5f11b930c5d
 Content-Type: application/json
 
 {
@@ -43,7 +43,7 @@ Content-Type: application/json
   "zip_code": "264 01",
   "google_access_token_timestamp": "2010-03-10T23:44:56.289Z",
   "google_refresh_token": "google_refresh_token",
-  "google_refresh_token_timestamp": "2010-03-10T23:44:56.289Z",
+  "google_refresh_token_timestamp": "2010-03-10T23:44:56.289Z"
 }
 
 
