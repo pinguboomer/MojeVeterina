@@ -1,6 +1,7 @@
 ###
 
 GET {{host}}/v1/animal-examinations
+Authorization: Bearer {{token}}
 
 ###
 
@@ -42,3 +43,8 @@ Content-Type: application/json
 
 DELETE {{host}}/v1/animal-examinations/65e470e5b3d1e0dbd69fc101
 
+###
+
+
+GET localhost:3000/animal-examinations-service/v1/animal-examinations
+Authorization: Bearer {{token}}
