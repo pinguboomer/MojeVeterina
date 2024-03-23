@@ -22,38 +22,38 @@
     Rychlé rozhraní
 </Heading>
 <div class="">
-<Card padding="none" size="2xl" class="grid md:grid-cols-2">
+    <Card padding="none" size="2xl" class="grid md:grid-cols-2">
 
-    <!--    Zobrazit rezervace-->
-    <div class="flex flex-col justify-center items-center p-8 text-center bg-white rounded-t-lg border-b border-gray-200 md:rounded-t-none md:rounded-tl-lg md:border-e dark:bg-gray-800 dark:border-gray-700">
-        <Heading tag="h3" class="text-lg font-semibold text-gray-900 dark:text-white pt-0">Zobrazit rezervace</Heading>
-        <Label for="date-input" class="my-4 font-light">Vyberte datum</Label>
-        <Input class="mb-4" id="date-input" type="date" value={date} on:input={e => date = e.target.value || date}/>
-        <!--        TODO dodělat odkaz-->
-        <Reservetions date={date}/>
-<!--        <Button href="/reservations/{date}">Vyhledej</Button>-->
-    </div>
+        <!--    Zobrazit rezervace-->
+        <div class="flex flex-col justify-center items-center p-8 text-center bg-white rounded-t-lg border-b border-gray-200 md:rounded-t-none md:rounded-tl-lg md:border-e dark:bg-gray-800 dark:border-gray-700">
+            <Heading tag="h3" class="text-lg font-semibold text-gray-900 dark:text-white pt-0">Zobrazit rezervace</Heading>
+            <Label for="date-input" class="my-4 font-light">Vyberte datum</Label>
+            <Input class="mb-4" id="date-input" type="date" value={date} on:input={e => date = e.target.value || date}/>
+            <!--        TODO dodělat odkaz-->
+            <Reservetions date={date}/>
+        <!--        <Button href="/reservations/{date}">Vyhledej</Button>-->
+        </div>
 
-    <!--    Přidat zvíře-->
-    <div class="flex flex-col justify-center items-center p-8 text-center bg-white rounded-tr-lg border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
-        <Heading tag="h3" class="text-lg font-semibold text-gray-900 dark:text-white">Přidat nové zvíře</Heading>
-        <P class="mb-4">Vytvoření nového záznamu do kartotéky</P>
-        <NewAnimal></NewAnimal>
-<!--        <Button href="/addAnimal">Přidat</Button>-->
-    </div>
+        <!--    Přidat zvíře-->
+        <div class="flex flex-col justify-center items-center p-8 text-center bg-white rounded-tr-lg border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+            <Heading tag="h3" class="text-lg font-semibold text-gray-900 dark:text-white">Přidat nové zvíře</Heading>
+            <P class="mb-4">Vytvoření nového záznamu do kartotéky</P>
+            <NewAnimal></NewAnimal>
+        <!--        <Button href="/addAnimal">Přidat</Button>-->
+        </div>
 
-    <!--    Nové vyšetření-->
-    <div class="flex flex-col justify-center items-center p-8 text-center bg-white rounded-bl-lg border-b border-gray-200 md:border-b-0 md:border-e dark:bg-gray-800 dark:border-gray-700">
-        <Heading tag="h3" class="text-lg font-semibold text-gray-900 dark:text-white">Nové vyšetření</Heading>
-        <P class="my-4 font-light"> Vytvoření nového záznamu o vyšetření zvířete</P>
-        <Button href="/addExamination">Přidat</Button>
-    </div>
+        <!--    Nové vyšetření-->
+        <div class="flex flex-col justify-center items-center p-8 text-center bg-white rounded-bl-lg border-b border-gray-200 md:border-b-0 md:border-e dark:bg-gray-800 dark:border-gray-700">
+            <Heading tag="h3" class="text-lg font-semibold text-gray-900 dark:text-white">Nové vyšetření</Heading>
+            <P class="my-4 font-light"> Vytvoření nového záznamu o vyšetření zvířete</P>
+            <Button href="/addExamination">Přidat</Button>
+        </div>
 
-    <!--    NováFaktůra-->
-    <div class="flex flex-col justify-center items-center p-8 text-center bg-white rounded-tr-lg border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
-        <Heading tag="h3" class="text-lg font-semibold text-gray-900 dark:text-white">Nová faktůra</Heading>
-        <P class="my-4 font-light"> Vytvoření nové faktůry</P>
-        <Button href="/addInvoice">Přidat</Button>
-    </div>
-</Card>
+        <!--    NováFaktůra-->
+        <div class="flex flex-col justify-center items-center p-8 text-center bg-white rounded-tr-lg border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+            <Heading tag="h3" class="text-lg font-semibold text-gray-900 dark:text-white">Nová faktůra</Heading>
+            <P class="my-4 font-light"> Vytvoření nové faktůry</P>
+            <Button href="/addInvoice">Přidat</Button>
+        </div>
+    </Card>
 </div>

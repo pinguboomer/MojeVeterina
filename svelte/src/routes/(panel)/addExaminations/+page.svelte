@@ -1,7 +1,7 @@
 <script>
 
     import {Button, Heading, Input, Label,Textarea} from "flowbite-svelte";
-    import {animal} from "../../stores/reservationsStore.js";
+    import {animal} from "../../../stores/reservationsStore.js";
 </script>
 
     <form class="" action="#">
