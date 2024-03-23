@@ -10,8 +10,6 @@
         TableHeadCell
     } from "flowbite-svelte";
     import {owner,animal} from "../../stores/reservationsStore.js";
-    import NewExaminations from "$lib/components/forms/NewExaminations.svelte";
-    import {afterUpdate} from "svelte";
 
     //TODO přes api získat rezervace
     const clientName = ["Tomáš Němeček", "František Brýl", "Filip Macháček", "Václav Buřil"];

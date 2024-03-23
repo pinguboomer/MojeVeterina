@@ -13,7 +13,7 @@
 <script>
     import {Card, Heading, Label, Button, Input, P} from 'flowbite-svelte';
     import NewAnimal from "$lib/components/forms/modal/NewAnimal.svelte";
-    import Reservetions from "$lib/components/Reservetions.svelte";
+    import Reservetions from "$lib/components/ReservetionsPopup.svelte";
 
     let date = (new Date()).toJSON().slice(0, 10);
 </script>
