@@ -20,13 +20,20 @@ export default function authzRole(req, res, next) {
      * @function
      * @name checkRole
      * @description - Checks if the users-service is staff
-     * @param {string} role - Role to check
+     * @param {string | [string]} roles - Roles to check
      * @returns {void}
      **/
-    return (role) => {
-        if (!req.user.role.includes(role)) {
-            return res.sendStatus(403)
+    return (roles) => {
+        if (typeof roles === 'string') {
+            roles = [roles]
         }
+
+        for (let role of roles) {
+            if (!req.user.role.includes(role)) {
+                return res.sendStatus(403)
+            }
+        }
+
         next()
     }
 }
