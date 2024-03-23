@@ -1,14 +1,14 @@
 ###
 
-GET localhost:3000/v1/users
+GET {{host}}/v1/users
 
 ###
 
-GET localhost:3000/v1/users/65f6ad0265eaff925f1d149e
+GET {{host}}/v1/users/65f6ad0265eaff925f1d149e
 
 ###
 
-POST localhost:3000/v1/users
+POST {{host}}/v1/users
 Content-Type: application/json
 
 {
@@ -28,7 +28,7 @@ Content-Type: application/json
 
 ###
 
-PUT localhost:3000/v1/users/65e366735cfda5f11b930c5d
+PUT {{host}}/v1/users/65e366735cfda5f11b930c5d
 Content-Type: application/json
 
 {
@@ -49,4 +49,50 @@ Content-Type: application/json
 
 ###
 
-DELETE {{host}}/v1/users/65e366735cfda5f11b930c5d
+DELETE {{host}}/v1/users/65fd9ed67ddd859495ec3878
+
+
+###
+
+POST localhost:3004/v1/auth/login
+Content-Type: application/json
+
+{
+    "email": "pepanovak@gmail.com",
+    "password": "heslo"
+}
+
+
+###
+
+POST localhost:3000/users-service/v1/auth/login
+Content-Type: application/json
+
+{
+  "email": "pepanovak@gmail.com",
+  "password": "heslo"
+}
+
+###
+
+GET localhost:3000/users-service/v1
+
+###
+
+POST localhost:3000/users-service/v1/users
+Content-Type: application/json
+
+{
+  "typ": "CUSTOMER",
+  "name": "Pepa",
+  "surname": "Novák",
+  "email": "pepanovak@gmail.com",
+  "phone": "+420777111222",
+  "password": "heslo",
+  "address": "Hradecká 10",
+  "city": "Hradec Králové",
+  "zip_code": "264 01",
+  "google_access_token_timestamp": "2010-03-10T23:44:56.289Z",
+  "google_refresh_token": "google_refresh_token",
+  "google_refresh_token_timestamp": "2010-03-10T23:44:56.289Z"
+}

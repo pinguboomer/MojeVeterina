@@ -1,4 +1,5 @@
 const {User, UserSchema} = require("../../../model/User");
+const bcrypt = require('bcrypt');
 
 async function createUser(req, res) {
     try {
@@ -8,8 +9,12 @@ async function createUser(req, res) {
             return res.sendStatus(400)
         }
 
+        value.password = bcrypt.hashSync(value.password, 12);
+
         const user = new User(value)
         await user.save()
+
+        // TODO send email
 
         res.status(201).send(user)
     }

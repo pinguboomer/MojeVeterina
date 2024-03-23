@@ -13,13 +13,13 @@ async function updateUser(req, res) {
             return res.sendStatus(400)
         }
 
+        delete value.password  // heslo se nemění - musí se změnit v jiném endpointu
+
         const updated = await User.updateOne({_id: req.params.id}, value)
 
         if (updated.matchedCount === 0) {
             return res.sendStatus(404)
         }
-
-        console.log(updated)
 
         res.sendStatus(204)
     }

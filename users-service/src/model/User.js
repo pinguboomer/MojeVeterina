@@ -1,18 +1,35 @@
 const mongoose = require("mongoose");
 const Joi = require('joi');
+const {EMAIL_REGEX, PHONE_REGEX} = require("../constants");
 
 const Schema = mongoose.Schema;
+
+
 
 const User = new Schema({
     typ: {
         type: String,
         required: true,
+        default: ['CUSTOMER'],
+        enum: ['CUSTOMER', 'ADMIN', 'SECRETARY', 'DOCTOR', 'NURSE'],
+    },
+    email: {
+        type: String,
+        required: true,
+        unique: true,
+        match: EMAIL_REGEX
+    },
+    password: {
+        type: String,
+        required: true,
+    },
+    phone: {
+        type: String,
+        required: true,
+        match: PHONE_REGEX
     },
     name: String,
     surname: String,
-    email: String,
-    phone: String,
-    password: String,
     address: String,
     city: String,
     zip_code: String,
@@ -24,11 +41,11 @@ const User = new Schema({
 // JOI validation - https://gist.github.com/stongo/6359042
 const joiSchema = Joi.object({
     typ: Joi.string().required(),
+    email: Joi.string().regex(EMAIL_REGEX).required(),
+    password: Joi.string(),
     name: Joi.string().allow(null),
     surname: Joi.string().allow(null),
-    email: Joi.string().allow(null),
-    phone: Joi.string().allow(null),
-    password: Joi.string().allow(null),
+    phone: Joi.string().regex(PHONE_REGEX).required(),
     address: Joi.string().allow(null),
     city: Joi.string().allow(null),
     zip_code: Joi.string().allow(null),
