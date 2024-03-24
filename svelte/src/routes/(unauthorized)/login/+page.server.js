@@ -1,15 +1,28 @@
-import { SECRET_API_URL } from '$env/static/private'
+import { SECRET_API_URL, TOKEN_COOKIE_NAME } from '$env/static/private'
+import {redirect} from "@sveltejs/kit";
+
+/** @type {import('@sveltejs/kit').Load} */
+export const load = async ({ cookies }) => {
+    if (cookies.get(TOKEN_COOKIE_NAME)) {
+        redirect(302, '/');
+    }
+
+    return {}
+}
 
 
 /** @type {import('./$types').Actions} */
 export const actions = {
-    login: async ({ request }) => {
+    default: async ({ request, cookies, locals }) => {  // TODO implement proper login
         const formData = await request.formData();
 
         const body = {
             email: formData.get('email'),
             password: formData.get('password'),
+            extend: formData.get('extend') === "on",
         }
+
+        console.log(body)
 
         const res = await fetch(SECRET_API_URL + '/users-service/v1/auth/login', {
             method: 'POST',
@@ -24,7 +37,16 @@ export const actions = {
         }
 
         const data = await res.json()
-        console.log(data)
-        return { success: true }
+
+        cookies.set(TOKEN_COOKIE_NAME, data.token, {
+            path: '/',
+            sameSite: 'strict',
+            maxAge: 60 * 60 * 24 * 7,
+            httpOnly: true
+        })
+
+        locals.user = data.token
+
+        redirect(302, '/');
     },
 };
