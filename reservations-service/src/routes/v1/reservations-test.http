@@ -1,0 +1,36 @@
+###
+
+GET localhost:27017/v1/reservations
+
+###
+
+GET localhost:27017/v1/reservations/65e366735cfda5f11b930c5d
+
+###
+
+POST localhost:27017/v1/reservations
+Content-Type: application/json
+
+{
+    "user": "1",
+    "date": "2010-03-10T23:44:56.289Z",
+    "animal": "2",
+    "reason": "Pravidelná prohlídka"
+}
+
+###
+
+PUT localhost:27017/v1/reservations/65e366735cfda5f11b930c5d
+Content-Type: application/json
+
+{
+  "user": "3",
+  "date": "2010-03-10T23:44:56.289Z",
+  "animal": "4",
+  "reason": "Operace"
+}
+
+
+###
+
+DELETE {{host}}/v1/reservations/65e366735cfda5f11b930c5d
