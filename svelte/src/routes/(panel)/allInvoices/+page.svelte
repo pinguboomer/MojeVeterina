@@ -1,12 +1,12 @@
 <script>
-    import {PUBLIC_API_URL} from "$env/static/public";
+    import InvoicesTable from "$lib/components/tables/InvoicesTable.svelte";
     import {onMount} from "svelte";
-    import AnimalTable from "$lib/components/tables/AnimalTable.svelte";
+    import {PUBLIC_API_URL} from "$env/static/public";
 
-    let animals = [];
+    let invoices = [];
 
     onMount(async () => {
-        animals = await load()
+        invoices = await load();
     })
 
     //TODO dodělat
@@ -22,6 +22,6 @@
         return [];
     }
 
-
 </script>
-<AnimalTable animals={animals}></AnimalTable>
+
+<InvoicesTable invoices={invoices}/>

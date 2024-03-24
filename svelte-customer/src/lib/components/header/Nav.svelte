@@ -13,7 +13,7 @@
         CalendarMonthSolid,
         ClipboardSolid,
         HomeSolid,
-        ChevronDownOutline
+        ChevronDownOutline, BugSolid
     } from "flowbite-svelte-icons";
 
 </script>
@@ -52,28 +52,16 @@
                 <span class="ml-2">Kalendář</span>
             </div>
         </NavLi>
-        <NavLi>
-            <div class="flex items-center">
+        <NavLi href="/">
+            <div class="flex items-center ">
                 <ClipboardSolid/>
-                <span class="ml-2">Kartotéka</span>
-                <Dropdown class="w-44 z-20">
-                    <DropdownItem href="/addExaminations">Nové vyšetření</DropdownItem>
-                    <DropdownItem href="/addAnimal">Přidat zvíře</DropdownItem>
-                    <DropdownItem href="/allAnimal">Vyhledat zvíře</DropdownItem>
-                </Dropdown>
-                <ChevronDownOutline class="w-3 h-3 ms-2   inline"/>
+                <span class="ml-2">Moje platby</span>
             </div>
         </NavLi>
-        <NavLi>
-            <div class="flex items-center">
-                <ClipboardSolid/>
-                <span class="ml-2">Faktůry</span>
-                <Dropdown class="w-44 z-20">
-                    <DropdownItem href="/addInvoices">Nová faktura</DropdownItem>
-                    <DropdownItem href="/allInvoices">Vyhledání faktury</DropdownItem>
-                    <DropdownItem href="/">Zobrazeni faktur</DropdownItem>
-                </Dropdown>
-                <ChevronDownOutline class="w-3 h-3 ms-2   inline"/>
+        <NavLi href="/">
+            <div class="flex items-center ">
+                <BugSolid/>
+                <span class="ml-2">Moji mazličci</span>
             </div>
         </NavLi>
     </NavUl>

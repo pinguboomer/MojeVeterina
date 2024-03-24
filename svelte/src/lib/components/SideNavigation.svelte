@@ -48,17 +48,17 @@
                     <ClipboardSolid
                             class="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"/>
                 </svelte:fragment>
-                <SidebarDropdownItem label="Nové vyšetření"/>
-                <SidebarDropdownItem label="Přidat zvíře"/>
-                <SidebarDropdownItem label="Vyhledat zvíře"/>
+                <SidebarDropdownItem href="/addExaminations" label="Nové vyšetření"/>
+                <SidebarDropdownItem href="/addAnimal" label="Přidat zvíře"/>
+                <SidebarDropdownItem href="/allAnimal"  label="Vyhledat zvíře"/>
             </SidebarDropdownWrapper>
             <SidebarDropdownWrapper label="Faktůry">
                 <svelte:fragment slot="icon">
                     <FileIcvoiceSolid
                             class="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"/>
                 </svelte:fragment>
-                <SidebarDropdownItem label="Nová faktura"/>
-                <SidebarDropdownItem label="Vyhledání faktury"/>
+                <SidebarDropdownItem href="/addInvoices" label="Nová faktura"/>
+                <SidebarDropdownItem href="/allInvoices" label="Vyhledání faktury"/>
                 <SidebarDropdownItem label="Zobrazeni faktur"/>
             </SidebarDropdownWrapper>
         </SidebarGroup>

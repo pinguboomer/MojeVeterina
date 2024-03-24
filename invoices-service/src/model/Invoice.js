@@ -14,7 +14,7 @@ const InvoiceItem = new Schema({
         required: true,
     }
 });
-
+//TODO přidat datum splatnosti, identifikátor zda je zaplaceno, automatické vytvoření čísla faktury
 const Invoice = new Schema({
     number: {
         type: Number,

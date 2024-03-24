@@ -1,5 +1,4 @@
 <script>
-    import NewAnimal from "$lib/components/forms/modal/NewAnimal.svelte";
+    import NewAnimalStandart from "$lib/components/forms/NewAnimalStandart.svelte";
 </script>
-
-<NewAnimal></NewAnimal>
+<NewAnimalStandart/>

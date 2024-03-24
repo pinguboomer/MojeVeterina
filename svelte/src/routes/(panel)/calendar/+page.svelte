@@ -1,9 +1,5 @@
 <script>
-
-    import {onMount} from "svelte";
-    import {PUBLIC_API_URL} from "$env/static/public";
-    // import {modal, reloadData, token} from "../stores.js";
-    import {modal, reloadData, token} from "../../../store.js";
+    import {modal} from "../../../store.js";
     import Calendar from "$lib/components/Calendar.svelte";
     import ReservationsCalendar from "$lib/components/ReservationsCalendar.svelte";
 
@@ -90,10 +86,6 @@
     /*********************************************************/
 
     let dateForReservations;
-
-    function dateParse(){
-
-    }
 
     function handleDayClick(e) {
         console.log(e.detail.date)
