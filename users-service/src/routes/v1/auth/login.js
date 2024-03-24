@@ -24,12 +24,6 @@ async function login(req, res) {
 
         const token = signToken(user, !!extend)
 
-        // res.cookie(TOKEN_COOKIE_NAME, token, {
-        //     httpOnly: true,
-        //     secure: process.env.NODE_ENV === 'production',
-        //     sameSite: TOKEN_COOKIE_SAME_SITE,
-        //     maxAge: TOKEN_COOKIE_MAX_AGE
-        // })
         res.status(200).send({token})
     }
     catch (e) {
