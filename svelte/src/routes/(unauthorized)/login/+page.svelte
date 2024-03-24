@@ -5,7 +5,7 @@
     export let form;
 </script>
 
-<form method="POST" class="w-80">
+<form method="POST">
     <Heading class="mb-6 text-center">Přihlášení</Heading>
     <div class="mb-4">
         <Label for="email" color={(form && !form.success)? 'red' : null} class="block mb-2">E-mail</Label>
