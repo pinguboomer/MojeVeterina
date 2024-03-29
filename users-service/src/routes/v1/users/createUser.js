@@ -6,6 +6,9 @@ async function createUser(req, res) {
         const {value, error} = UserSchema.validate(req.body)
 
         if(error) {
+            if (process.env.NODE_ENV === "development") {
+                console.error(error)
+            }
             return res.sendStatus(400)
         }
 

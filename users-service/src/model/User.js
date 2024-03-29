@@ -40,12 +40,12 @@ const User = new Schema({
 
 // JOI validation - https://gist.github.com/stongo/6359042
 const joiSchema = Joi.object({
-    typ: Joi.string().required(),
+    typ: Joi.string().allow(null),
     email: Joi.string().regex(EMAIL_REGEX).required(),
     password: Joi.string(),
     name: Joi.string().allow(null),
     surname: Joi.string().allow(null),
-    phone: Joi.string().regex(PHONE_REGEX).required(),
+    phone: Joi.string().regex(PHONE_REGEX).allow(null),
     address: Joi.string().allow(null),
     city: Joi.string().allow(null),
     zip_code: Joi.string().allow(null),
