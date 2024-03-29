@@ -1,5 +1,6 @@
 <script>
     import {A, Button, Checkbox, Heading, Helper, Hr, Input, Label, Tooltip} from "flowbite-svelte";
+    import {TITLE_PREFIX} from "$lib/constants";
 
     /** @type {import('./$types').ActionData} */
     export let form;
@@ -19,6 +20,10 @@
     }
 
 </script>
+
+<svelte:head>
+    <title>{TITLE_PREFIX}Registrace</title>
+</svelte:head>
 
 <form method="POST">
     <Heading class="mb-6 text-center">Registrace</Heading>
@@ -67,7 +72,7 @@
     {/if}
     <Button class="block mx-auto mb-4 px-8" type="submit">Registrovat se</Button>
     <Helper class="text-sm mt-2 text-center">Již máte účet? <A href="/login">Přihlašte se</A></Helper>
-    <Tooltip type="auto" placement="right" triggeredBy="[data-tooltip='required']">Povinná položka</Tooltip>
+    <Tooltip type="auto" placement="right" triggeredBy="[data-tooltip='required']" tabindex="-1">Povinná položka</Tooltip>
 </form>
 
 <style>

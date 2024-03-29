@@ -28,7 +28,7 @@
     }
 </script>
 
-<Sidebar class="">
+<Sidebar class={$$restProps.class}>
     <SidebarWrapper class="h-[95dvh] m-4 flex flex-col  items-center">
         <img src="src/lib/images/logo_veterina.png" class=" mb-5 me-3 h-28" alt="Logo Moje veterina"/>
 

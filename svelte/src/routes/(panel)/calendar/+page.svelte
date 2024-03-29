@@ -1,13 +1,12 @@
 <script>
     import {modal} from "../../../store.js";
-    import Calendar from "$lib/components/Calendar.svelte";
+    import FullCalendar from "$lib/components/FullCalendar.svelte";
     import ReservationsCalendar from "$lib/components/ReservationsCalendar.svelte";
 
     let date = new Date()
-    let month = date.getMonth()
-    let year = date.getFullYear()
 
-    let monthNames = ["Leden", "Únor", "Březen", "Duben", "Květen", "Červen", "Červenec", "Srpen", "Září", "Říjen", "Listopad", "Prosinec"]
+    const monthLabels = ["Leden", "Únor", "Březen", "Duben", "Květen", "Červen", "Červenec", "Srpen", "Září", "Říjen", "Listopad", "Prosinec"]
+    const dayLabels = ["Ne", "Po", "Út", "St", "Čt", "Pá", "So"]
 
     /*********************************************************/
 
@@ -85,7 +84,7 @@
 
     /*********************************************************/
 
-    let dateForReservations;
+    let dateForReservations = new Date();
 
     function handleDayClick(e) {
         console.log(e.detail.date)
@@ -99,45 +98,39 @@
         // else if (e.detail.type === "event") modal.set({show: true, type: "event_detail", details: e.detail.detail});
         // else if (e.detail.type === "match") modal.set({show: true, type: "match_detail", details: e.detail.detail});
     }
-
-    function toPrev() {
-        if (--month < 0) {
-            month = 11;
-            year--;
-        }
-    }
-
-    function toNext() {
-        if (++month > 11) {
-            month = 0;
-            year++;
-        }
-    }
 </script>
 
 
 <div>
-    <div class="calendar-header">
-        <svg on:click={toPrev} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-            <!--! Font Awesome Pro 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
-            <path d="M512 256C512 114.6 397.4 0 256 0S0 114.6 0 256S114.6 512 256 512s256-114.6 256-256zM271 135c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-87 87 87 87c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0L167 273c-9.4-9.4-9.4-24.6 0-33.9L271 135z"/>
-        </svg>
-        <span class="text">
-            {monthNames[month]} {year}
-        </span>
-        <svg on:click={toNext} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-            <!--! Font Awesome Pro 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
-            <path d="M0 256C0 397.4 114.6 512 256 512s256-114.6 256-256S397.4 0 256 0S0 114.6 0 256zM241 377c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l87-87-87-87c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0L345 239c9.4 9.4 9.4 24.6 0 33.9L241 377z"/>
-        </svg>
-    </div>
-    <Calendar
-            month={month+1}
-            year={year}
-            today={date}
-            offset={1}
-            labels={["Ne", "Po", "Út", "St", "Čt", "Pá", "So"]}
-            on:day_click={handleDayClick}
-            on:event_click={handleEventClick}
+<!--    <div class="calendar-header">-->
+<!--        <svg on:click={toPrev} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">-->
+<!--            &lt;!&ndash;! Font Awesome Pro 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. &ndash;&gt;-->
+<!--            <path d="M512 256C512 114.6 397.4 0 256 0S0 114.6 0 256S114.6 512 256 512s256-114.6 256-256zM271 135c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-87 87 87 87c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0L167 273c-9.4-9.4-9.4-24.6 0-33.9L271 135z"/>-->
+<!--        </svg>-->
+<!--        <span class="text">-->
+<!--            {monthNames[month]} {year}-->
+<!--        </span>-->
+<!--        <svg on:click={toNext} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">-->
+<!--            &lt;!&ndash;! Font Awesome Pro 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. &ndash;&gt;-->
+<!--            <path d="M0 256C0 397.4 114.6 512 256 512s256-114.6 256-256S397.4 0 256 0S0 114.6 0 256zM241 377c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l87-87-87-87c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0L345 239c9.4 9.4 9.4 24.6 0 33.9L241 377z"/>-->
+<!--        </svg>-->
+<!--    </div>-->
+<!--    <Calendar-->
+<!--            month={month+1}-->
+<!--            year={year}-->
+<!--            today={date}-->
+<!--            offset={1}-->
+<!--            labels={["Ne", "Po", "Út", "St", "Čt", "Pá", "So"]}-->
+<!--            on:day_click={handleDayClick}-->
+<!--            on:event_click={handleEventClick}-->
+<!--    />-->
+<!--    {#if dateForReservations !== undefined}-->
+<!--        <ReservationsCalendar date={dateForReservations}/>-->
+<!--    {/if}-->
+    <FullCalendar
+        bind:active={dateForReservations}
+        monthLabels={monthLabels}
+        dayLabels={dayLabels}
     />
     {#if dateForReservations !== undefined}
         <ReservationsCalendar date={dateForReservations}/>

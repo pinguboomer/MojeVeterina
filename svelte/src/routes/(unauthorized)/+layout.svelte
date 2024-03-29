@@ -3,7 +3,7 @@
 </script>
 
 <div class="flex min-h-[100dvh] justify-center items-center bg-primary-100">
-    <Card class="w-[40rem]">
+    <Card class="w-[40rem] m-4">
         <slot/>
     </Card>
 </div>

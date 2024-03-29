@@ -1,9 +1,14 @@
 <script>
     import {A, Button, Checkbox, Heading, Helper, Input, Label} from "flowbite-svelte";
+    import {TITLE_PREFIX} from "$lib/constants.js";
 
     /** @type {import('./$types').ActionData} */
     export let form;
 </script>
+
+<svelte:head>
+    <title>{TITLE_PREFIX}Přihlášení</title>
+</svelte:head>
 
 <form method="POST">
     <Heading class="mb-6 text-center">Přihlášení</Heading>

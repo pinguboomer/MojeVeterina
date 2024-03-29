@@ -3,8 +3,10 @@ import {redirect} from "@sveltejs/kit";
 
 /** @type {import('@sveltejs/kit').Load} */
 export const load = async ({ cookies }) => {
+    console.log("LAYOUT AUTH LOAD")
+
     if (!cookies.get(TOKEN_COOKIE_NAME)) {
-        redirect(302, '/');
+        redirect(302, '/login');
     }
 
     return {}

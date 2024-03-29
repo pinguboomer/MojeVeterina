@@ -13,7 +13,9 @@
     export let active = null; // Date
     export let offset = 0;
 
-    export let labels = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    export let disableDaysOutsideMonth = true;
+
+    export let dayLabels = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
     export let disableDays = [];
 
     export let events = []
@@ -68,7 +70,7 @@
     }
 
     // Labels
-    $: reorderedLabels = reorderLabels(labels, offset);
+    $: reorderedLabels = reorderLabels(dayLabels, offset);
 
     function reorderLabels(labels, offset) {
         let reorderedLabels = []
@@ -103,7 +105,7 @@
 
 <div class="calendar calendar-grid w-full">
     {#each reorderedLabels as label}
-        <div class="header text-center font-medium text-lg text-gray-600 flex items-center justify-center bg-gray-50{reorderedLabels.indexOf(label)===0? ' rounded-l-lg' : ''}{reorderedLabels.indexOf(label)===reorderedLabels.length-1? ' rounded-r-lg' : ''}">{label}</div>
+        <div class="header text-center font-medium text-gray-600 flex items-center justify-center bg-gray-50{reorderedLabels.indexOf(label)===0? ' rounded-l-lg' : ''}{reorderedLabels.indexOf(label)===reorderedLabels.length-1? ' rounded-r-lg' : ''}">{label}</div>
     {/each}
 
     {#each calendarArray as cell}
@@ -118,9 +120,11 @@
 /* is sunday */          (cell.date.getDay() === SUNDAY)? " " : "",
 /* is not this month */  (!sameMonth(cell.date, thisMonth))? "text-gray-400 hover:text-gray-500" : "",
 /* is today */           (sameDay(cell.date, today))? "bg-gray-100": "",
-/* active day */         (cell.date === active)? "bg-primary-600 text-white hover:bg-primary-600 hover:text-white": ""
+/* active day */         (cell.date === active)? "bg-primary-600 text-white hover:bg-primary-600 hover:text-white": "",
+                         "disabled:cursor-default disabled:bg-transparent disabled:text-gray-400"
                 )}
                 on:click|self={() => { dispatch("day_click", {date: cell.date}); active = cell.date }}
+                disabled={disableDaysOutsideMonth && !sameMonth(cell.date, thisMonth)}
             >
                 {cell.date.getDate()}
             </button>
