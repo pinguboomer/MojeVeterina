@@ -6,7 +6,8 @@ export const actions = {
     default: async ({ cookies }) => {
         cookies.delete(TOKEN_COOKIE_NAME, {
             path: '/',
-            sameSite: 'strict',
+            sameSite: 'Lax',
+            secure: false,
             httpOnly: true
         })
         redirect(302, '/login');

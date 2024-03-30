@@ -1,9 +1,11 @@
 <script>
     import {A, Button, Checkbox, Heading, Helper, Input, Label} from "flowbite-svelte";
     import {TITLE_PREFIX} from "$lib/constants.js";
+    import GoogleButton from "$lib/components/forms/GoogleButton.svelte";
 
     /** @type {import('./$types').ActionData} */
     export let form;
+    export let data;
 </script>
 
 <svelte:head>
@@ -12,6 +14,7 @@
 
 <form method="POST">
     <Heading class="mb-6 text-center">Přihlášení</Heading>
+    <GoogleButton url={data.googleLoginUrl} class="w-full" />
     <div class="mb-4">
         <Label for="email" color={(form && !form.success)? 'red' : null} class="block mb-2">E-mail</Label>
         <Input id="email" name="email" color={(form && !form.success)? 'red' : null} placeholder="E-mail" type="email" required/>

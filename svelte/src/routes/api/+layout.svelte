@@ -6,5 +6,6 @@
     <Card>
         <Heading class="mb-6">Ajaj</Heading>
         <P>Zatoulali jste se do neznámých končin. <A href="/">Zpět na hlavní stránku.</A></P>
+        <slot/>
     </Card>
 </div>
