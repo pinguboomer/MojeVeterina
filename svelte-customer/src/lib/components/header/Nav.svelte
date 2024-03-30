@@ -52,13 +52,13 @@
                 <span class="ml-2">Kalendář</span>
             </div>
         </NavLi>
-        <NavLi href="/">
+        <NavLi href="/myInvoices">
             <div class="flex items-center ">
                 <ClipboardSolid/>
                 <span class="ml-2">Moje platby</span>
             </div>
         </NavLi>
-        <NavLi href="/">
+        <NavLi href="/myAnimals">
             <div class="flex items-center ">
                 <BugSolid/>
                 <span class="ml-2">Moji mazličci</span>

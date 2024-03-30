@@ -32,6 +32,7 @@
   },
   "type": "module",
   "dependencies": {
-    "flowbite-svelte-icons": "^1.3.1"
+    "flowbite-svelte-icons": "^1.3.1",
+    "jspdf-invoice-template": "^1.4.3"
   }
 }

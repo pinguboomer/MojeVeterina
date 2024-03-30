@@ -42,13 +42,13 @@
                             class="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"/>
                 </svelte:fragment>
             </SidebarItem>
-            <SidebarItem href="/calendar" label="Moje platby">
+            <SidebarItem href="/myInvoices" label="Moje platby">
                 <svelte:fragment slot="icon">
                     <FileIcvoiceSolid
                             class="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"/>
                 </svelte:fragment>
             </SidebarItem>
-            <SidebarItem href="/calendar" label="Moji mazlíčci">
+            <SidebarItem href="/myAnimals" label="Moji mazlíčci">
                 <svelte:fragment slot="icon">
                     <BugSolid
                             class="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"/>
