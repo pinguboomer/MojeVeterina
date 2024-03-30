@@ -9,6 +9,7 @@ router.post('/auth/login', require('./auth/login'));
 /** Authorized */
 // Auth
 router.post('/auth/logout', require('./auth/login'));
+router.post('/auth/google/callback', require('./auth/googleCallback'));
 
 // Users
 router.get('/users/:id', require('./users/getUser'))

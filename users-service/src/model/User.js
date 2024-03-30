@@ -21,11 +21,11 @@ const User = new Schema({
     },
     password: {
         type: String,
-        required: true,
+        required: false,
     },
     phone: {
         type: String,
-        required: true,
+        required: false,
         match: PHONE_REGEX
     },
     name: String,
@@ -33,9 +33,10 @@ const User = new Schema({
     address: String,
     city: String,
     zip_code: String,
-    google_access_token_timestamp: Date,
-    google_refresh_token: String,
-    google_refresh_token_timestamp: Date,
+    google_id: {
+        type: String,
+        required: false,
+    },
 });
 
 // JOI validation - https://gist.github.com/stongo/6359042
@@ -49,9 +50,6 @@ const joiSchema = Joi.object({
     address: Joi.string().allow(null),
     city: Joi.string().allow(null),
     zip_code: Joi.string().allow(null),
-    google_access_token_timestamp: Joi.date().allow(null),
-    google_refresh_token: Joi.string().allow(null),
-    google_refresh_token_timestamp: Joi.date().allow(null),
 })
 
 
