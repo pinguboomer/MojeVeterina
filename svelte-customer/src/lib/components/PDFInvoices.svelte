@@ -6,6 +6,8 @@
     import autoTable from 'jspdf-autotable'
     import {onDestroy, onMount} from "svelte";
     import {invoicesNumber} from "../../routes/stores/invoiceStore.js";
+    import {amiriFont} from "$lib/charset/test_chartset.js";
+    console.log(amiriFont);
 
 
     //TODO doplnit aoutomaticky hodnoty do promněných
@@ -52,6 +54,7 @@
         doc.setLineHeightFactor(0.5)
         doc.setFontSize(12);
         // doc.addFileToVFS('src/lib/charset/Amiri-Regular.ttf', "Amiri")
+        //doc.addFileToVFS("Amiri-Regular.ttf", amiriFont);
         doc.addFont("src/lib/charset/Amiri-Regular.ttf", 'custom', "normal");
         doc.setFont('custom');
 

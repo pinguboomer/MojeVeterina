@@ -18,7 +18,7 @@
 
 </script>
 
-<Navbar class="pt-0 pb-0 border-2 border-b-black mb-1.5">
+<Navbar class="pt-0 pb-0 border-2 border-b-black mb-1.5" >
     <NavBrand href="/">
         <img src="src/lib/images/logo_veterina.png" class="me-3 h-6 sm:h-9" alt="Logo Moje veterina"/>
         <span class="self-center whitespace-nowrap text-xl font-semibold dark:text-white">Moje veterina</span>
