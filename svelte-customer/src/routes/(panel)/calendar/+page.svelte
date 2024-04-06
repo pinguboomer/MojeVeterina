@@ -86,6 +86,8 @@
 
     let dateForReservations = new Date();
 
+    console.log(dateForReservations.getDate() % 6);
+
     function handleDayClick(e) {
         console.log(e.detail.date)
         dateForReservations = e.detail.date;
@@ -132,7 +134,7 @@
         monthLabels={monthLabels}
         dayLabels={dayLabels}
     />
-    {#if dateForReservations !== undefined}
+    {#if dateForReservations !== undefined && (dateForReservations.getDate() % 6) && (dateForReservations.getDate() % 7) }
         <ReservationsCalendar date={dateForReservations}/>
     {/if}
 </div>

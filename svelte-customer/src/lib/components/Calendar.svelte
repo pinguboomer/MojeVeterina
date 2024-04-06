@@ -124,7 +124,7 @@
                          "disabled:cursor-default disabled:bg-transparent disabled:text-gray-400"
                 )}
                     on:click|self={() => { dispatch("day_click", {date: cell.date}); active = cell.date }}
-                    disabled={disableDaysOutsideMonth && !sameMonth(cell.date, thisMonth)}
+                    disabled={disableDaysOutsideMonth && !sameMonth(cell.date, thisMonth) || cell.date.getDay() === SATURDAY || cell.date.getDay() === SUNDAY ||  cell.date < new Date()}
             >
                 {cell.date.getDate()}
             </button>

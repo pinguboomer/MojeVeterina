@@ -1,14 +1,9 @@
 <script>
-
-    import TableMyInvoices from "$lib/components/table/TableMyInvoices.svelte";
     import {Button} from "flowbite-svelte";
     import {jsPDF} from "jspdf";
     import autoTable from 'jspdf-autotable'
     import {onDestroy, onMount} from "svelte";
     import {invoicesNumber} from "../../routes/stores/invoiceStore.js";
-    import {amiriFont} from "$lib/charset/test_chartset.js";
-    console.log(amiriFont);
-
 
     //TODO doplnit aoutomaticky hodnoty do promněných
     onMount(() => {

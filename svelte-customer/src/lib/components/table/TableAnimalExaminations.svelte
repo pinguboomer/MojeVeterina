@@ -10,10 +10,12 @@
         TableHeadCell
     } from "flowbite-svelte";
     import {onMount} from "svelte";
+    import {formatDate} from "$lib/formateDate.js";
+    import DetailExaminations from "$lib/components/DetailExaminations.svelte";
 
-    let animals = [{name: 'Jan', species: 'Krokodýl'},
-        {name: 'Bell', species: 'Pes'},
-        {name: 'Test', species: 'Myš'}];
+    let animals = [{date: formatDate(new Date()), species: 'Krokodýl'},
+        {date: formatDate(new Date()), species: 'Krokodýl'},
+        {date: formatDate(new Date()), species: 'Krokodýl'}];
 
     onMount(() => {
         //TODO z databáze
@@ -30,7 +32,7 @@
 <Heading tag="h1" class="mb-2">Moji mazlíčci</Heading>
 <Table>
     <TableHead>
-        <TableHeadCell>Jméno</TableHeadCell>
+        <TableHeadCell>Datum</TableHeadCell>
         <TableHeadCell>Druh</TableHeadCell>
         <TableHeadCell></TableHeadCell>
     </TableHead>
@@ -38,14 +40,15 @@
         {#each animals as animal}
             <TableBodyRow>
                 <TableBodyCell>
-                    {animal.name}
+                    {animal.date}
                 </TableBodyCell>
                 <TableBodyCell>
                     {animal.species}
                 </TableBodyCell>
                 <TableBodyCell>
-<!--                    TODO -->
-                    <Button href="/examinations">Zobrazit vyšetření</Button>
+                    <!--                    TODO -->
+<!--                    <Button>Zobrazit Detail</Button>-->
+                    <DetailExaminations/>
                 </TableBodyCell>
             </TableBodyRow>
         {/each}
