@@ -11,7 +11,7 @@
 <!--</Button>-->
 
 <script>
-    import {Card, Heading, Label, Button, Input, P} from 'flowbite-svelte';
+    import {Card, Heading, Label, Button, Input, P, A} from 'flowbite-svelte';
     import NewAnimal from "$lib/components/forms/modal/NewAnimal.svelte";
     import Reservetions from "$lib/components/ReservetionsPopup.svelte";
 
@@ -38,8 +38,8 @@
         <div class="flex flex-col justify-center items-center p-8 text-center bg-white rounded-tr-lg border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
             <Heading tag="h3" class="text-lg font-semibold text-gray-900 dark:text-white">Přidat nové zvíře</Heading>
             <P class="mb-4">Vytvoření nového záznamu do kartotéky</P>
-            <NewAnimal></NewAnimal>
-        <!--        <Button href="/addAnimal">Přidat</Button>-->
+<!--            <NewAnimal></NewAnimal>-->
+            <Button href="/animals/add">Přidat</Button>
         </div>
 
         <!--    Nové vyšetření-->
@@ -49,10 +49,10 @@
             <Button href="/addExamination">Přidat</Button>
         </div>
 
-        <!--    NováFaktůra-->
+        <!--    Nová faktura-->
         <div class="flex flex-col justify-center items-center p-8 text-center bg-white rounded-tr-lg border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
-            <Heading tag="h3" class="text-lg font-semibold text-gray-900 dark:text-white">Nová faktůra</Heading>
-            <P class="my-4 font-light"> Vytvoření nové faktůry</P>
+            <Heading tag="h3" class="text-lg font-semibold text-gray-900 dark:text-white">Nová faktura</Heading>
+            <P class="my-4 font-light"> Vytvoření nové faktury</P>
             <Button href="/addInvoice">Přidat</Button>
         </div>
     </Card>

@@ -33,11 +33,11 @@ const AnimalExamination = new Schema({
     },
     diagnose: {
         type: String,
-        required: false,
+        required: true,
     },
     text: {
         type: String,
-        required: true,
+        required: false,
     },
     recommendation: {
         type: String,
@@ -52,8 +52,8 @@ const joiSchema = Joi.object({
     subject: Joi.string().required(),
     date: Joi.date().required(),
     weight: Joi.number().allow(null),
-    diagnose: Joi.string().allow(null),
-    text: Joi.string().required(),
+    diagnose: Joi.string().required(),
+    text: Joi.string().allow(null),
     recommendation: Joi.string().allow(null),
 })
 

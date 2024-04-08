@@ -31,7 +31,7 @@
 
 <Modal bind:open={formModal} size="xs" autoclose={false} class="w-full">
     <form class="flex flex-col space-y-6" action="#">
-        <Heading tag="h3" class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Přidání nového zvířete</Heading>
+        <Heading tag="h1" class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Přidání nového zvířete</Heading>
         <Label class="space-y-2">
             <span>Druh</span>
             <Input type="text" name="species" required />

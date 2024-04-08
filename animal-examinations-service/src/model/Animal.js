@@ -16,11 +16,20 @@ const Animal = new Schema({
     },
     sex: {
         type: String,
-        required: true,
+        required: false,
     },
-    name: String,
-    birthDate: Date,
-    deathDate: Date,
+    name: {
+        type: String,
+        required: false,
+    },
+    birthDate: {
+        type: Date,
+        required: false,
+    },
+    deathDate: {
+        type: Date,
+        required: false,
+    },
     owner: {
         type: ObjectId,
         required: true,
@@ -30,7 +39,7 @@ const Animal = new Schema({
 // JOI validation - https://gist.github.com/stongo/6359042
 const joiSchema = Joi.object({
     species: Joi.string().required(),
-    sex: Joi.string().required(),
+    sex: Joi.string().allow(null),
     name: Joi.string().allow(null),
     birthDate: Joi.date().allow(null),
     deathDate: Joi.date().allow(null),

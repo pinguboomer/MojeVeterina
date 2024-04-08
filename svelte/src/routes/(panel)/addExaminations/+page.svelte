@@ -1,5 +1,5 @@
 <script>
-import NewExaminations from "$lib/components/forms/NewExaminations.svelte";
+import NewExaminations from "$lib/components/forms/FormNewExamination.svelte";
 </script>
 
 <NewExaminations/>

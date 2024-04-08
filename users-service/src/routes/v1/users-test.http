@@ -1,6 +1,6 @@
 ###
 
-GET {{host}}/v1/users
+GET {{host}}/v1/users?projection=users
 
 ###
 

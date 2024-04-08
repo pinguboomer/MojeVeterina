@@ -17,7 +17,7 @@
  *  })
  *  @throws {403} - Forbidden
  **/
-export function authzStaff (req, res, next) {
+export default function authzStaff (req, res, next) {
     if (!req.user.role.includes('staff')) {
         return res.sendStatus(403)
     }

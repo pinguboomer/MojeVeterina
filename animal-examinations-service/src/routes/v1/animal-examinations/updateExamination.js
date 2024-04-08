@@ -19,8 +19,6 @@ async function updateExamination(req, res) {
             return res.sendStatus(404)
         }
 
-        console.log(updated)
-
         res.sendStatus(204)
     }
     catch (e) {

@@ -15,12 +15,13 @@
         HomeSolid,
         ChevronDownOutline
     } from "flowbite-svelte-icons";
+    import logo from "$lib/images/logo_veterina.png";
 
 </script>
 
 <Navbar class={"pt-0 pb-0 border-2 border-b-black mb-1.5 " + $$restProps.class}>
     <NavBrand href="/">
-        <img src="src/lib/images/logo_veterina.png" class="me-3 h-6 sm:h-9" alt="Logo Moje veterina"/>
+        <img src={logo} class="me-3 h-6 sm:h-9" alt="Logo Moje veterina"/>
         <span class="self-center whitespace-nowrap text-xl font-semibold dark:text-white">Moje veterina</span>
     </NavBrand>
     <div class="flex items-center md:order-2">

@@ -14,6 +14,7 @@
         ClipboardSolid,
         FileIcvoiceSolid
     } from "flowbite-svelte-icons";
+    import logo from "$lib/images/logo_veterina.png";
 
     import {applyAction, enhance} from '$app/forms';
 
@@ -30,7 +31,7 @@
 
 <Sidebar class={$$restProps.class}>
     <SidebarWrapper class="h-[95dvh] m-4 flex flex-col  items-center">
-        <img src="src/lib/images/logo_veterina.png" class=" mb-5 me-3 h-28" alt="Logo Moje veterina"/>
+        <img src={logo} class=" mb-5 me-3 h-28" alt="Logo Moje veterina"/>
 
         <SidebarGroup>
             <div class="flex  mb-12">

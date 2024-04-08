@@ -7,6 +7,15 @@ async function changePassword(req, res) {
     try {
         const {email, password, newPassword} = req.body
 
+
+        //Ověříme, jestli upravuje sám sebe.
+        if (!req.user.role.includes('ADMIN')) {
+            if (email != req.user.email) {
+                return res.sendStatus(403)
+            }
+        }
+
+
         // Neplatný email nebo heslo
         if (typeof email !== 'string' || typeof password !== 'string' || typeof newPassword !== 'string' || !email.match(EMAIL_REGEX)) {
             return res.sendStatus(400)

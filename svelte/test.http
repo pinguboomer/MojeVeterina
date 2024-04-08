@@ -1,0 +1,10 @@
+###
+
+GET localhost:3000/users-service/v1/users?role=CUSTOMER
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjExMzc0MjNhNDQ4YjEwMDUxNjM4MGUiLCJyb2xlIjoiQ1VTVE9NRVIiLCJlbWFpbCI6InRvbWFzQG5lb2xvb3AuY3oiLCJfX3YiOjAsImlhdCI6MTcxMjQwNDI5OSwiZXhwIjoxNzEyNDkwNjk5fQ.VsUeI7mDwmU4Vk75L20HkZNxvOu6qq60FxNcZyUcRrI
+
+###
+
+POST localhost:3000/animal-examinations-service/v1/animals
+
+###

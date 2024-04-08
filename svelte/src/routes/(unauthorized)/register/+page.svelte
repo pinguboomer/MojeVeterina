@@ -5,14 +5,9 @@
     /** @type {import('./$types').ActionData} */
     export let form;
 
-    // Nastavení důvodů chyb - může se lišit podle API
-    const ERROR_REASONS = {
-        email_exists: 'email_exists',
-    }
-
     function getErrorText(reason) {
         switch(reason) {
-            case ERROR_REASONS.email_exists:
+            case 'email_exists':
                 return 'Uživatel s tímto e-mailem již existuje.';
             default:
                 return 'Chyba při registraci. Zkuste to prosím znovu.';
@@ -43,27 +38,27 @@
     <div class="grid">
         <div class="mb-4 grid-first-name">
             <Label for="firstName" class="block mb-2">Jméno</Label>
-            <Input id="firstName" name="firstName" placeholder="Jméno" type="text" />
+            <Input id="firstName" name="firstName" placeholder="Jméno" type="text" required />
         </div>
         <div class="mb-4 grid-last-name">
             <Label for="lastName" class="block mb-2">Přijmení</Label>
-            <Input id="lastName" name="lastName" placeholder="Přijmení" type="text" />
+            <Input id="lastName" name="lastName" placeholder="Přijmení" type="text" required />
         </div>
         <div class="mb-4 grid-phone">
             <Label for="phone" class="block mb-2">Telefon</Label>
-            <Input id="phone" name="phone" placeholder="Telefon" type="text" />
+            <Input id="phone" name="phone" placeholder="Telefon" type="text" required />
         </div>
         <div class="mb-4 grid-address">
             <Label for="address" class="block mb-2">Ulice a číslo popisné</Label>
-            <Input id="address" name="address" placeholder="Ulice a číslo popisné" type="text" />
+            <Input id="address" name="address" placeholder="Ulice a číslo popisné" type="text" required />
         </div>
         <div class="mb-4 grid-zip">
             <Label for="zipCode" class="block mb-2">PSČ</Label>
-            <Input id="zipCode" name="zipCode" placeholder="PSČ" type="text" />
+            <Input id="zipCode" name="zipCode" placeholder="PSČ" type="text" required />
         </div>
         <div class="mb-4 grid-city">
             <Label for="city" class="block mb-2">Město</Label>
-            <Input id="city" name="city" placeholder="Město" type="text" />
+            <Input id="city" name="city" placeholder="Město" type="text" required />
         </div>
     </div>
     <Checkbox class="mb-4" id="terms" name="terms" required>Souhlasím s podmínkami registrace</Checkbox>

@@ -2,11 +2,11 @@ const mongoose = require("mongoose");
 const Joi = require('joi');
 
 const Schema = mongoose.Schema;
-const ObjectId = Schema.ObjectId;
 
 const Reservation = new Schema({
     user: {
-        type: mongoose.Schema.Types.ObjectId, ref: 'User',
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
         required: true
     },
     date:  {
@@ -14,7 +14,8 @@ const Reservation = new Schema({
         required: true,
     },
     animal: {
-        type: mongoose.Schema.Types.ObjectId, ref: 'Animal',
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Animal',
         required: true,
     },
     reason: {

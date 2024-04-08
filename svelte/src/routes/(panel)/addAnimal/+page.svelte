@@ -1,4 +1,4 @@
 <script>
-    import NewAnimalStandart from "$lib/components/forms/NewAnimalStandart.svelte";
+    import NewAnimalStandart from "$lib/components/forms/FormNewAnimal.svelte";
 </script>
 <NewAnimalStandart/>

@@ -12,7 +12,6 @@ export const actions = {    // TODO: Implement proper registration
         }
 
         const body = {
-            "typ": "CUSTOMER",
             "name": formData.get('firstName'),
             "surname": formData.get('lastName'),
             "email": formData.get('email'),

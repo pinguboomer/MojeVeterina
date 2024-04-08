@@ -7,7 +7,10 @@ async function getUser(req, res) {
             return res.sendStatus(400)
         }
 
-        const user = await User.findOne({_id: req.params.id})
+        const user = await User.findOne({_id: req.params.id},  {
+            password: 0,
+            google_id: 0
+        })
 
         if (!user) {
             return res.sendStatus(404)
