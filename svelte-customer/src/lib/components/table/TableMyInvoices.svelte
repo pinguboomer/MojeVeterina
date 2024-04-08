@@ -11,6 +11,7 @@
     } from "flowbite-svelte";
     import {onMount} from "svelte";
     import {invoicesNumber} from "../../../routes/stores/invoiceStore.js";
+    import {formatDate} from "$lib/formateDate.js";
 
     let invoices = [];
     onMount(() => {
@@ -34,26 +35,6 @@
 
         invoices = invoices
 
-    }
-
-    function formatDate(date) {
-        // Získání jednotlivých částí data
-        var day = date.getDate();
-        var month = date.getMonth() + 1; // Měsíce jsou indexovány od 0
-        var year = date.getFullYear();
-
-        // Přidání předchozí nuly pro jednociferný den nebo měsíc
-        if (day < 10) {
-            day = '0' + day;
-        }
-        if (month < 10) {
-            month = '0' + month;
-        }
-
-        // Sestavení formátu "dd.mm.yyyy"
-        var formattedDate = day + '.' + month + '.' + year;
-
-        return formattedDate;
     }
 
     function randomDate(start, end) {

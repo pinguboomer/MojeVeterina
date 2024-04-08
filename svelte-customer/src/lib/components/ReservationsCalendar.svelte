@@ -2,15 +2,35 @@
     import {
         Button,
         Heading,
-         P, Table,
+        P,
+        Table,
         TableBody,
         TableBodyCell,
         TableBodyRow,
         TableHead,
         TableHeadCell
     } from "flowbite-svelte";
+    import {formatDate} from "$lib/formateDate.js";
 
     export let date;
+
+    // function formatDate(date) {
+    //     let day = date.getDate();
+    //     let month = date.getMonth() + 1;
+    //     let year = date.getFullYear();
+    //
+    //
+    //     if (day < 10) {
+    //         day = '0' + day;
+    //     }
+    //     if (month < 10) {
+    //         month = '0' + month;
+    //     }
+    //
+    //     return day + '.' + month + '.' + year;
+    // }
+
+
 
     //TODO přes api získat rezervace
     const clientName = ["Tomáš Němeček", "František Brýl", "Filip Macháček", "Václav Buřil"];
@@ -29,7 +49,7 @@
 
 
 </script>
-<Heading tag="h3">{date}</Heading>
+<Heading tag="h3">{formatDate(date)}</Heading>
     <Table>
         <TableHead>
             <TableHeadCell>

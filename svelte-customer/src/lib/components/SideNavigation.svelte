@@ -1,6 +1,6 @@
 <script>
     import {
-        Avatar,
+        Avatar, Button,
         Sidebar,
         SidebarDropdownItem,
         SidebarDropdownWrapper,
@@ -14,6 +14,17 @@
         BugSolid,
         FileIcvoiceSolid
     } from "flowbite-svelte-icons";
+
+    import {applyAction, enhance} from '$app/forms';
+
+    function onSubmit() {
+        return async ({result}) => {
+            await applyAction(result); // might not do anything here
+
+            // if (result.type == 'success' || result.type == 'failure')
+            // form = result.data;
+        }
+    }
 </script>
 
 <Sidebar class="">
@@ -26,7 +37,9 @@
                 <SidebarDropdownWrapper label="Václav Buřil" class="mr-4 font-bold">
                     <!--                    TODO odkaz-->
                     <SidebarDropdownItem label="Účet"/>
-                    <SidebarDropdownItem label="Odhlásit"/>
+                    <form method="POST" action="/api/logout" use:enhance={onSubmit}>
+                        <Button type="submit">Odhlásit se</Button>
+                    </form>
                 </SidebarDropdownWrapper>
             </div>
             <SidebarItem href="/" label="Domů">

@@ -1,12 +1,9 @@
 <script>
-
-    import TableMyInvoices from "$lib/components/table/TableMyInvoices.svelte";
     import {Button} from "flowbite-svelte";
     import {jsPDF} from "jspdf";
     import autoTable from 'jspdf-autotable'
     import {onDestroy, onMount} from "svelte";
     import {invoicesNumber} from "../../routes/stores/invoiceStore.js";
-
 
     //TODO doplnit aoutomaticky hodnoty do promněných
     onMount(() => {
@@ -52,6 +49,7 @@
         doc.setLineHeightFactor(0.5)
         doc.setFontSize(12);
         // doc.addFileToVFS('src/lib/charset/Amiri-Regular.ttf', "Amiri")
+        //doc.addFileToVFS("Amiri-Regular.ttf", amiriFont);
         doc.addFont("src/lib/charset/Amiri-Regular.ttf", 'custom', "normal");
         doc.setFont('custom');
 
