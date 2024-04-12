@@ -4,7 +4,12 @@ GET {{host}}/v1/animals
 
 ###
 
-GET {{host}}/v1/animals/65e366735cfda5f11b930c5d
+GET {{host}}/v1/
+Authorization: Bearer {{token}}
+
+###
+
+GET {{host}}/v1/animals/66180f685af6cc6fe75e32a7
 Authorization: Bearer {{token}}
 
 
@@ -14,7 +19,7 @@ POST {{host}}/v1/animals
 Content-Type: application/json
 
 {
-    "species": "krokodýl",
+    "species": "krokodýl1",
     "sex": "male",
     "name": "Honza",
     "birthDate": "2010-03-10T23:44:56.289Z",
@@ -24,11 +29,12 @@ Content-Type: application/json
 
 ###
 
-PUT {{host}}/v1/animals/65e366735cfda5f11b930c5d
+PUT {{host}}/v1/animals/66194e4f76b9a38659855f99
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 {
-    "species": "krokodýl",
+    "species": "krokodýl5",
     "sex": "male",
     "name": "Pežot",
     "birthDate": "2010-03-10T23:44:56.289Z",

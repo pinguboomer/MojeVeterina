@@ -1,5 +1,4 @@
 <script>
-
     import {Button, P} from "flowbite-svelte";
     import PDFInvoices from "$lib/components/PDFInvoices.svelte";
     import {invoicesNumber} from "../../stores/invoiceStore.js";

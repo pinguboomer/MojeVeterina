@@ -1,0 +1,53 @@
+###
+GET {{host}}/v1/
+Authorization: Bearer {{token}}
+###
+
+GET {{host}}/v1/invoices
+Authorization: Bearer {{token}}
+
+###
+
+POST {{host}}/v1/invoices
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "client": "66179f31c4987b5cbb046f40",
+  "items": [
+    {
+      "name": "Item 1",
+      "price": 10,
+      "quantity": 2
+    },
+    {
+      "name": "Item 2",
+      "price": 15,
+      "quantity": 1
+    }
+  ]
+}
+
+###
+
+PUT {{host}}/v1/invoices/661836e8bed1e63c9c6517ab
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "client": "66179f31c4987b5cbb046f40",
+  "items": [
+    {
+      "name": "Item 1",
+      "price": 10,
+      "quantity": 2
+    },
+    {
+      "name": "Item 2",
+      "price": 15,
+      "quantity": 1
+    }
+  ]
+}
+
+

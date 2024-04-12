@@ -28,13 +28,14 @@
 
 
     function setSuma(){
+        suma = 0;
         for (let item of items){
-
             suma = suma + (item.price * item.quantity);
         }
 
     }
 
+    setSuma();
     function addItem() {
         let item = {name: name, price: price, quantity: number};
         items = items.concat(item);
@@ -55,7 +56,7 @@
 </script>
 
 <form class="flex flex-col space-y-6" method="post" use:enhance>
-    <Heading tag="h1" class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Nová faktůra</Heading>
+    <Heading tag="h1" class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Detail faktury</Heading>
     <!--{#if errorMessage !== undefined}-->
     <!--    <P class="text-red-700">{errorMessage}</P>-->
     <!--{/if}-->
@@ -92,4 +93,5 @@
         <Helper class="text-sm text-center mb-4" color="red">{getErrorText(form?.reason)}</Helper>
     {/if}
     <Button class="w-full" type="submit" disabled={!!form?.success}>Vytvořit novou faktůru</Button>
+    <Button href="/addInvoices/{invoice._id}/pdfInvoice">PDF</Button>
 </form>

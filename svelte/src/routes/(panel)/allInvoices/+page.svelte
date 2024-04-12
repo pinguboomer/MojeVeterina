@@ -1,27 +1,16 @@
 <script>
     import InvoicesTable from "$lib/components/tables/InvoicesTable.svelte";
-    import {onMount} from "svelte";
-    import {PUBLIC_API_URL} from "$env/static/public";
+    import {P} from "flowbite-svelte";
+    export let data;
 
-    let invoices = [];
-
-    onMount(async () => {
-        invoices = await load();
-    })
-
-    //TODO dodělat
-    async function load() {
-        const res = await fetch(PUBLIC_API_URL + '/v1/animals', {
-            method: 'GET'
-        })
-
-        if (res.ok) {
-            return await res.json() || []
-        }
-
-        return [];
-    }
+    console.log(data.clients)
 
 </script>
 
-<InvoicesTable invoices={invoices}/>
+{#await data.invoices then invoices}
+    <InvoicesTable invoices={invoices}
+    clients={data.clients}
+    />
+{:catch error}
+    <P>{error.message}</P>
+{/await}

@@ -1,7 +1,8 @@
 ###
 
-GET {{host}}/v1/animal-examinations
-Authorization: Bearer {{token}}
+GET localhost:3001/v1/animal-examinations
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjE3OWYzMWM0OTg3YjVjYmIwNDZmNDAiLCJyb2xlIjoiQ1VTVE9NRVIiLCJlbWFpbCI6InZhc2VrYnVyaWxAZ21haWwuY29tIiwibmFtZSI6IlbDoWNsYXYiLCJzdXJuYW1lIjoiQnXFmWlsIiwiZ29vZ2xlX2lkIjoiMTA1MjMzMzk2NzEyNDU0NDkxNTE2IiwiX192IjowLCJpYXQiOjE3MTI4MzU5MjAsImV4cCI6MTcxMjkyMjMyMH0.WQn9X4AgBSG4WCY_9-Spx6quaJzj6WTNWzKQQGtg7GM
+
 
 ###
 
@@ -11,6 +12,7 @@ GET {{host}}/v1/animal-examinations/65e470e5b3d1e0dbd69fc101
 
 POST {{host}}/v1/animal-examinations
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 {
   "author": "65e352d6d67152adb841fde2",
@@ -25,18 +27,19 @@ Content-Type: application/json
 
 ###
 
-PUT {{host}}/v1/animal-examinations/65e470e5b3d1e0dbd69fc101
+PUT {{host}}/v1/animal-examinations/661963e576b9a38659855fde
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 {
   "author": "65e352d6d67152adb841fde2",
   "animal": "65e352d6d67152adb841fde2",
-  "subject": "Test examination",
+  "subject": "Test examination54",
   "date": "2021-01-01T00:00:00.000Z",
-  "weight": null,
-  "diagnose": null,
+  "weight": 15.3,
+  "diagnose": "Test diagnose",
   "text": "Examination description",
-  "recommendation": null
+  "recommendation": "Test recommendations"
 }
 
 ###

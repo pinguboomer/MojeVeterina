@@ -4,6 +4,7 @@ const router = Router();
 
 
 // Animals
+//TODO dodělat put a delete
 router.get('/invoices/:id', require('./invoices/getInvoice'));
 router.post('/invoices', require('./invoices/createInvoice'));
 router.get('/invoices', require('./invoices/getInvoices'));

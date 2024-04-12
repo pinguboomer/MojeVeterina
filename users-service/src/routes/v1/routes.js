@@ -18,7 +18,7 @@ router.use(auth)
 router.post('/auth/logout', require('./auth/login'));
 
 // Users
-router.get('/users/:id', authzRole(['ADMIN', 'SECRETARY', 'DOCTOR', 'NURSE']), require('./users/getUser'))
+router.get('/users/:id', authzRole(['ADMIN', 'SECRETARY', 'DOCTOR', 'NURSE', 'CUSTOMER']), require('./users/getUser'))
 router.get('/users', authzRole(['ADMIN', 'SECRETARY', 'DOCTOR', 'NURSE']), require('./users/getUsers'))
 router.put('/users/:id', authzRole(['ADMIN', 'SECRETARY', 'DOCTOR', 'NURSE']),  require('./users/updateUser'))
 router.put('/users/password', require('./users/changePassword'))

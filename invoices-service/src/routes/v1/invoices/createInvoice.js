@@ -9,6 +9,7 @@ async function createInvoice(req, res) {
         const {value, error} = InvoiceSchema.validate(req.body)
 
         if (error) {
+            console.error(error);
             return res.sendStatus(400)
         }
 

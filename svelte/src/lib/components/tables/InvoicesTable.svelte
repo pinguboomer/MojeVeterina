@@ -1,7 +1,28 @@
 <script>
     import {Button, Table, TableBody, TableBodyCell, TableBodyRow, TableHead, TableHeadCell} from "flowbite-svelte";
+    import {formatDate} from "$lib/formateDate.js"
 
     export let invoices = [];
+    export let clients = [];
+
+    function setNameClient(id){
+        console.log(clients)
+        let client = clients.find(x => x._id === id);
+        return String(client.name + " " + client.surname);
+    }
+
+    const getFullPrice = function (items, number) {
+        console.log(number)
+
+        let fullPrice = 0;
+        for (let item of items) {
+            console.log(item[2])
+            let price = item.price + item.quantity;
+            fullPrice = fullPrice + price
+        }
+
+        return String(fullPrice + ' Kč');
+    }
 </script>
 
 <Table hoverable={true}>
@@ -12,24 +33,25 @@
         <TableHeadCell>Splaceno</TableHeadCell>
         <TableHeadCell></TableHeadCell>
     </TableHead>
+<!--    TODO dodlěat datum splatnosti-->
     <TableBody>
         {#each invoices as invoice}
             <TableBodyRow>
                 <TableBodyCell>
-                    {invoice.client}
+                    {setNameClient(invoice.client)}
+                    <!--{invoice.client}-->
                 </TableBodyCell>
                 <TableBodyCell>
-                    {invoice.creationDate}
+                    {formatDate(new Date(invoice.creationDate))}
                 </TableBodyCell>
                 <TableBodyCell>
-                    {invoice.paid}
+                    {getFullPrice(invoice.items, invoice.number)}
                 </TableBodyCell>
                 <TableBodyCell>
-                    {invoice.sex}
+                    {invoice.paid? "ano": "ne"}
                 </TableBodyCell>
                 <TableBodyCell>
-<!--                    TODO dodělat zobrazení-->
-                    <Button>Zobrazit detail</Button>
+                    <Button href="addInvoices/{invoice._id}">Zobrazit detail</Button>
                 </TableBodyCell>
             </TableBodyRow>
         {/each}

@@ -1,10 +1,11 @@
 ###
 
 GET {{host}}/v1/users?projection=users
-
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjE3YTAxZGM0OTg3YjVjYmIwNDZmNDIiLCJyb2xlIjoiQ1VTVE9NRVIiLCJlbWFpbCI6InZhc2VrQHNlem5hbS5jeiIsInBob25lIjoiNzUzIDM1NyA1NzgiLCJuYW1lIjoiVsOhY2xhdiIsInN1cm5hbWUiOiJCdcWZaWwiLCJhZGRyZXNzIjoiZmRzZDUxNiIsImNpdHkiOiJSeWNobm92IG5hZCBrbsSbxb5ub3UiLCJ6aXBfY29kZSI6IjUxNjAxIiwiX192IjowLCJpYXQiOjE3MTI5MjQ0NzcsImV4cCI6MTcxMjkyODA3N30.wtfqwrmM4UrpZeLVy4RFbMqzjMqbpQptxnsXfVMuOUo
 ###
 
-GET {{host}}/v1/users/65f6ad0265eaff925f1d149e
+GET {{host}}/v1/users/6617a01dc4987b5cbb046f42
+Authorization: Bearer {{token}}
 
 ###
 

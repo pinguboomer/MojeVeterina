@@ -12,9 +12,13 @@ const InvoiceItem = new Schema({
     price: {
         type: Number,
         required: true,
+    },
+    quantity: {
+        type: Number,
+        required: true,
     }
 });
-//TODO přidat datum splatnosti, identifikátor zda je zaplaceno, automatické vytvoření čísla faktury
+//TODO datum splatnosti
 const Invoice = new Schema({
     number: {
         type: Number,
@@ -50,6 +54,7 @@ const Invoice = new Schema({
 const joiInvoiceItemSchema = Joi.object({
     name: Joi.string().required(),
     price: Joi.number().required(),
+    quantity: Joi.number().required(),
 })
 
 const joiSchema = Joi.object({
