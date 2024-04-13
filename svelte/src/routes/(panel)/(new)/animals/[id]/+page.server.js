@@ -82,8 +82,6 @@ export const actions = {
             return {success: false, reason: "unknown"}
         }
 
-        const data = await res.json()
-
-        return {success: true, redirect: `/animals/${data._id}`}
+        return {success: true, redirect: `/animals/`+ params.id}
     }
 }

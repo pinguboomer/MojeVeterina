@@ -88,8 +88,8 @@ export const actions = {
             return { success: false, reason: "unknown" }
         }
 
-        const data = await res.json()
+       // const data = await res.json()
 
-        return { success: true, redirect: `/animals/${body.animal}/examinations/${data._id}` }
+        return { success: true, redirect: `/animals/${body.animal}/examinations/` + params.examination_id}
     }
 }

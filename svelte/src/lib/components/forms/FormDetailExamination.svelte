@@ -23,6 +23,7 @@
                 return 'Chyba při vytváření záznamu o vyšetření. Zkuste to prosím znovu.';
         }
     }
+    console.log(data.date)
 </script>
 
 <form class="flex flex-col space-y-6" method="post" use:enhance>
