@@ -2,6 +2,7 @@
     import {modal} from "../../../store.js";
     import FullCalendar from "$lib/components/FullCalendar.svelte";
     import ReservationsCalendar from "$lib/components/ReservationsCalendar.svelte";
+    import {redirect} from "@sveltejs/kit";
 
     let date = new Date()
 
@@ -86,8 +87,6 @@
 
     let dateForReservations = new Date();
 
-    console.log(dateForReservations.getDate() % 6);
-
     function handleDayClick(e) {
         console.log(e.detail.date)
         dateForReservations = e.detail.date;
@@ -134,7 +133,7 @@
         monthLabels={monthLabels}
         dayLabels={dayLabels}
     />
-    {#if dateForReservations !== undefined && (dateForReservations.getDate() % 6) && (dateForReservations.getDate() % 7) }
+    {#if dateForReservations !== undefined}
         <ReservationsCalendar date={dateForReservations}/>
     {/if}
 </div>

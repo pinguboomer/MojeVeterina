@@ -12,7 +12,8 @@
         HomeSolid,
         CalendarMonthSolid,
         BugSolid,
-        FileInvoiceSolid
+        FileIcvoiceSolid
+        //FileInvoiceSolid
     } from "flowbite-svelte-icons";
 
     import {applyAction, enhance} from '$app/forms';
@@ -57,7 +58,7 @@
             </SidebarItem>
             <SidebarItem href="/myInvoices" label="Moje platby">
                 <svelte:fragment slot="icon">
-                    <FileInvoiceSolid
+                    <FileIcvoiceSolid
                             class="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"/>
                 </svelte:fragment>
             </SidebarItem>

@@ -6,18 +6,15 @@
     export let clients = [];
 
     function setNameClient(id){
-        console.log(clients)
         let client = clients.find(x => x._id === id);
         return String(client.name + " " + client.surname);
     }
 
     const getFullPrice = function (items, number) {
-        console.log(number)
-
         let fullPrice = 0;
         for (let item of items) {
             console.log(item[2])
-            let price = item.price + item.quantity;
+            let price = item.price * item.quantity;
             fullPrice = fullPrice + price
         }
 

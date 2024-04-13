@@ -6,7 +6,6 @@
     import {font} from "$lib/charset/Amiri-Regular-normal.js";
     import {formatDate} from "$lib/formatDate.js"
 
-
     export let invoice;
     export let client;
 

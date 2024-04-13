@@ -1,6 +1,8 @@
 <script>
     import {createEventDispatcher} from "svelte"
     import {twMerge} from "tailwind-merge";
+    import {redirect} from "@sveltejs/kit";
+    import {goto} from "$app/navigation";
 
     const dispatch = createEventDispatcher()
 
@@ -123,7 +125,7 @@
 /* active day */         (cell.date === active)? "bg-primary-600 text-white hover:bg-primary-600 hover:text-white": "",
                          "disabled:cursor-default disabled:bg-transparent disabled:text-gray-400"
                 )}
-                    on:click|self={() => { dispatch("day_click", {date: cell.date}); active = cell.date }}
+                    on:click|self={() => { dispatch("day_click", {date: cell.date}); active = cell.date; goto("?date=" + cell.date.toISOString().split('T')[0]); console.log(cell.date.toISOString()) }}
                     disabled={disableDaysOutsideMonth && !sameMonth(cell.date, thisMonth) || cell.date.getDay() === SATURDAY || cell.date.getDay() === SUNDAY ||  cell.date < new Date()}
             >
                 {cell.date.getDate()}

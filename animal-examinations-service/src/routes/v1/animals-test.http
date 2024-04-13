@@ -1,6 +1,7 @@
 ###
 
 GET {{host}}/v1/animals
+Authorization: Bearer {{token}}
 
 ###
 
@@ -9,7 +10,7 @@ Authorization: Bearer {{token}}
 
 ###
 
-GET {{host}}/v1/animals/66180f685af6cc6fe75e32a7
+GET {{host}}/v1/animals/65ec342d31c26ad8bfd61691
 Authorization: Bearer {{token}}
 
 
@@ -46,3 +47,8 @@ Authorization: Bearer {{token}}
 ###
 
 DELETE {{host}}/v1/animals/65e366735cfda5f11b930c5d
+
+###
+
+GET {{host}}/v1/animals/client/65e352d6d67152adb841fde2
+Authorization: Bearer {{token}}

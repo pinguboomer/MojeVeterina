@@ -8,6 +8,7 @@ const router = Router();
 router.get('/invoices/:id', require('./invoices/getInvoice'));
 router.post('/invoices', require('./invoices/createInvoice'));
 router.get('/invoices', require('./invoices/getInvoices'));
+router.get('/invoices/client/:id', require('./invoices/client/getInvoiceClient'))
 router.post('/webhooks/revolut', require('./webhooks/revolutPaymentWebhook'));
 
 router.get('/', (req, res) => {

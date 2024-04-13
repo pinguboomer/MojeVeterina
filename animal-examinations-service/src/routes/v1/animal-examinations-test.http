@@ -51,3 +51,7 @@ DELETE {{host}}/v1/animal-examinations/65e470e5b3d1e0dbd69fc101
 
 GET localhost:3000/animal-examinations-service/v1/animal-examinations
 Authorization: Bearer {{token}}
+
+###
+GET {{host}}/v1/animal-examinations/animal/65ec342d31c26ad8bfd61691
+Authorization: Bearer {{token}}

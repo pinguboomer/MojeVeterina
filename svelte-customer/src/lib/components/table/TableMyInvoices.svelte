@@ -9,40 +9,19 @@
         TableHead,
         TableHeadCell
     } from "flowbite-svelte";
-    import {onMount} from "svelte";
-    import {invoicesNumber} from "../../../stores/invoiceStore.js";
+
     import {formatDate} from "$lib/formateDate.js";
+    export let invoices = [];
 
-    let invoices = [];
-    onMount(() => {
-        console.log($invoicesNumber)
-        //TODO načíst z DB
-        loadData();
-
-    })
-
-
-    function loadData() {
-        for (let i = 0; i < 10; i++) {
-
-            const d1 = randomDate(new Date(2024, 0, 1), new Date());
-            const d2 = randomDate(d1, new Date());
-            let paid = Math.random() < 0.5;
-            let price = Math.random() * 100;
-            let invoice = {creationDate: formatDate(d1), dueDate: formatDate(d2), price: Math.round(price), paid: paid};
-            invoices.push(invoice);
+    const getFullPrice = function (items) {
+        let fullPrice = 0;
+        for (let item of items) {
+            let price = item.price * item.quantity;
+            fullPrice = fullPrice + price
         }
 
-        invoices = invoices
-
+        return String(fullPrice + ' Kč');
     }
-
-    function randomDate(start, end) {
-        return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
-    }
-
-
-
 
 </script>
 
@@ -60,22 +39,20 @@
         {#each invoices as invoice}
             <TableBodyRow>
                 <TableBodyCell>
-                    {invoice.creationDate}
+                    {formatDate(new Date(invoice.creationDate))}
                 </TableBodyCell>
+                <!--    TODO dodlěat datum splatnosti-->
                 <TableBodyCell>
                     {invoice.dueDate}
                 </TableBodyCell>
                 <TableBodyCell>
-                    {invoice.price} Kč
+                    {getFullPrice(invoice.items)}
                 </TableBodyCell>
                 <TableBodyCell>
                     {invoice.paid ? "ano": "ne"}
                 </TableBodyCell>
                 <TableBodyCell>
-                    <!--                    TODO dodělat zobrazení-->
-                    <Button href="/detailInvoices" on:click={() => {
-                        invoicesNumber.set(7884524)
-                    }}>Zobrazit detail</Button>
+                    <Button href="/myInvoices/{invoice._id}">Zobrazit detail1</Button>
                 </TableBodyCell>
             </TableBodyRow>
         {/each}

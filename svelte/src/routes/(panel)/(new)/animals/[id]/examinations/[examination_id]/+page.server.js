@@ -3,18 +3,9 @@ import {fetchData} from "$lib/server/fetchData.js";
 import {error, redirect} from "@sveltejs/kit";
 import {getUserFromToken} from "$lib/server/getUserFromToken.js";
 
-export const prerender = false
-
 /** @type {import('./$types').PageServerLoad} */
 export const load = async ({ parent, cookies, params }) => {
     await parent();
-
-    async function throwNotFound() {
-        return {
-            status: 404,
-            error: new Error('Not found').message
-        }
-    }
 
     try {
         const [examination, animal] = await Promise.all([
@@ -26,7 +17,6 @@ export const load = async ({ parent, cookies, params }) => {
             redirect(302, '/animals/' + params.id + '/examinations')
         }
         else {
-            console.log('TADY2')
             return {
                 animal,
                 examination

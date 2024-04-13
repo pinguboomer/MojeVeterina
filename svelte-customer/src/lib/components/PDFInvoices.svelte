@@ -2,41 +2,34 @@
     import {Button} from "flowbite-svelte";
     import {jsPDF} from "jspdf";
     import autoTable from 'jspdf-autotable'
-    import {onDestroy, onMount} from "svelte";
-    import {invoicesNumber} from "../../stores/invoiceStore.js";
+    import {onMount} from "svelte";
+    import {font} from "$lib/charset/Amiri-Regular-normal.js";
+    import {formatDate} from "$lib/formateDate.js"
 
-    //TODO doplnit aoutomaticky hodnoty do promněných
+    export let invoice;
+    export let client;
+
     onMount(() => {
-        //TODO najit v DB podle čísla faktůry
         generateInvoice(false);
-        //await load($invoicesNumber)
     })
 
-    onDestroy(() => {
-        $invoicesNumber = null;
-        $invoicesNumber = $invoicesNumber;
-    })
 
-    function load(numberInvoices) {
-
-    }
-
-    function gen_items() {
+    function get_items() {
         let items = [];
-        let itemName = ["Regen", "Očkování", "Dlaha"]
-        for (let i = 0; i < 10; i++) {
-            let item = [itemName[Math.floor(Math.random() * itemName.length)], String(i + ' Kč'), 2, String((i * 2) + ' Kč')];
-            items.push(item);
+        for (let item of invoice.items) {
+            let i = [item.name, String(item.quantity), String(item.price + ' Kč'), String((item.quantity * item.price) + ' Kč')];
+            items.push(i)
         }
         return items;
     }
 
     const getFullPrice = function (items) {
-        let fullPrice;
+        let fullPrice = 0;
         for (let item of items) {
-            fullPrice = fullPrice + item[3];
+            let price = item[3].split(' ')
+            fullPrice = fullPrice + parseInt(price[0]);
         }
-        return fullPrice;
+        return String(fullPrice + ' Kč');
     }
 
     let pdfURL;
@@ -48,9 +41,9 @@
 
         doc.setLineHeightFactor(0.5)
         doc.setFontSize(12);
-        // doc.addFileToVFS('src/lib/charset/Amiri-Regular.ttf', "Amiri")
-        //doc.addFileToVFS("Amiri-Regular.ttf", amiriFont);
-        doc.addFont("src/lib/charset/Amiri-Regular.ttf", 'custom', "normal");
+        //doc.addFileToVFS('src/lib/charset/Amiri-Regular.ttf', "custom")
+        doc.addFileToVFS("Amiri-Regular.ttf", font);
+        doc.addFont('Amiri-Regular.ttf', 'custom', "normal");
         doc.setFont('custom');
 
         const logo = new Image();
@@ -61,19 +54,24 @@
         doc.text('Moje Veterina', 10, 10);
 
         doc.setFontSize(12);
+
         doc.text('Adresa: Praha 10 Mírov 5', 10, 15);
         doc.text('Telofoní číslo: +420 752 488 589', 10, 20)
         doc.text('IČO: 12345678', 10, 25);
         doc.text('DIČ: CZ12345678', 10, 30);
 
-        doc.text('Plátce', 105, 10);
-        doc.text('Jméno a příjmení: Václav Buřil', 105, 15);
-        doc.text('Adresa: Rychnov nad Kněžnou, U stadionu 5', 105, 20);
 
-        doc.text('Datum vytvoření: 15.3.2024', 10, 45);
+        doc.text('Plátce', 105, 10);
+        doc.text('Jméno a příjmení: ' + client.name + ' ' + client.surname, 105, 15);
+        if (client.city && client.address)
+            doc.text('Adresa: ' + client.city + ' ' + client.address, 105, 20);
+
+        doc.text('Datum vytvoření: ' + formatDate(new Date(invoice.creationDate)) , 10, 45);
+        //TODO dodělat
         doc.text('Datum splatnosti: 20.3.2024', 10, 50);
 
-        doc.text(String('Číslo faktůry:' + $invoicesNumber), 105, 45)
+        doc.text(String('Číslo faktůry:' + invoice.number.toString()), 102, 45)
+        doc.text(String('Číslo platby:' + invoice.transactionPublicId), 102, 50)
 
         doc.line(100, 3, 100, 60);
         doc.line(5, 60, 200, 60);
@@ -85,12 +83,13 @@
         autoTable(doc, {
             headStyles: {fillColor: [0, 0, 0]},
             head: [['Položka', 'Počet', 'Cena za ks', 'Celkem']],
-            body: gen_items(),
+            body: get_items(),
             startY: 65,
             styles: {font: 'custom'}
         })
 
-        doc.text(String("Celková cena: " + getFullPrice(gen_items())), 5, doc.lastAutoTable.finalY + 10)
+        doc.setFontSize(18)
+        doc.text(String("Celková cena: " + getFullPrice(get_items())), 130, doc.lastAutoTable.finalY + 10)
         console.log(doc.lastAutoTable.finalY)
 
         pdfURL = URL.createObjectURL(doc.output("blob"));
@@ -104,7 +103,6 @@
 </script>
 
 <iframe src={pdfURL} width="800px" height="700px" class="mb-2"></iframe>
-<Button href="/myInvoices">Zpět na výpis</Button>
-<!--    TODO dodělat funkci zaplatit-->
-<Button>Zaplaťit</Button>
+<Button href="/myInvoices">Zpět výpis</Button>
+<!--TODO možnost platby-->
 <Button on:click={downloadPDF}>Stáhnout</Button>

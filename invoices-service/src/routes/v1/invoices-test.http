@@ -3,7 +3,7 @@ GET {{host}}/v1/
 Authorization: Bearer {{token}}
 ###
 
-GET {{host}}/v1/invoices
+GET {{host}}/v1/invoices/66182ffcbed1e63c9c65175f
 Authorization: Bearer {{token}}
 
 ###
@@ -50,4 +50,8 @@ Authorization: Bearer {{token}}
   ]
 }
 
+###
+
+GET {{host}}/v1/invoices/client/66179f31c4987b5cbb046f40
+Authorization: Bearer {{token}}
 
