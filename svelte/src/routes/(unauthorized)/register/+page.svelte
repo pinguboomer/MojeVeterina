@@ -23,7 +23,7 @@
 <form method="POST">
     <Heading class="mb-6 text-center">Registrace</Heading>
     <div class="mb-4">
-<!--        <Label for="email" color={(form?.reason === ERROR_REASONS.email_exists)? "red" : null} class="block mb-2">E-mail <span class="text-red-500" data-tooltip='required'>*</span></Label>-->
+        <Label for="email" color={(form?.reason === 'email_exists')? "red" : null} class="block mb-2">E-mail <span class="text-red-500" data-tooltip='required'>*</span></Label>
         <Input id="email" name="email" placeholder="E-mail" type="email" required/>
     </div>
     <div class="mb-4">
