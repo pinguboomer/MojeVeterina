@@ -3,7 +3,7 @@
     import {jsPDF} from "jspdf";
     import autoTable from 'jspdf-autotable'
     import {onDestroy, onMount} from "svelte";
-    import {invoicesNumber} from "../../routes/stores/invoiceStore.js";
+    import {invoicesNumber} from "../../stores/invoiceStore.js";
 
     //TODO doplnit aoutomaticky hodnoty do promněných
     onMount(() => {
