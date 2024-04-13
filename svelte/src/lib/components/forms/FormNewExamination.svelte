@@ -25,7 +25,7 @@
 </script>
 
 <form class="flex flex-col space-y-6" method="post" use:enhance>
-    <Heading tag="h3" class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Nové vyšetření</Heading>
+    <Heading tag="h1" class="mb-4">Nové vyšetření</Heading>
     <Input class="hidden" type="text" name="animal" value={data.animal}></Input>
     <Label class="space-y-2">
         <span>Datum</span>

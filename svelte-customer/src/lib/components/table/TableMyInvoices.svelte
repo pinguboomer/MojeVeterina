@@ -10,7 +10,7 @@
         TableHeadCell
     } from "flowbite-svelte";
     import {onMount} from "svelte";
-    import {invoicesNumber} from "../../../routes/stores/invoiceStore.js";
+    import {invoicesNumber} from "../../../stores/invoiceStore.js";
     import {formatDate} from "$lib/formateDate.js";
 
     let invoices = [];
