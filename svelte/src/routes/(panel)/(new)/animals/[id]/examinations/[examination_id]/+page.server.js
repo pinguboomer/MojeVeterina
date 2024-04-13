@@ -1,44 +1,43 @@
 import {env} from "$env/dynamic/private";
-import {redirect} from "@sveltejs/kit";
+import {fetchData} from "$lib/server/fetchData.js";
+import {error, redirect} from "@sveltejs/kit";
+
+export const prerender = false
 
 /** @type {import('./$types').PageServerLoad} */
 export const load = async ({ parent, cookies, params }) => {
     await parent();
 
-    async function loadAnimals() {
-        const res = await fetch(env.SECRET_API_URL + '/animal-examinations-service/v1/animals/' + params.id, {
-            method: 'GET',
-            headers: {
-                'Authorization': 'Bearer ' + cookies.get(env.SECRET_TOKEN_COOKIE_NAME)
-            }
-        })
-
-        if (!res.ok) {
-            redirect(302, '/')
-        } else {
-            return await res.json()
+    async function throwNotFound() {
+        return {
+            status: 404,
+            error: new Error('Not found').message
         }
     }
 
-    async function loadExamination() {
-        const res = await fetch(env.SECRET_API_URL + '/animal-examinations-service/v1/animal-examinations/' + params.examination_id, {
-            method: 'GET',
-            headers: {
-                'Authorization': 'Bearer ' + cookies.get(env.SECRET_TOKEN_COOKIE_NAME)
-            }
-        })
+    try {
+        const [examination, animal] = await Promise.all([
+            fetchData(env.SECRET_API_URL + '/animal-examinations-service/v1/animal-examinations/' + params.examination_id, cookies.get(env.SECRET_TOKEN_COOKIE_NAME)),
+            fetchData(env.SECRET_API_URL + '/animal-examinations-service/v1/animals/' + params.id, cookies.get(env.SECRET_TOKEN_COOKIE_NAME))
+        ])
 
-        if (!res.ok) {
-            redirect(302, '/')
-        } else {
-            return await res.json()
+        if (examination.animal !== params.id) {
+            redirect(302, '/animals/' + params.id + '/examinations')
+        }
+        else {
+            console.log('TADY2')
+            return {
+                animal,
+                examination
+            }
         }
     }
-
-
-    return {
-        animal:await loadAnimals(),
-        examination: await loadExamination()
+    catch (e) {
+        redirect(302, '/animals/' + params.id + '/examinations')
+        // return {
+        //     status: 500,
+        //     error: e
+        // }
     }
 }
 
@@ -90,6 +89,9 @@ export const actions = {
 
        // const data = await res.json()
 
-        return { success: true, redirect: `/animals/${body.animal}/examinations/` + params.examination_id}
+        return {
+            success: true,
+            redirect: `/animals/${body.animal}/examinations/` + params.examination_id
+        }
     }
 }

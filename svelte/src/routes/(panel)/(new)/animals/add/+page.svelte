@@ -11,13 +11,9 @@
     }
 </script>
 
-{#await data.owners then owners}
-    <FormNewAnimal
-            owners={owners.map((owner) => { return { name: `${owner.name} ${owner.surname}`, value: owner._id } })}
-           {form}
-            bind:animal={animal}
-    />
-{:catch error}
-    <p>{error.message}</p>
-{/await}
+<FormNewAnimal
+        owners={data.owners.map((owner) => { return { name: `${owner.name} ${owner.surname}`, value: owner._id } })}
+        {form}
+        bind:animal={animal}
+/>
 

@@ -1,5 +1,6 @@
 import { SECRET_API_URL, SECRET_TOKEN_COOKIE_NAME, SECRET_GOOGLE_CLIENT_ID, SECRET_GOOGLE_REDIRECT_URI } from '$env/static/private'
 import {redirect} from "@sveltejs/kit";
+import {env} from "$env/dynamic/private";
 
 /** @type {import('./$types').PageServerLoad} */
 export const load = async () => { //profile email
@@ -37,15 +38,15 @@ export const actions = {
         const data = await res.json()
 
         cookies.set(SECRET_TOKEN_COOKIE_NAME, data.token, {
-            path: '/',
-            sameSite: 'Lax',
-            maxAge: 60 * 60 * 24 * 7,
-            secure: false,
-            httpOnly: true
+            path: env.SECRET_COOKIE_PATH,
+            sameSite: env.SECRET_COOKIE_SAME_SITE,
+            secure: !!env.SECRET_COOKIE_SECURE,
+            httpOnly: !!env.SECRET_COOKIE_HTTP_ONLY,
+            maxAge: parseInt(env.SECRET_COOKIE_MAX_AGE),
         })
 
         locals.user = data.token
 
-        redirect(302, '/');
+        await redirect(302, '/');
     },
 };

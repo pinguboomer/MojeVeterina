@@ -1,29 +1,22 @@
 import {env} from "$env/dynamic/private";
+import {fetchData} from "$lib/server/fetchData.js";
 import {redirect} from "@sveltejs/kit";
 
 /** @type {import('./$types').PageServerLoad} */
 export const load = async ({ parent, cookies, params }) => {
     await parent();
 
-    const res = await fetch(env.SECRET_API_URL + '/animal-examinations-service/v1/animals/' + params.id, {
-        method: 'GET',
-        headers: {
-            'Authorization': 'Bearer ' + cookies.get(env.SECRET_TOKEN_COOKIE_NAME)
+    try {
+        return {
+            animal: await fetchData(env.SECRET_API_URL + '/animal-examinations-service/v1/animals/' + params.id, cookies.get(env.SECRET_TOKEN_COOKIE_NAME)),
         }
-    })
-
-    if (!res.ok) {
-        if (res.status === 404) {
-            redirect(302, '/animals/' + params.id)
-        }
-
-        redirect(302, '/')
     }
-
-    const data = await res.json()
-
-    return {
-        animal: data
+    catch (e) {
+        redirect(302, '/animals/' + params.id + '/examinations')
+        // return {
+        //     status: 500,
+        //     error: e
+        // }
     }
 }
 

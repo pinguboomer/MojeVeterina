@@ -7,7 +7,7 @@
 
 
     export let data = {
-        animal: animal._id,
+        animal: animal?._id,
         date: new Date().toISOString().split('T')[0],
         subject: "",
         weight: "",
