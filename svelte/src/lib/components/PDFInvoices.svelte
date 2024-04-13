@@ -4,7 +4,7 @@
     import autoTable from 'jspdf-autotable'
     import {onMount} from "svelte";
     import {font} from "$lib/charset/Amiri-Regular-normal.js";
-    import {formatDate} from "$lib/formateDate.js"
+    import {formatDate} from "$lib/formatDate.js"
 
 
     export let invoice;

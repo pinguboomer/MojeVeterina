@@ -1,11 +1,11 @@
 <script>
-    import {Button, Heading, Helper, Input, Label, Select} from "flowbite-svelte";
+    import {Button, Helper, Input, Label, Select} from "flowbite-svelte";
     import {enhance} from "$app/forms";
-    import {invalidateAll} from "$app/navigation";
     export let owners = [];
     export let form
 
     export let animal = {
+        _id: '',
         name: '',
         species: '',
         sex: '',
@@ -24,13 +24,23 @@
     }
 </script>
 
-<form class="flex flex-col space-y-6" method="post" use:enhance={() => {
-		return async () => {
-            editMode = false
+<form class="flex flex-col space-y-6 w-full" method="post" use:enhance={() => {
+		return async ({result}) => {
+            form = result.data
+            if (result.data.success) {
+                editMode = false
+            }
 		};
 	}}
 >
-    <Heading tag="h1" class="mb-4">Detail zvířete</Heading>
+    <div class="flex gap-4">
+        {#if editMode}
+            <Button class="w-full" type="submit">Uložit změny</Button>
+        {:else}
+            <Button class="w-full" type="button" on:click={() => editMode = true}>Upravit zvíře</Button>
+        {/if}
+        <Button href="/animals/{animal._id}/examinations" class="w-full" variant="secondary">Vyšetření</Button>
+    </div>
     <Label class="space-y-2">
         <span>Jméno</span>
         <Input type="text" name="name" bind:value={animal.name} disabled={!editMode}/>
@@ -57,10 +67,5 @@
     </Label>
     {#if form && !form?.success}
         <Helper class="text-sm text-center mb-4" color="red">{getErrorText(form?.reason)}</Helper>
-    {/if}
-    {#if editMode}
-        <Button class="w-full" type="submit">Uložit změny</Button>
-    {:else}
-        <Button class="w-full" type="button" on:click={() => editMode = true}>Upravit zvíře</Button>
     {/if}
 </form>

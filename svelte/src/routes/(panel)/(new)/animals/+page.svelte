@@ -1,11 +1,7 @@
 <script>
-    export let data
+    import AnimalTable from "$lib/components/tables/AnimalTable.svelte";
 
-    alert('data: ' + JSON.stringify(data, null, 2))
+    export let data
 </script>
 
-<pre>
-    {#each data.animals as animal}
-        {JSON.stringify(animal, null, 2)}
-    {/each}
-</pre>
+<AnimalTable animals={data.animals} />

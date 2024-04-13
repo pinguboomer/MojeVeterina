@@ -1,6 +1,6 @@
 <script>
     import {Button, Table, TableBody, TableBodyCell, TableBodyRow, TableHead, TableHeadCell} from "flowbite-svelte";
-    import {formatDate} from "$lib/formateDate.js"
+    import {formatDate} from "$lib/formatDate.js"
 
     export let invoices = [];
     export let clients = [];

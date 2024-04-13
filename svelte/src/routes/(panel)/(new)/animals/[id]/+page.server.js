@@ -7,14 +7,17 @@ export const load = async ({parent, cookies, params}) => {
     await parent();
 
     try {
-        const [owners, animal] = await Promise.all([
+        const [owners, animal, examinations] = await Promise.all([
             fetchData(env.SECRET_API_URL + '/users-service/v1/users?role=CUSTOMER', cookies.get(env.SECRET_TOKEN_COOKIE_NAME)),
-            fetchData(env.SECRET_API_URL + '/animal-examinations-service/v1/animals/' + params.id, cookies.get(env.SECRET_TOKEN_COOKIE_NAME))
+            fetchData(env.SECRET_API_URL + '/animal-examinations-service/v1/animals/' + params.id, cookies.get(env.SECRET_TOKEN_COOKIE_NAME)),
+            // fetchData(env.SECRET_API_URL + '/animal-examinations-service/v1/animals/' + params.id + '/examinations', cookies.get(env.SECRET_TOKEN_COOKIE_NAME)) // TODO
+            fetchData(env.SECRET_API_URL + '/animal-examinations-service/v1/animal-examinations', cookies.get(env.SECRET_TOKEN_COOKIE_NAME))
         ])
 
         return {
             owners,
-            animal
+            animal,
+            examinations
         }
     }
     catch (e) {

@@ -8,7 +8,7 @@
     <TopNav class="sm:hidden"></TopNav>
     <SideNavigation class="hidden sm:block"></SideNavigation>
     <div class="flex justify-center items-center w-full mx-4">
-        <main class=" ">
+        <main class="w-full">
             <slot/>
         </main>
     </div>

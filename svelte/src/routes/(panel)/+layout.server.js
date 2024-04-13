@@ -22,6 +22,7 @@ export const load = async ({ locals, cookies }) => {
         console.log('Token expired')
         redirect(302, '/login')
     }
+
     locals.user = user
 
     return {}

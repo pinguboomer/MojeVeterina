@@ -1,6 +1,7 @@
 import {env} from "$env/dynamic/private";
 import {fetchData} from "$lib/server/fetchData.js";
 import {error, redirect} from "@sveltejs/kit";
+import {getUserFromToken} from "$lib/server/getUserFromToken.js";
 
 export const prerender = false
 
@@ -45,14 +46,10 @@ export const actions = {
     default: async ({ request, cookies, params }) => {
         const formData = await request.formData();
 
-        // Extract author from token cookie
-        const token = cookies.get(env.SECRET_TOKEN_COOKIE_NAME)
-        const payload = token.split('.')[1]
-        const base64 = payload.replace('-', '+').replace('_', '/')
-        const decoded = JSON.parse(atob(base64))
+        console.log(formData.get('animal'))
 
         const body = {
-            author: decoded._id,
+            author: getUserFromToken(cookies.get(env.SECRET_TOKEN_COOKIE_NAME))._id,
             animal: formData.get('animal'),
             date: formData.get('date'),
             subject: formData.get('subject'),
