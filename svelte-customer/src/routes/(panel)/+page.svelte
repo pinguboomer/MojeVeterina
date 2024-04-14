@@ -2,6 +2,7 @@
     import {Card, Heading, Label, Button, Input, P} from 'flowbite-svelte';
     import MyReservations from "$lib/components/MyReservations.svelte";
 
+    export let data;
 
     let date = (new Date()).toJSON().slice(0, 10);
 </script>
@@ -16,7 +17,7 @@
         <div class="flex flex-col justify-center items-center p-8 text-center bg-white rounded-t-lg border-b border-gray-200 md:rounded-t-none md:rounded-tl-lg md:border-e dark:bg-gray-800 dark:border-gray-700">
             <Heading tag="h3" class="text-lg font-semibold text-gray-900 dark:text-white pt-0">Moje rezervace</Heading>
             <Label for="date-input" class="my-4 ">Zobrazit vámi udělané rezervace</Label>
-            <MyReservations/>
+            <MyReservations reservations={data.reservations} animals={data.animals}/>
         </div>
 
         <!--    Přidat zvíře-->

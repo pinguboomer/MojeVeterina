@@ -1,6 +1,7 @@
 ###
 
-GET localhost:27017/v1/reservations
+GET {{host}}/v1/reservations
+Authorization: Bearer {{token}}
 
 ###
 
@@ -34,3 +35,8 @@ Content-Type: application/json
 ###
 
 DELETE {{host}}/v1/reservations/65e366735cfda5f11b930c5d
+
+###
+
+GET {{host}}/v1/reservations/client/6617a01dc4987b5cbb046f42
+Authorization: Bearer {{token}}

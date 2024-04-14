@@ -1,6 +1,5 @@
 <script>
     import {
-        Button,
         Heading,
         P,
         Table,
@@ -11,25 +10,13 @@
         TableHeadCell
     } from "flowbite-svelte";
     import {formatDate} from "$lib/formateDate.js";
+    import NewReservations from "$lib/components/forms/modal/NewReservations.svelte";
 
     export let date;
+    export let form;
+    export let animals
 
-    // function formatDate(date) {
-    //     let day = date.getDate();
-    //     let month = date.getMonth() + 1;
-    //     let year = date.getFullYear();
-    //
-    //
-    //     if (day < 10) {
-    //         day = '0' + day;
-    //     }
-    //     if (month < 10) {
-    //         month = '0' + month;
-    //     }
-    //
-    //     return day + '.' + month + '.' + year;
-    // }
-
+    export let reservations
 
 
     //TODO přes api získat rezervace
@@ -42,11 +29,11 @@
         return array[r]
     }
 
-    function setStoreValue(owner1, animal1){
-
-    }
-
-
+function setHour(date, hour){
+        const newDate = new Date(date);
+        newDate.setHours(hour + 1,0,0);
+        return newDate.toISOString();
+}
 
 </script>
 <Heading tag="h3">{formatDate(date)}</Heading>
@@ -65,7 +52,7 @@
             {#each Array.from(Array(18).keys()).slice(7) as i}
                 <TableBodyRow>
                     <TableBodyCell class="border-solid border-2 border-gray-300">
-                        {i + 1}
+                        {String((i + 1) + ':00' )}
                     </TableBodyCell>
                     <TableBodyCell class="border-solid border-2 border-gray-300">
                         <P>{getValueFromArray(clientName)}</P>
@@ -73,7 +60,11 @@
                         <P>{getValueFromArray(type)}</P>
                     </TableBodyCell>
                     <TableBodyCell class="border-solid border-2 border-gray-300">
-                        <Button href="/addExaminations" on:click={() => setStoreValue(getValueFromArray(clientName), getValueFromArray(animal1))}>Zahajit vyšetření</Button>
+                        <NewReservations
+                        form={form}
+                        animals={animals.map((animal) => { return { name: `${animal.name}`, value: animal._id } })}
+                        date={setHour(date,i)}
+                        />
                     </TableBodyCell>
                 </TableBodyRow>
             {/each}
