@@ -9,20 +9,9 @@
         TableHead,
         TableHeadCell
     } from "flowbite-svelte";
-    import {onMount} from "svelte";
 
-    let animals = [{name: 'Jan', species: 'Krokodýl'},
-        {name: 'Bell', species: 'Pes'},
-        {name: 'Test', species: 'Myš'}];
 
-    onMount(() => {
-        //TODO z databáze
-        load()
-    })
-
-    function load() {
-
-    }
+    export let animals = [];
 
 
 </script>
@@ -45,7 +34,7 @@
                 </TableBodyCell>
                 <TableBodyCell>
 <!--                    TODO -->
-                    <Button href="/examinations">Zobrazit vyšetření</Button>
+                    <Button href="myAnimals/{animal._id}" on:click={() => console.log(animal._id)}>Zobrazit vyšetření</Button>
                 </TableBodyCell>
             </TableBodyRow>
         {/each}

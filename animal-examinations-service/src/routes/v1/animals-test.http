@@ -50,5 +50,5 @@ DELETE {{host}}/v1/animals/65e366735cfda5f11b930c5d
 
 ###
 
-GET {{host}}/v1/animals/client/65e352d6d67152adb841fde2
+GET {{host}}/v1/animals/client/6617a01dc4987b5cbb046f42
 Authorization: Bearer {{token}}
