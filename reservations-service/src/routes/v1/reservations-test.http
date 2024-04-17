@@ -40,3 +40,8 @@ DELETE {{host}}/v1/reservations/65e366735cfda5f11b930c5d
 
 GET {{host}}/v1/reservations/client/6617a01dc4987b5cbb046f42
 Authorization: Bearer {{token}}
+
+###
+
+GET {{host}}/v1/reservations/date/2024-04-14T15:48:16.309+00:00
+Authorization: Bearer {{token}}

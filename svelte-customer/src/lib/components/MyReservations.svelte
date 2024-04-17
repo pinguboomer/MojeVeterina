@@ -1,7 +1,7 @@
 <script>
     import {
         Button,
-        Heading,
+        Heading, Input,
         Modal, P, Table,
         TableBody,
         TableBodyCell,
@@ -9,11 +9,10 @@
         TableHead,
         TableHeadCell
     } from "flowbite-svelte";
-    import ConfirmDeleteReservations from "$lib/components/ConfirmDeleteReservations.svelte";
     import {formatDateWithHours} from "$lib/formateDate.js";
-    //TODO přes api získat rezervace
-    const animal1 = ["Pes", "Kočka", "Mamba černá", "Leguán Kubanský", "Narval"];
-    const type = ["Očkování", "Zastřihování drábků", "Vyšetření", "Jiné"];
+    import {enhance} from "$app/forms";
+
+
 
     export let reservations
     export let animals
@@ -53,9 +52,10 @@
                         <P>{reservations.reason}</P>
                     </TableBodyCell>
                     <TableBodyCell class="border-solid border-2 border-gray-300">
-<!--                        TODO dodělat delete-->
-<!--                        <ConfirmDeleteReservations disabled={date < new Date().getTime() - (60 * 60 * 24 * 1000)}/>-->
-                        <Button disabled={date < new Date().getTime() - (60 * 60 * 24 * 1000)} on:click={() => console.log(reservations)}>Zrušit rezervaci</Button>
+                        <form method="post" use:enhance>
+                            <Input type="text" name="id" bind:value={reservations._id} class="hidden"/>
+                            <Button type="submit" disabled={date < new Date().getTime() - (60 * 60 * 24 * 1000)}>Zrušit rezervaci</Button>
+                        </form>
                     </TableBodyCell>
                 </TableBodyRow>
             {/each}

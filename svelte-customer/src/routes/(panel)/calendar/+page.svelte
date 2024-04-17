@@ -3,6 +3,7 @@
     import FullCalendar from "$lib/components/FullCalendar.svelte";
     import ReservationsCalendar from "$lib/components/ReservationsCalendar.svelte";
     import {goto} from "$app/navigation";
+    import {Button} from "flowbite-svelte";
 
     let date = new Date()
 
@@ -37,9 +38,10 @@
                 date={dateForReservations}
                 form={form}
                 animals={data.animals}
-                reservations={reservations}
+                reservations={data.reservations}
         />
     {/if}
+    <Button on:click={() => console.log(data.reservations)}>click</Button>
 </div>
 
 

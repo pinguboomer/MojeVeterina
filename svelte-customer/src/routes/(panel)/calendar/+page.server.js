@@ -7,9 +7,23 @@ import {fetchData} from "$lib/server/fetchData.js";
 export const load = async ({ parent, cookies, url,locals }) => {
     await parent()
 
+    let date;
     try {
+        if (!url.searchParams.get('date')){
+            date = new Date().toISOString();
+        }else{
+            date = url.searchParams.get('date');
+        }
+
+        const [animals, reservations] = await Promise.all([
+            fetchData(env.SECRET_API_URL + '/animal-examinations-service/v1/animals/client/' + locals.user._id, cookies.get(env.SECRET_TOKEN_COOKIE_NAME)),
+            fetchData(env.SECRET_API_URL + '/reservations-service/v1/reservations/date/' + date, cookies.get(env.SECRET_TOKEN_COOKIE_NAME))
+        ])
+
         return{
-            animals: await fetchData(env.SECRET_API_URL + '/animal-examinations-service/v1/animals/client/'+ locals.user._id, cookies.get(env.SECRET_TOKEN_COOKIE_NAME))
+            animals,
+            reservations
+           // animals: await fetchData(env.SECRET_API_URL + '/animal-examinations-service/v1/animals/client/'+ locals.user._id, cookies.get(env.SECRET_TOKEN_COOKIE_NAME))
         }
     }catch (e) {
         console.log(e)

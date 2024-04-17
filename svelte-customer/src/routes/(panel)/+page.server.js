@@ -20,3 +20,25 @@ export const load = async ({parent, cookies, locals}) => {
         redirect(301, '/myAnimals')
     }
 }
+
+export const actions = {
+    default: async ({ request, cookies }) => {
+        const formData = await request.formData();
+
+        console.log(formData.get('id'))
+
+        const res = await fetch(env.SECRET_API_URL + '/reservations-service/v1/reservations/' + formData.get('id'), {
+            method: 'DELETE',
+            headers: {
+                'Authorization': 'Bearer ' + cookies.get(env.SECRET_TOKEN_COOKIE_NAME)
+            },
+        })
+
+        if (!res.ok) {
+            console.log(res.status)
+            return { success: false, reason: "unknown" }
+        }
+
+        return { success: true, redirect: `/` }
+    }
+}

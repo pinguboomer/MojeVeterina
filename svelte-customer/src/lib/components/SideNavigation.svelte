@@ -17,6 +17,7 @@
     } from "flowbite-svelte-icons";
 
     import {applyAction, enhance} from '$app/forms';
+    import {goto} from "$app/navigation";
 
     function onSubmit() {
         return async ({result}) => {
