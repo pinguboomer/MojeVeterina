@@ -1,16 +1,11 @@
 <script>
-    import {modal} from "../../../store.js";
     import FullCalendar from "$lib/components/FullCalendar.svelte";
     import ReservationsCalendar from "$lib/components/ReservationsCalendar.svelte";
     import {goto} from "$app/navigation";
-    import {Button} from "flowbite-svelte";
-
-    let date = new Date()
+    import {page} from "$app/stores";
 
     export let data;
     export let form;
-
-    let reservations
 
     $: if (form?.redirect) {
         goto(form.redirect)
@@ -22,6 +17,11 @@
 
 
     let dateForReservations = new Date();
+
+    const isDate = $page.url.searchParams.get('date');
+    if (isDate)
+        dateForReservations = new Date(isDate)
+
 
 </script>
 
@@ -41,7 +41,6 @@
                 reservations={data.reservations}
         />
     {/if}
-    <Button on:click={() => console.log(data.reservations)}>click</Button>
 </div>
 
 

@@ -10,7 +10,8 @@ export const load = async ({ parent, cookies, url,locals }) => {
     let date;
     try {
         if (!url.searchParams.get('date')){
-            date = new Date().toISOString();
+            date = new Date();
+            date.setHours(0, 0, 0);
         }else{
             date = url.searchParams.get('date');
         }
@@ -23,21 +24,17 @@ export const load = async ({ parent, cookies, url,locals }) => {
         return{
             animals,
             reservations
-           // animals: await fetchData(env.SECRET_API_URL + '/animal-examinations-service/v1/animals/client/'+ locals.user._id, cookies.get(env.SECRET_TOKEN_COOKIE_NAME))
         }
     }catch (e) {
         console.log(e)
         redirect(301, '/')
     }
 
-    console.log(url.searchParams.get('date'))
-    console.log(locals.user)
 }
 
 export const actions = {
     default: async ({ request, cookies }) => {
         const formData = await request.formData();
-        console.log(formData.get('date'))
 
         const token = cookies.get(env.SECRET_TOKEN_COOKIE_NAME)
         const payload = token.split('.')[1]
@@ -67,8 +64,6 @@ export const actions = {
         if (!res.ok) {
             return { success: false, reason: "unknown" }
         }
-
-        const data = await res.json()
 
         return { success: true, redirect: `/` }
     }

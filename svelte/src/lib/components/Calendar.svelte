@@ -1,6 +1,7 @@
 <script>
     import {createEventDispatcher} from "svelte"
     import {twMerge} from "tailwind-merge";
+    import {goto} from "$app/navigation";
 
     const dispatch = createEventDispatcher()
 
@@ -10,7 +11,10 @@
     export let month = 12;
     export let year = 2022;
     export let today = null; // Date
-    export let active = null; // Date
+    export let active; // Date
+
+    console.log(active)
+
     export let offset = 0;
 
     export let disableDaysOutsideMonth = true;
@@ -19,22 +23,6 @@
     export let disableDays = [];
 
     export let events = []
-    /*
-    [
-        {
-            date: new Date("21-12-2022"),
-            text: "Konec světa byl před 10 lety"
-        },
-        {
-            date: new Date("21-12-2022"),
-            text: "Konec světa byl před 10 lety"
-        },
-        {
-            date: new Date("12-12-2022"),
-            text: "Konec světa"
-        }
-    ]
-    * */
 
     $: thisMonth = new Date(year, month, 0)
 
@@ -123,7 +111,7 @@
 /* active day */         (cell.date === active)? "bg-primary-600 text-white hover:bg-primary-600 hover:text-white": "",
                          "disabled:cursor-default disabled:bg-transparent disabled:text-gray-400"
                 )}
-                on:click|self={() => { dispatch("day_click", {date: cell.date}); active = cell.date }}
+                on:click|self={() => { dispatch("day_click", {date: cell.date}); active = cell.date; goto("?date=" + cell.date.toISOString());}}
                 disabled={disableDaysOutsideMonth && !sameMonth(cell.date, thisMonth)}
             >
                 {cell.date.getDate()}
