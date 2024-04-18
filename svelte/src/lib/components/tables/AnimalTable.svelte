@@ -14,6 +14,8 @@
 
     export let animals = [];
 
+    export let owners;
+
     let filtered = animals;
 
     function find(e) {
@@ -42,7 +44,7 @@
         {#each filtered as animal}
             <TableBodyRow>
                 <TableBodyCell>
-                    {animal.owner ?? '-'}
+                    {owners.find(x => x.value === animal.owner) ? owners.find(x => x.value === animal.owner).name :  '-'}
                 </TableBodyCell>
                 <TableBodyCell>
                     {animal.species ?? '-'}

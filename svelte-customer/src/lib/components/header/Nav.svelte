@@ -7,7 +7,7 @@
         NavHamburger,
         Avatar,
         Dropdown,
-        DropdownItem
+        DropdownItem, Button
     } from 'flowbite-svelte';
     import {
         CalendarMonthSolid,
@@ -15,6 +15,19 @@
         HomeSolid,
         ChevronDownOutline, BugSolid
     } from "flowbite-svelte-icons";
+
+    import {applyAction, enhance} from '$app/forms';
+
+    function onSubmit() {
+        return async ({result}) => {
+            await applyAction(result); // might not do anything here
+
+            // if (result.type == 'success' || result.type == 'failure')
+            // form = result.data;
+        }
+    }
+
+    export let user
 
 </script>
 
@@ -31,11 +44,16 @@
         <NavLi>
             <div class="flex items-center">
                 <Avatar id="avatar-menu" class=""/>
-                <span class="ml-2">Václav Buřil</span>
+                <span class="ml-2">{`${user.name} ${user.surname}`}</span>
 
                 <Dropdown class="w-44 z-20">
+                    <!--                    TODO doděalt změnu hesla atd-->
                     <DropdownItem href="/">Učet</DropdownItem>
-                    <DropdownItem href="/docs/components/navbar">Odhlásit</DropdownItem>
+                    <DropdownItem>
+                        <form method="POST" action="/api/logout" use:enhance={onSubmit}>
+                            <Button type="submit">Odhlásit se</Button>
+                        </form>
+                    </DropdownItem>
                 </Dropdown>
                 <ChevronDownOutline class="w-3 h-3 ms-2   inline"/>
             </div>

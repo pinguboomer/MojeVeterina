@@ -18,6 +18,8 @@
 
     import {applyAction, enhance} from '$app/forms';
 
+    export let user;
+
     // export let form = undefined;
     function onSubmit() {
         return async ({result}) => {
@@ -27,6 +29,7 @@
             // form = result.data;
         }
     }
+
 </script>
 
 <Sidebar class={$$restProps.class}>
@@ -36,8 +39,8 @@
         <SidebarGroup>
             <div class="flex  mb-12">
                 <Avatar id="avatar-menu" class=""/>
-                <SidebarDropdownWrapper label="Václav Buřil" class="mr-4 font-bold">
-                    <!--                    TODO odkaz-->
+                <SidebarDropdownWrapper label={`${user.name} ${user.surname}`} class="mr-4 font-bold">
+                    <!--                    TODO doděalt změnu hesla atd-->
                     <SidebarDropdownItem label="Účet"/>
                     <form method="POST" action="/api/logout" use:enhance={onSubmit}>
                         <Button type="submit">Odhlásit se</Button>
@@ -50,7 +53,6 @@
 <!--                            class="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"/>-->
                 </svelte:fragment>
             </SidebarItem>
-            <!--            TODO odkaz-->
             <SidebarItem href="/calendar" label="Calendář">
                 <svelte:fragment slot="icon">
 <!--                    <CalendarMonthSolid-->

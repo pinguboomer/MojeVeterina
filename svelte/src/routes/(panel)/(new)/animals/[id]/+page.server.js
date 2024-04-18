@@ -11,7 +11,7 @@ export const load = async ({parent, cookies, params}) => {
             fetchData(env.SECRET_API_URL + '/users-service/v1/users?role=CUSTOMER', cookies.get(env.SECRET_TOKEN_COOKIE_NAME)),
             fetchData(env.SECRET_API_URL + '/animal-examinations-service/v1/animals/' + params.id, cookies.get(env.SECRET_TOKEN_COOKIE_NAME)),
             // fetchData(env.SECRET_API_URL + '/animal-examinations-service/v1/animals/' + params.id + '/examinations', cookies.get(env.SECRET_TOKEN_COOKIE_NAME)) // TODO
-            fetchData(env.SECRET_API_URL + '/animal-examinations-service/v1/animal-examinations', cookies.get(env.SECRET_TOKEN_COOKIE_NAME))
+            fetchData(env.SECRET_API_URL + '/animal-examinations-service/v1/animal-examinations/animal/' + params.id, cookies.get(env.SECRET_TOKEN_COOKIE_NAME))
         ])
 
         return {

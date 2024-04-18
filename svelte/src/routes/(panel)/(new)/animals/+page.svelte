@@ -4,4 +4,7 @@
     export let data
 </script>
 
-<AnimalTable animals={data.animals} />
+<AnimalTable
+        animals={data.animals}
+        owners={data.owners.map((owner) => { return { name: `${owner.name} ${owner.surname}`, value: owner._id } })}
+/>

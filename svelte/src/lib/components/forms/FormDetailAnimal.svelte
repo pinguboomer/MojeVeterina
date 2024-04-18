@@ -39,7 +39,7 @@
         {:else}
             <Button class="w-full" type="button" on:click={() => editMode = true}>Upravit zvíře</Button>
         {/if}
-        <Button href="/animals/{animal._id}/examinations" class="w-full" variant="secondary">Vyšetření</Button>
+        <Button href="/animals/{animal._id}/examinations/add" class="w-full" variant="secondary">Vyšetření</Button>
     </div>
     <Label class="space-y-2">
         <span>Jméno</span>

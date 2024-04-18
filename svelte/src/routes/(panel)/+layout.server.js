@@ -25,5 +25,5 @@ export const load = async ({ locals, cookies }) => {
 
     locals.user = user
 
-    return {}
+    return {user}
 }

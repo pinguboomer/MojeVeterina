@@ -41,16 +41,16 @@
 
         <!--    Nové vyšetření-->
         <div class="flex flex-col justify-center items-center p-8 text-center bg-white rounded-bl-lg border-b border-gray-200 md:border-b-0 md:border-e dark:bg-gray-800 dark:border-gray-700">
-            <Heading tag="h3" class="text-lg font-semibold text-gray-900 dark:text-white">Nové vyšetření</Heading>
-            <P class="my-4 font-light"> Vytvoření nového záznamu o vyšetření zvířete</P>
-            <Button href="/addExamination">Přidat</Button>
+            <Heading tag="h3" class="text-lg font-semibold text-gray-900 dark:text-white">Kartotéka</Heading>
+            <P class="my-4 font-light">Zobrazit pacienty v kartotéce</P>
+            <Button href="/animals">Zobrazit</Button>
         </div>
 
         <!--    Nová faktura-->
         <div class="flex flex-col justify-center items-center p-8 text-center bg-white rounded-tr-lg border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
             <Heading tag="h3" class="text-lg font-semibold text-gray-900 dark:text-white">Nová faktura</Heading>
             <P class="my-4 font-light"> Vytvoření nové faktury</P>
-            <Button href="/addInvoice">Přidat</Button>
+            <Button href="/addInvoices">Přidat</Button>
         </div>
     </Card>
 </div>
