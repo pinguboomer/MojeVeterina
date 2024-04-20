@@ -10,11 +10,7 @@ async function getAnimalsClient(req, res) {
 
         const animals = await Animal.find({owner: req.params.id})
 
-        // if (!animals) {
-        //     console.log('Animal not found1')
-        //     return res.sendStatus(404)
-        // }
-        res.status(200).json(animals)
+        res.status(200).json(animals);
     }
     catch (e) {
         console.error(e)
