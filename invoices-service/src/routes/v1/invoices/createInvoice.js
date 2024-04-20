@@ -58,24 +58,6 @@ async function createInvoice(req, res) {
             res.sendStatus(500);
         }
 
-
-        // axios(config)
-        //     .then(async (response) => {
-        //         console.log(JSON.stringify(response.data));
-        //
-        //         invoices-service.transactionId = response.data.id;
-        //         invoices-service.transactionPublicId = response.data.public_id;
-        //
-        //         await invoices-service.save();
-        //         res.status(200).send(invoices-service);
-        //
-        //     })
-        //     .catch((error) => {
-        //         console.log(error);
-        //         res.sendStatus(500);
-        //     });
-        //endregion
-
     } catch (e) {
         console.error(e)
         res.sendStatus(500)
