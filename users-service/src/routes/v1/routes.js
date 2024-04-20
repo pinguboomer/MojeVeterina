@@ -10,6 +10,7 @@ router.post('/auth/google/callback', require('./auth/googleCallback'));
 
 // Users
 router.post('/users', require('./users/createUser'))
+router.post('/users/validate', require('./users/validateUser'));
 
 /** Authorized */
 router.use(auth)
