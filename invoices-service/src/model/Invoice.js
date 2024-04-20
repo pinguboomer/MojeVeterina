@@ -42,6 +42,14 @@ const Invoice = new Schema({
         required: true,
         default: new Date()
     },
+    dueDate:  {
+        type: Date,
+        required: true,
+        // Default due date is 14 days from creation
+        default: function() {
+            return new Date(this.creationDate.getTime() + 14 * 24 * 60 * 60 * 1000)
+        }
+    },
     items:{
         type: [InvoiceItem]
     }
@@ -60,13 +68,12 @@ const joiInvoiceItemSchema = Joi.object({
 const joiSchema = Joi.object({
     client: Joi.string().hex().length(24).required(),
     animal: Joi.string().hex().length(24).allow(null),
-    items: Joi.array().items(joiInvoiceItemSchema).required()
+    items: Joi.array().items(joiInvoiceItemSchema).required(),
 })
 
 
 
 // Exports
 module.exports.Invoice = mongoose.model('Invoice', Invoice)
-// module.exports.InvoiceItem = mongoose.model('InvoiceItem', Invoice)
 module.exports.InvoiceSchema = joiSchema
 module.exports.InvoiceItemSchema = joiInvoiceItemSchema
