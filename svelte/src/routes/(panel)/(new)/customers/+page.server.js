@@ -8,7 +8,7 @@ export const load = async ({parent, cookies}) => {
 
     try {
         const [customers] = await Promise.all([
-            fetchData(env.SECRET_API_URL + '/users-service/v1/users?role=CUSTOMER', cookies.get(env.SECRET_TOKEN_COOKIE_NAME)),
+            fetchData(env.SECRET_API_URL + '/users-service/v1/users?role=CUSTOMER', cookies),
         ])
 
         return {

@@ -86,7 +86,7 @@
         <NavLi>
             <div class="flex items-center">
                 <ClipboardSolid/>
-                <span class="ml-2">Faktůry</span>
+                <span class="ml-2">Faktury</span>
                 <Dropdown class="w-44 z-20">
                     <DropdownItem href="/addInvoices">Nová faktura</DropdownItem>
                     <DropdownItem href="/allInvoices">Vyhledání faktury</DropdownItem>
@@ -96,5 +96,4 @@
             </div>
         </NavLi>
     </NavUl>
-
 </Navbar>

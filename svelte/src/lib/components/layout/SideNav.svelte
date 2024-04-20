@@ -1,6 +1,6 @@
 <script>
     import {
-        Avatar, Button,
+        Avatar,
         Sidebar,
         SidebarDropdownItem,
         SidebarDropdownWrapper,
@@ -8,15 +8,10 @@
         SidebarItem,
         SidebarWrapper
     } from "flowbite-svelte";
-    // import {
-    //     HomeSolid,
-    //     CalendarMonthSolid,
-    //     ClipboardSolid,
-    //     FileInvoiceSolid
-    // } from "flowbite-svelte-icons";
-    import logo from "$lib/images/logo_veterina.png";
-
     import {applyAction, enhance} from '$app/forms';
+    import {CalendarMonthSolid, ClipboardSolid, FileInvoiceOutline, HomeSolid} from "flowbite-svelte-icons";
+    import {page} from '$app/stores';
+    import Logo from "$lib/components/Logo.svelte";
 
     export let user;
 
@@ -30,54 +25,70 @@
         }
     }
 
+    $: activeUrl = $page.url.pathname;
+
+    let iconClass = 'size-6 text-gray-500'
 </script>
 
-<Sidebar class={$$restProps.class}>
-    <SidebarWrapper class="h-[95dvh] m-4 flex flex-col  items-center">
-        <img src={logo} class=" mb-5 me-3 h-28" alt="Logo Moje veterina"/>
+<Sidebar {activeUrl} class={$$restProps.class}>
+    <SidebarWrapper class="md:h-[100dvh]">
+        <div class="hidden md:block">
+            <Logo class="mb-4" />
+        </div>
 
         <SidebarGroup>
-            <div class="flex  mb-12">
-                <Avatar id="avatar-menu" class=""/>
-                <SidebarDropdownWrapper label={`${user.name} ${user.surname}`} class="mr-4 font-bold">
-                    <!--                    TODO doděalt změnu hesla atd-->
-                    <SidebarDropdownItem label="Účet"/>
-                    <form method="POST" action="/api/logout" use:enhance={onSubmit}>
-                        <Button type="submit">Odhlásit se</Button>
-                    </form>
-                </SidebarDropdownWrapper>
-            </div>
+            <li class="mb-4">
+                <div class="rounded-xl border border-gray-300 p-4 flex flex-col items-center">
+                    <Avatar id="avatar-menu" class="size-12 mt-1"/>
+                    <span class="font-semibold text-lg mt-3">{user.name?? ''} {user.surname?? ''}</span>
+                    <div class="flex gap-4 mt-2">
+                        <a href="/account" class="hover:bg-gray-200 p-1 rounded-lg" title="Nastavení účtu">
+                            <svg title="Nastavení účtu" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.325.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 0 1 1.37.49l1.296 2.247a1.125 1.125 0 0 1-.26 1.431l-1.003.827c-.293.241-.438.613-.43.992a7.723 7.723 0 0 1 0 .255c-.008.378.137.75.43.991l1.004.827c.424.35.534.955.26 1.43l-1.298 2.247a1.125 1.125 0 0 1-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.47 6.47 0 0 1-.22.128c-.331.183-.581.495-.644.869l-.213 1.281c-.09.543-.56.94-1.11.94h-2.594c-.55 0-1.019-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 0 1-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 0 1-1.369-.49l-1.297-2.247a1.125 1.125 0 0 1 .26-1.431l1.004-.827c.292-.24.437-.613.43-.991a6.932 6.932 0 0 1 0-.255c.007-.38-.138-.751-.43-.992l-1.004-.827a1.125 1.125 0 0 1-.26-1.43l1.297-2.247a1.125 1.125 0 0 1 1.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.086.22-.128.332-.183.582-.495.644-.869l.214-1.28Z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                            </svg>
+                        </a>
+                        <form method="POST" action="/api/logout" use:enhance={onSubmit}>
+                            <button type="submit" class="hover:bg-gray-200 p-1 rounded-lg" title="Odhlásit se">
+                                <svg title="Odhlásit se" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15m3 0 3-3m0 0-3-3m3 3H9" />
+                                </svg>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </li>
             <SidebarItem href="/" label="Domů">
                 <svelte:fragment slot="icon">
-<!--                    <HomeSolid-->
-<!--                            class="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"/>-->
+                    <HomeSolid class={iconClass}/>
                 </svelte:fragment>
             </SidebarItem>
-            <SidebarItem href="/calendar" label="Calendář">
+            <SidebarItem href="/calendar" label="Kalendář">
                 <svelte:fragment slot="icon">
-<!--                    <CalendarMonthSolid-->
-<!--                            class="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"/>-->
+                    <CalendarMonthSolid class={iconClass}/>
                 </svelte:fragment>
             </SidebarItem>
 
             <SidebarDropdownWrapper label="Kartotéka">
                 <svelte:fragment slot="icon">
-<!--                    <ClipboardSolid-->
-<!--                            class="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"/>-->
+                    <ClipboardSolid class={iconClass}/>
                 </svelte:fragment>
                 <SidebarDropdownItem href="/customers"  label="Klienti"/>
                 <SidebarDropdownItem href="/animals"  label="Vyhledat zvíře"/>
                 <SidebarDropdownItem href="/animals/add" label="Přidat zvíře"/>
             </SidebarDropdownWrapper>
-            <SidebarDropdownWrapper label="Faktůry">
+            <SidebarDropdownWrapper label="Faktury">
                 <svelte:fragment slot="icon">
-<!--                    <FileInvoiceSolid-->
-<!--                            class="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"/>-->
+                    <FileInvoiceOutline class={iconClass}/>
                 </svelte:fragment>
-                <SidebarDropdownItem href="/addInvoices" label="Nová faktura"/>
-                <SidebarDropdownItem href="/allInvoices" label="Vyhledání faktury"/>
-                <SidebarDropdownItem label="Zobrazeni faktur"/>
+                <SidebarDropdownItem href="/invoices/add" label="Přidat fakturu"/>
+                <SidebarDropdownItem href="/invoices" label="Vyhledat fakturu"/>
             </SidebarDropdownWrapper>
+            <SidebarItem href="/staff" label="Zaměstnanci">
+                <svelte:fragment slot="icon">
+                    <CalendarMonthSolid class={iconClass}/>
+                </svelte:fragment>
+            </SidebarItem>
         </SidebarGroup>
     </SidebarWrapper>
 </Sidebar>

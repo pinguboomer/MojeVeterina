@@ -50,7 +50,7 @@
         <div class="flex flex-col justify-center items-center p-8 text-center bg-white rounded-tr-lg border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
             <Heading tag="h3" class="text-lg font-semibold text-gray-900 dark:text-white">Nová faktura</Heading>
             <P class="my-4 font-light"> Vytvoření nové faktury</P>
-            <Button href="/addInvoices">Přidat</Button>
+            <Button href="/invoices">Přidat</Button>
         </div>
     </Card>
 </div>

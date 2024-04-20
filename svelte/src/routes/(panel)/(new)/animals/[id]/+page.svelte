@@ -9,15 +9,19 @@
     if (data?.animal?.deathDate) data.animal.deathDate = data.animal.deathDate.split('T')[0]
 </script>
 
-<Heading tag="h1" class="mb-4">Detail zvířete</Heading>
-<div class="md:flex gap-8">
+<Heading tag="h1" class="mb-8">Detail zvířete</Heading>
+<div class="space-y-8 xl:flex xl:gap-8">
     <FormDetailAnimal
-            owners={data.owners.map((owner) => { return { name: `${owner.name} ${owner.surname}`, value: owner._id } })}
+            owners={data.owners.map((owner) => { return { name: `${owner.name} ${owner.surname} (${owner.email})`, value: owner._id } })}
             {form}
             bind:animal={data.animal}
     />
-    <ExaminationsTable
-            examinations={data.examinations}
-            animalId={data.animal._id}
-    />
+    <hr/>
+    <div class="-mt-2 xl:mt-0 w-full">
+        <Heading tag="h2" customSize="text-2xl font-bold" class="mb-4">Vyšetření</Heading>
+        <ExaminationsTable
+                examinations={data.examinations}
+                animalId={data.animal._id}
+        />
+    </div>
 </div>

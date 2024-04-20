@@ -1,16 +1,16 @@
 <script>
-    import {Button, Table, TableBody, TableBodyCell, TableBodyRow, TableHead, TableHeadCell} from "flowbite-svelte";
+    import {A, Table, TableBody, TableBodyCell, TableBodyRow, TableHead, TableHeadCell} from "flowbite-svelte";
     import {formatDate} from "$lib/formatDate.js"
 
     export let invoices = [];
     export let clients = [];
 
-    function setNameClient(id){
+    function getClientName(id){
         let client = clients.find(x => x._id === id);
-        return String(client.name + " " + client.surname);
+        return `${client.name} ${client.surname}<br/><span class="text-xs text-gray-500">${client.email}</span>`
     }
 
-    const getFullPrice = function (items, number) {
+    const getFullPrice = function (items) {
         let fullPrice = 0;
         for (let item of items) {
             console.log(item[2])
@@ -26,29 +26,32 @@
     <TableHead>
         <TableHeadCell>Klient</TableHeadCell>
         <TableHeadCell>Datum vytvoření</TableHeadCell>
+        <TableHeadCell>Datum splatnosti</TableHeadCell>
         <TableHeadCell>Částka</TableHeadCell>
         <TableHeadCell>Splaceno</TableHeadCell>
         <TableHeadCell></TableHeadCell>
     </TableHead>
-<!--    TODO dodlěat datum splatnosti-->
     <TableBody>
         {#each invoices as invoice}
             <TableBodyRow>
                 <TableBodyCell>
-                    {setNameClient(invoice.client)}
+                    {@html getClientName(invoice.client)}
                     <!--{invoice.client}-->
                 </TableBodyCell>
                 <TableBodyCell>
                     {formatDate(new Date(invoice.creationDate))}
                 </TableBodyCell>
                 <TableBodyCell>
-                    {getFullPrice(invoice.items, invoice.number)}
+                    {formatDate(new Date(invoice.dueDate))}
                 </TableBodyCell>
                 <TableBodyCell>
-                    {invoice.paid? "ano": "ne"}
+                    {getFullPrice(invoice.items)}
                 </TableBodyCell>
                 <TableBodyCell>
-                    <Button href="addInvoices/{invoice._id}">Zobrazit detail</Button>
+                    {invoice.paid? "Ano": "Ne"}
+                </TableBodyCell>
+                <TableBodyCell>
+                    <A href="/invoices/{invoice._id}">Detail</A>
                 </TableBodyCell>
             </TableBodyRow>
         {/each}

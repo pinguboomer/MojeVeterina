@@ -1,6 +1,7 @@
 import { SECRET_API_URL, SECRET_TOKEN_COOKIE_NAME, SECRET_GOOGLE_CLIENT_ID, SECRET_GOOGLE_REDIRECT_URI } from '$env/static/private'
 import {redirect} from "@sveltejs/kit";
 import {env} from "$env/dynamic/private";
+import {Base64} from "js-base64";
 
 /** @type {import('./$types').PageServerLoad} */
 export const load = async () => { //profile email
@@ -37,6 +38,16 @@ export const actions = {
 
         const data = await res.json()
 
+        const user = JSON.parse(Base64.decode(data.token.split('.')[1]))
+
+        console.log(user)
+
+        if (user.role === 'CUSTOMER') {
+            return { success: false }
+        }
+
+        console.log("TAK CO DO RITI")
+
         cookies.set(SECRET_TOKEN_COOKIE_NAME, data.token, {
             path: env.SECRET_COOKIE_PATH,
             sameSite: env.SECRET_COOKIE_SAME_SITE,
@@ -44,8 +55,6 @@ export const actions = {
             httpOnly: !!env.SECRET_COOKIE_HTTP_ONLY,
             maxAge: parseInt(env.SECRET_COOKIE_MAX_AGE),
         })
-
-        locals.user = data.token
 
         await redirect(302, '/');
     },

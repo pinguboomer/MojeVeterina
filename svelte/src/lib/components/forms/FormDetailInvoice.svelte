@@ -1,10 +1,18 @@
 <script>
-    import {Button, Heading, Helper, Input, Label, P, Select} from "flowbite-svelte";
+    import {
+        Button,
+        Input,
+        Label,
+        Span,
+        Table, TableBody, TableBodyCell,
+        TableBodyRow, TableHead,
+        TableHeadCell
+    } from "flowbite-svelte";
     import {enhance} from "$app/forms";
+    import {goto} from "$app/navigation";
 
-    export let owners = [];
+    export let client = {}
 
-    export let form;
 
     export let invoice = {
         client: '',
@@ -12,86 +20,87 @@
     }
 
     let items = invoice.items;
-    function getErrorText(reason) {
-        switch(reason) {
-            default:
-                return 'Chyba při vytváření faktůry. Zkuste to prosím znovu.';
-        }
-    }
 
-
-    let price;
-    let name;
-    let number;
     let suma = 0;
-
-
 
     function setSuma(){
         suma = 0;
         for (let item of items){
             suma = suma + (item.price * item.quantity);
         }
-
     }
-
     setSuma();
-    function addItem() {
-        let item = {name: name, price: price, quantity: number};
-        items = items.concat(item);
 
-        setSuma();
-
-        price = undefined;
-        name = undefined;
-        number = undefined;
-    }
-
-    function deleteItem(i) {
-        console.log(items)
-        items.splice(i, 1);
-        items = items;
-    }
-
+    console.log(invoice)
 </script>
 
-<form class="flex flex-col space-y-6" method="post" use:enhance>
-    <Heading tag="h1" class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Detail faktury</Heading>
-    <!--{#if errorMessage !== undefined}-->
-    <!--    <P class="text-red-700">{errorMessage}</P>-->
-    <!--{/if}-->
+<div class="flex flex-col space-y-6">
     <Label class="space-y-2">
-        <span>Plátce<span class="ml-1 text-red-500">*</span></span>
-        <Select class="mt-2" placeholder="..." name="client" items={owners} bind:value={invoice.client} required />
+        <span>Plátce</span>
+        <Input type="text" value={`${client.name} ${client.surname} (${client.email})`} disabled/>
+    </Label>
+    <Label class="space-y-2">
+        <span>Datum vystavení</span>
+        <Input type="date" value={invoice.creationDate?.split('T')[0]} disabled/>
+    </Label>
+    <Label class="space-y-2">
+        <span>Datum splatnosti</span>
+        <Input type="date" value={invoice.dueDate?.split('T')[0]} disabled/>
     </Label>
     <div class="border border-gray-300 rounded-md p-4 mb-4">
-        <Input class="hidden" name="number_items" bind:value={items.length}></Input>
-        {#each items as item , i}
-            <div class="flex items-center justify-between mt-1 border-b-gray-300">
-                <Input class="hidden" name="item_name_{i}" bind:value={item.name}></Input>
-                <Input class="hidden" name="item_price_{i}" bind:value={item.price}></Input>
-                <Input class="hidden" name="item_quantity_{i}" bind:value={item.quantity}></Input>
-                <P>{item.name}  {item.price} {item.quantity}</P>
-                <Button on:click={() => deleteItem(i)}>Odtranit</Button>
-            </div>
-        {/each}
+        <Input class="hidden" type="number" name="number_items" bind:value={items.length}></Input>
+        <Table>
+            <TableHead>
+                <TableHeadCell>Položka</TableHeadCell>
+                <TableHeadCell>Cena za jednotku</TableHeadCell>
+                <TableHeadCell>Počet</TableHeadCell>
+                <TableHeadCell>Cena položky</TableHeadCell>
+            </TableHead>
+            <TableBody>
+                {#each invoice.items as item , i}
+                    <TableBodyRow>
+                        <TableBodyCell>
+                            <Input class="hidden" name="item_name_{i}" bind:value={item.name}></Input>
+                            {item.name}
+                        </TableBodyCell>
+                        <TableBodyCell>
+                            <Input class="hidden" name="item_price_{i}" bind:value={item.price}></Input>
+                            {item.price} Kč
+                        </TableBodyCell>
+                        <TableBodyCell>
+                            <Input class="hidden" name="item_quantity_{i}" bind:value={item.quantity}></Input>
+                            {item.quantity}
+                        </TableBodyCell>
+                        <TableBodyCell>
+                            {item.price * item.quantity} Kč
+                        </TableBodyCell>
+                    </TableBodyRow>
+                {/each}
+                {#if items.length === 0}
+                    <TableBodyRow>
+                        <TableBodyCell class="text-center" colspan="5">Žádné položky</TableBodyCell>
+                    </TableBodyRow>
+                {/if}
+            </TableBody>
+        </Table>
     </div>
-    <Label class="space-y-2">
-        <span>Položka</span>
-        <Input bind:value={name} type="text" name="name"/>
-        <span>Cena</span>
-        <Input bind:value={price} type="number" name="price" min="0"/>
-        <span>Počet</span>
-        <Input bind:value={number} type="number" name="quantity" min="1"/>
-        <Button on:click={addItem}>přidat položku</Button>
-    </Label>
     <div class="flex items-center justify-between mt-1 border-b-gray-300">
-        <P>Celková cena:</P>
-        <P>{suma} Kč</P>
+        <Span>Celková cena:</Span>
+        <Span>{suma} Kč</Span>
     </div>
-    {#if form && !form?.success}
-        <Helper class="text-sm text-center mb-4" color="red">{getErrorText(form?.reason)}</Helper>
-    {/if}
-    <Button class="w-full" type="submit" disabled={!!form?.success}>Vytvořit novou faktůru</Button>
-    <Button href="/addInvoices/{invoice._id}/pdfInvoice">PDF</Button>
-</form>
+    <div class="flex gap-4">
+        <Button href="/invoices/{invoice._id}/pdf" class="w-full">PDF</Button>
+<!--        <form method="POST" class="" use:enhance={() => {-->
+<!--                return async ({result}) => {-->
+<!--                    if (!result.data.success) {-->
+<!--                        return alert('Chyba při odstranění faktury.');-->
+<!--                    }-->
+<!--                    goto('/invoices');-->
+<!--                };-->
+<!--            }}-->
+<!--        >-->
+<!--            <input type="hidden" hidden name="id" value={invoice._id}>-->
+<!--            <Button type="submit">Odstranit</Button>-->
+<!--        </form>-->
+    </div>
+</div>

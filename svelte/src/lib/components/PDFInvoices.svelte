@@ -51,27 +51,39 @@
         doc.addImage(logo, 'PNG', 70, 5, 30, 30);
 
         doc.setFontSize(25);
-        doc.text('Moje Veterina', 10, 10);
+        doc.text('Moje Veterina', 10, 14);
 
         doc.setFontSize(12);
 
-        doc.text('Adresa: Praha 10 Mírov 5', 10, 15);
-        doc.text('Telofoní číslo: +420 752 488 589', 10, 20)
-        doc.text('IČO: 12345678', 10, 25);
-        doc.text('DIČ: CZ12345678', 10, 30);
+        doc.text('Mírov 5, Praha 10 ', 10, 20);
+        // doc.text('Telefonní číslo: +420 752 488 589', 10, 25)
+        doc.text('IČO: 12345678', 10, 30);
+        doc.text('DIČ: CZ12345678', 10, 35);
+
+        doc.setFontSize(10);
+        doc.text('Plátce:', 105, 10);
+        doc.setFontSize(12);
+        doc.text(client.name + ' ' + client.surname, 105, 15);
+        if (client.address) {
+            doc.text(client.address, 105, 20);
+        }
+        if (client.zip_code && client.city) {
+            doc.text(client.zip_code + ' ' + client.city, 105, 25);
+        }
+        if (client.phone) {
+            doc.text('Telefonní číslo: ' + client.phone, 105, 30);
+        }
+        if (client.email) {
+            doc.text('E-mail: ' + client.email, 105, 35);
+        }
 
 
-        doc.text('Plátce', 105, 10);
-        doc.text('Jméno a příjmení: ' + client.name + ' ' + client.surname, 105, 15);
-        if (client.city && client.address)
-            doc.text('Adresa: ' + client.city + ' ' + client.address, 105, 20);
-
-        doc.text('Datum vytvoření: ' + formatDate(new Date(invoice.creationDate)) , 10, 45);
+        doc.text('Datum vytvoření: ' + formatDate(new Date(invoice.creationDate)) , 10, 49);
         //TODO dodělat
-        doc.text('Datum splatnosti: 20.3.2024', 10, 50);
+        doc.text('Datum splatnosti: ' + formatDate(new Date(invoice.dueDate)), 10, 54);
 
-        doc.text(String('Číslo faktůry:' + invoice.number.toString()), 102, 45)
-        doc.text(String('Číslo platby:' + invoice.transactionPublicId), 102, 50)
+        doc.text(String('Číslo faktury: ' + invoice.number), 105, 49)
+        // doc.text(String('Číslo platby:' + invoice.transactionPublicId), 102, 50)
 
         doc.line(100, 3, 100, 60);
         doc.line(5, 60, 200, 60);
@@ -88,9 +100,8 @@
             styles: {font: 'custom'}
         })
 
-        doc.setFontSize(18)
-        doc.text(String("Celková cena: " + getFullPrice(get_items())), 130, doc.lastAutoTable.finalY + 10)
-        console.log(doc.lastAutoTable.finalY)
+        doc.setFontSize(12)
+        doc.text(String("Celková cena: " + getFullPrice(get_items())), 150, doc.lastAutoTable.finalY + 10)
 
         pdfURL = URL.createObjectURL(doc.output("blob"));
         if (download)
@@ -103,5 +114,5 @@
 </script>
 
 <iframe src={pdfURL} width="800px" height="700px" class="mb-2"></iframe>
-<Button href="/addInvoices/{invoice._id}">Zpět na Detail</Button>
+<Button href="/invoices/{invoice._id}">Zpět na Detail</Button>
 <Button on:click={downloadPDF}>Stáhnout</Button>

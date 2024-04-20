@@ -10,8 +10,7 @@
         TableHeadCell
     } from "flowbite-svelte";
     export let customers = [];
-
-    console.log(customers)
+    export let detailHref = '/customers/';
 
     let filtered = customers;
 
@@ -48,7 +47,7 @@
                         {item.phone ?? '-'}
                     </TableBodyCell>
                     <TableBodyCell>
-                        <A href="/customers/{item._id}">Detail</A>
+                        <A href="{detailHref}{item._id}">Detail</A>
                     </TableBodyCell>
                 </TableBodyRow>
             {/each}

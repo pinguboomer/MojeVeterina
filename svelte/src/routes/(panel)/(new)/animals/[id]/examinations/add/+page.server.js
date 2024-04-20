@@ -8,7 +8,7 @@ export const load = async ({ parent, cookies, params }) => {
 
     try {
         return {
-            animal: await fetchData(env.SECRET_API_URL + '/animal-examinations-service/v1/animals/' + params.id, cookies.get(env.SECRET_TOKEN_COOKIE_NAME)),
+            animal: await fetchData(env.SECRET_API_URL + '/animal-examinations-service/v1/animals/' + params.id, cookies),
         }
     }
     catch (e) {

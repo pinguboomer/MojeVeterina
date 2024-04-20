@@ -33,14 +33,12 @@
 		};
 	}}
 >
-    <div class="flex gap-4">
-        {#if editMode}
-            <Button class="w-full" type="submit">Uložit změny</Button>
-        {:else}
-            <Button class="w-full" type="button" on:click={() => editMode = true}>Upravit zvíře</Button>
-        {/if}
-        <Button href="/animals/{animal._id}/examinations/add" class="w-full" variant="secondary">Vyšetření</Button>
-    </div>
+    {#if editMode}
+        <Button class="w-full" type="submit">Uložit změny</Button>
+    {:else}
+        <Button class="w-full" type="button" on:click={() => editMode = true}>Upravit zvíře</Button>
+    {/if}
+
     <Label class="space-y-2">
         <span>Jméno</span>
         <Input type="text" name="name" bind:value={animal.name} disabled={!editMode}/>

@@ -12,6 +12,7 @@
     } from "flowbite-svelte";
     import {formatDate} from "$lib/formatDate.js";
 
+    export let showOwners = true;
     export let animals = [];
 
     export let owners;
@@ -28,11 +29,12 @@
     }
 </script>
 
-<Heading class="mb-8">Pacienti</Heading>
 <Search class="mb-4" size="md" on:input={find} placeholder="Hledat..." />
 <Table hoverable={true}>
     <TableHead>
-        <TableHeadCell>Majitel</TableHeadCell>
+        {#if showOwners}
+            <TableHeadCell>Majitel</TableHeadCell>
+        {/if}
         <TableHeadCell>Druh</TableHeadCell>
         <TableHeadCell>Pohlaví</TableHeadCell>
         <TableHeadCell>Jméno</TableHeadCell>
@@ -43,9 +45,11 @@
     <TableBody>
         {#each filtered as animal}
             <TableBodyRow>
-                <TableBodyCell>
-                    {owners.find(x => x.value === animal.owner) ? owners.find(x => x.value === animal.owner).name :  '-'}
-                </TableBodyCell>
+                {#if showOwners}
+                    <TableBodyCell>
+                        {@html owners.find(x => x.value === animal.owner) ? owners.find(x => x.value === animal.owner).name :  '-'}
+                    </TableBodyCell>
+                {/if}
                 <TableBodyCell>
                     {animal.species ?? '-'}
                 </TableBodyCell>

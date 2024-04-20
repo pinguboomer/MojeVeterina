@@ -1,6 +1,6 @@
 import {env} from "$env/dynamic/private";
 import {fetchData} from "$lib/server/fetchData.js";
-import {error, redirect} from "@sveltejs/kit";
+import {redirect} from "@sveltejs/kit";
 import {getUserFromToken} from "$lib/server/getUserFromToken.js";
 
 /** @type {import('./$types').PageServerLoad} */
@@ -9,8 +9,8 @@ export const load = async ({ parent, cookies, params }) => {
 
     try {
         const [examination, animal] = await Promise.all([
-            fetchData(env.SECRET_API_URL + '/animal-examinations-service/v1/animal-examinations/' + params.examination_id, cookies.get(env.SECRET_TOKEN_COOKIE_NAME)),
-            fetchData(env.SECRET_API_URL + '/animal-examinations-service/v1/animals/' + params.id, cookies.get(env.SECRET_TOKEN_COOKIE_NAME))
+            fetchData(env.SECRET_API_URL + '/animal-examinations-service/v1/animal-examinations/' + params.examination_id, cookies),
+            fetchData(env.SECRET_API_URL + '/animal-examinations-service/v1/animals/' + params.id, cookies)
         ])
 
         if (examination.animal !== params.id) {
@@ -24,7 +24,7 @@ export const load = async ({ parent, cookies, params }) => {
         }
     }
     catch (e) {
-        redirect(302, '/animals/' + params.id + '/examinations')
+        redirect(302, '/animals/' + params.id)
         // return {
         //     status: 500,
         //     error: e
