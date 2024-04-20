@@ -20,9 +20,15 @@ async function login(req, res) {
         }
 
         // Vytvoření a odeslání tokenu
-        delete user.password
+        const payload = {
+            _id: user._id,
+            email: user.email,
+            role: user.role,
+            name: user.name,
+            surname: user.surname
+        }
 
-        const token = signToken(user, !!extend)
+        const token = signToken(payload, !!extend)
 
         res.status(200).send({token})
     }

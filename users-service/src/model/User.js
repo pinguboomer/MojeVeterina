@@ -11,7 +11,7 @@ const User = new Schema({
         type: String,
         required: true,
         default: 'CUSTOMER',
-        enum: ['CUSTOMER', 'ADMIN', 'SECRETARY', 'DOCTOR', 'NURSE'],
+        enum: ['CUSTOMER', 'ADMIN'],
     },
     email: {
         type: String,
@@ -56,15 +56,15 @@ const User = new Schema({
 
 // JOI validation - https://gist.github.com/stongo/6359042
 const joiSchema = Joi.object({
-    role: Joi.string(),
     email: Joi.string().regex(EMAIL_REGEX).required(),
     password: Joi.string(),
-    name: Joi.string().required(),
-    surname: Joi.string().required(),
-    phone: Joi.string().regex(PHONE_REGEX).required(),
-    address: Joi.string().required(),
-    city: Joi.string().required(),
-    zip_code: Joi.string().required(),
+    name: Joi.string().allow(null),
+    surname: Joi.string().allow(null),
+    phone: Joi.string().regex(PHONE_REGEX).allow(null),
+    address: Joi.string().allow(null),
+    city: Joi.string().allow(null),
+    zip_code: Joi.string().allow(null),
+    role: Joi.string().valid('CUSTOMER', 'ADMIN'),
 })
 
 
