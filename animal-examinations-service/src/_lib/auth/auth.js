@@ -16,24 +16,40 @@ const jwt = require('jsonwebtoken');
  *  @throws {401} - Token expired
  *  @throws {403} - Forbidden
  **/
-module.exports = function auth (req, res, next) {
-  // Check if the bearer token is present
-  if (!req.headers.authorization || !req.headers.authorization?.startsWith('Bearer ')) {
-    return res.sendStatus(401)
-  }
-  // Extract the token
-  const token = req.headers.authorization.split(' ')[1]
+const FETCH_URL = 'http://localhost:3004/v1/users/validate'
 
-  // Check if the token is valid
-  try {
-    // Attach the user to the request object
-    req.user = jwt.verify(token, process.env.JWT_SECRET);
-  } catch(err) { // Token expired or invalid
-    if (err.name === 'TokenExpiredError') {
-      return res.status(401).send('Token expired')
+module.exports = async function auth(req, res, next) {
+    // Check if the bearer token is present
+    if (!req.headers.authorization || !req.headers.authorization?.startsWith('Bearer ')) {
+        return res.sendStatus(401)
     }
-    return res.sendStatus(403)
-  }
+    // Extract the token
+    const token = req.headers.authorization.split(' ')[1]
 
-  next()
+    // Check if the token is valid
+    try {
+        // Attach the user to the request object
+        req.user = jwt.verify(token, process.env.JWT_SECRET);
+
+        // Check if the user is still in the database
+        const result = await fetch(FETCH_URL, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ user: req.user })
+        });
+
+        if (!result.ok) {
+            return res.status(401).send('Token user changed')
+        }
+
+    } catch (err) { // Token expired or invalid
+        if (err.name === 'TokenExpiredError') {
+            return res.status(401).send('Token expired')
+        }
+        return res.sendStatus(403)
+    }
+
+    next()
 }
