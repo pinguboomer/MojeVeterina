@@ -4,7 +4,7 @@ const router = Router();
 // Animals
 router.get('/reservations/:id', require('./reservations/getReservation'))
 router.get('/reservations', require('./reservations/getReservations'))
-router.get('/reservations/client/:id', require('./reservations/client/getReservationsClietnt'))
+router.get('/reservations/client/:id', require('./reservations/client/getReservationsClient'))
 router.get('/reservations/date/:date',  require('./reservations/date/getReservationsDate'))
 router.post('/reservations', require('./reservations/createReservation'))
 router.put('/reservations/:id', require('./reservations/updateReservation'))
