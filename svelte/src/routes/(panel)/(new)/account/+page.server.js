@@ -2,7 +2,7 @@ import {env} from "$env/dynamic/private";
 import {fetchData} from "$lib/server/fetchData.js";
 import {redirect} from "@sveltejs/kit";
 
-/** @type {import('./$types').PageServerLoad} */
+/** @type {import('../../../../../.svelte-kit/types/src/routes').PageServerLoad} */
 export const load = async ({parent, cookies, locals}) => {
     await parent();
 
