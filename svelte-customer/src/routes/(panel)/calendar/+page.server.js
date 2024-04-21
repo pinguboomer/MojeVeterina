@@ -17,8 +17,8 @@ export const load = async ({ parent, cookies, url,locals }) => {
         }
 
         const [animals, reservations] = await Promise.all([
-            fetchData(env.SECRET_API_URL + '/animal-examinations-service/v1/animals/client/' + locals.user._id, cookies.get(env.SECRET_TOKEN_COOKIE_NAME)),
-            fetchData(env.SECRET_API_URL + '/reservations-service/v1/reservations/date/' + date, cookies.get(env.SECRET_TOKEN_COOKIE_NAME))
+            fetchData(env.SECRET_API_URL + '/animal-examinations-service/v1/animals/client/' + locals.user._id, cookies),
+            fetchData(env.SECRET_API_URL + '/reservations-service/v1/reservations/date/' + date, cookies)
         ])
 
         return{
@@ -27,7 +27,7 @@ export const load = async ({ parent, cookies, url,locals }) => {
         }
     }catch (e) {
         console.log(e)
-        redirect(301, '/')
+        redirect(302, '/')
     }
 
 }
@@ -48,10 +48,6 @@ export const actions = {
             reason: formData.get('reason')
         }
 
-        console.log(body)
-
-        //TODO ověřit zda neexistuje už registrace na daný termín
-
         const res = await fetch(env.SECRET_API_URL + '/reservations-service/v1/reservations', {
             method: 'POST',
             headers: {
@@ -65,6 +61,6 @@ export const actions = {
             return { success: false, reason: "unknown" }
         }
 
-        return { success: true, redirect: `/` }
+        return { success: true }
     }
 }

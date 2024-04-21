@@ -7,7 +7,7 @@
     <PDFInvoices/>
 
 {:else}
-    <P>Není vybraná žádná faktůra</P>
+    <P>Není vybraná žádná faktura</P>
     <Button href="/myInvoices">Zpět na výpis</Button>
     {/if}
 

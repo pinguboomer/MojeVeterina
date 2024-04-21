@@ -1,9 +1,7 @@
 <script>
     import {A, Button, Checkbox, Heading, Helper, Input, Label} from "flowbite-svelte";
-    import {TITLE_PREFIX}  from "$lib/constants.js"
+    import {TITLE_PREFIX} from "$lib/constants.js";
     import GoogleButton from "$lib/components/forms/GoogleButton.svelte";
-
-    // import GoogleButton from "$lib/components/forms/GoogleButton.svelte";
 
     /** @type {import('./$types').ActionData} */
     export let form;

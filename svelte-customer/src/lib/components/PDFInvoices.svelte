@@ -70,7 +70,7 @@
         //TODO dodělat
         doc.text('Datum splatnosti: 20.3.2024', 10, 50);
 
-        doc.text(String('Číslo faktůry:' + invoice.number.toString()), 102, 45)
+        doc.text(String('Číslo faktury:' + invoice.number.toString()), 102, 45)
         doc.text(String('Číslo platby:' + invoice.transactionPublicId), 102, 50)
 
         doc.line(100, 3, 100, 60);

@@ -1,7 +1,7 @@
 <script>
     import {
         Button,
-        Heading, Input,
+        Heading, Helper, Input,
         Modal, P, Table,
         TableBody,
         TableBodyCell,
@@ -11,7 +11,7 @@
     } from "flowbite-svelte";
     import {formatDateWithHours} from "$lib/formateDate.js";
     import {enhance} from "$app/forms";
-
+    import {invalidateAll} from "$app/navigation";
 
 
     export let reservations
@@ -22,9 +22,11 @@
     let date = new Date();
 
     function getNameAnimal(id){
-        return animals.find(x => x._id === id).name;
+        const animal = animals.find(x => x._id === id)
+        return `${animal.name} (${animal.species})`;
     }
 
+    console.log('Res', reservations)
 </script>
 
 <Button on:click={() => (formModal = true)}>Zobrazit rezervace</Button>
@@ -42,23 +44,37 @@
             </TableHeadCell>
         </TableHead>
         <TableBody>
-            {#each reservations as reservations}
+            {#each reservations as reservation}
                 <TableBodyRow>
-                    <TableBodyCell class="border-solid border-2 border-gray-300">
-                        {formatDateWithHours(new Date(reservations.date))}
+                    <TableBodyCell width="160">
+                        {formatDateWithHours(new Date(reservation.date))}
                     </TableBodyCell>
-                    <TableBodyCell class="border-solid border-2 border-gray-300">
-                        <P>{getNameAnimal(reservations.animal)}</P>
-                        <P>{reservations.reason}</P>
+                    <TableBodyCell>
+                        {reservation.reason}
+                        <br/>
+                        <span class="text-sm text-gray-500">{getNameAnimal(reservation.animal)}</span>
                     </TableBodyCell>
-                    <TableBodyCell class="border-solid border-2 border-gray-300">
-                        <form method="post" use:enhance>
-                            <Input type="text" name="id" bind:value={reservations._id} class="hidden"/>
-                            <Button type="submit" disabled={date < new Date().getTime() - (60 * 60 * 24 * 1000)}>Zrušit rezervaci</Button>
+                    <TableBodyCell width="80">
+                        <form method="post" use:enhance={() => {
+                            return async ({result}) => {
+                                if (result.data.success) {
+                                    reservations = reservations.filter(x => x._id !== reservation._id)
+                                    return
+                                }
+                                alert('Nastala neočekávaná chyba rušení rezervace.')
+                            };
+                        }}>
+                            <Input type="text" name="id" bind:value={reservation._id} class="hidden"/>
+                            <Button type="submit" disabled={date < new Date().getTime() - (60 * 60 * 24 * 1000)}>Zrušit</Button>
                         </form>
                     </TableBodyCell>
                 </TableBodyRow>
             {/each}
+            {#if reservations.length === 0}
+                <TableBodyRow>
+                    <TableBodyCell colspan="3" class="text-center">Žádné rezervace</TableBodyCell>
+                </TableBodyRow>
+            {/if}
         </TableBody>
     </Table>
 </Modal>

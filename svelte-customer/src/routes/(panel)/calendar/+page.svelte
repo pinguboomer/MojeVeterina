@@ -16,22 +16,34 @@
     const dayLabels = ["Ne", "Po", "Út", "St", "Čt", "Pá", "So"]
 
 
-    let dateForReservations = new Date();
+    let dateForReservations = removeTime(new Date());
 
     const isDate = $page.url.searchParams.get('date');
-    if (isDate)
-        dateForReservations = new Date(isDate)
 
+    if (isDate) {
+        dateForReservations = removeTime(new Date(isDate))
+    }
+    function removeTime(date) {
+        // Přičtení časové zóny
+        let timezoneOffsetMinutes = date.getTimezoneOffset();
+        date.setMinutes(date.getMinutes() - timezoneOffsetMinutes);
 
+        return new Date(date.getFullYear(), date.getMonth(), date.getDate());
+    }
 </script>
 
 
 <div>
-
     <FullCalendar
             bind:active={dateForReservations}
             monthLabels={monthLabels}
             dayLabels={dayLabels}
+            on:day_click={(e) => {
+                let timezoneOffsetMinutes = e.detail.date.getTimezoneOffset();
+                const date = e.detail.date.setMinutes(e.detail.date.getMinutes() - timezoneOffsetMinutes);
+                goto('?date=' + new Date(date).toISOString().split('T')[0])
+                //invalidateAll()
+            }}
     />
     {#if dateForReservations !== undefined}
         <ReservationsCalendar
@@ -42,24 +54,3 @@
         />
     {/if}
 </div>
-
-
-<style>
-    .calendar-header svg {
-        width: 1.5rem;
-        height: 1.5rem;
-        transition: transform 0.1s ease-out;
-    }
-
-    .calendar-header svg:hover {
-        cursor: pointer;
-        transform: translateY(-1px);
-    }
-
-    .calendar-header .text {
-        display: inline-block;
-        width: 12rem;
-        text-align: center;
-    }
-
-</style>

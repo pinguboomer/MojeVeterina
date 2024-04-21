@@ -1,5 +1,5 @@
 <script>
-    import {Button, Heading, Helper, Input, Label, Modal, Select} from "flowbite-svelte";
+    import {Button, Heading, Helper, Input, Label, Modal, Select, Span} from "flowbite-svelte";
     let formModal = false;
     import {enhance} from "$app/forms";
     import {formatDateWithHours} from "$lib/formateDate.js";
@@ -25,11 +25,11 @@
 
 <Button on:click={() => (formModal = true)}>Přidat</Button>
 
-<!--TODO dodělat stylizaci-->
+
 <Modal bind:open={formModal} size="xs" autoclose={false} class="w-full">
     <form class="flex flex-col space-y-6" method="post" use:enhance>
         <Heading tag="h2" class="mb-4">Provedení rezervace</Heading>
-        <Heading tag="h3" class="mb-4">{formatDateWithHours(new Date(date))}</Heading>
+        <Span class="mb-4">{formatDateWithHours(new Date(date))}</Span>
         <input type="text" name="date" bind:value={date} class="hidden"/>
         <Label class="space-y-2">
             <span>Předmět návštevy</span>

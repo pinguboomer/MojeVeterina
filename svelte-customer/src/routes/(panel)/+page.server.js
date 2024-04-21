@@ -7,8 +7,8 @@ export const load = async ({parent, cookies, locals}) => {
 
     try {
         const [animals, reservations] = await Promise.all([
-            fetchData(env.SECRET_API_URL + '/animal-examinations-service/v1/animals/client/' + locals.user._id, cookies.get(env.SECRET_TOKEN_COOKIE_NAME)),
-            fetchData(env.SECRET_API_URL + '/reservations-service/v1/reservations/client/' + locals.user._id, cookies.get(env.SECRET_TOKEN_COOKIE_NAME))
+            fetchData(env.SECRET_API_URL + '/animal-examinations-service/v1/animals/client/' + locals.user._id, cookies),
+            fetchData(env.SECRET_API_URL + '/reservations-service/v1/reservations/client/' + locals.user._id, cookies)
         ])
 
         return {
@@ -16,16 +16,19 @@ export const load = async ({parent, cookies, locals}) => {
             reservations
         }
     } catch (e) {
-        console.log(e)
-        redirect(301, '/myAnimals')
+        cookies.delete(env.SECRET_TOKEN_COOKIE_NAME, {
+            path: env.SECRET_COOKIE_PATH,
+            sameSite: env.SECRET_COOKIE_SAME_SITE,
+            secure: !!env.SECRET_COOKIE_SECURE,
+            httpOnly: !!env.SECRET_COOKIE_HTTP_ONLY,
+        })
+        redirect(302, '/login');
     }
 }
 
 export const actions = {
     default: async ({ request, cookies }) => {
         const formData = await request.formData();
-
-        console.log(formData.get('id'))
 
         const res = await fetch(env.SECRET_API_URL + '/reservations-service/v1/reservations/' + formData.get('id'), {
             method: 'DELETE',
@@ -39,6 +42,6 @@ export const actions = {
             return { success: false, reason: "unknown" }
         }
 
-        return { success: true, redirect: `/` }
+        return { success: true, removeId: formData.get('id') }
     }
 }

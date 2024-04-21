@@ -1,7 +1,7 @@
 <script>
-    import {Button, Helper, Input, Label, Select} from "flowbite-svelte";
+    import {Button, Helper, Input, Label} from "flowbite-svelte";
     import {enhance} from "$app/forms";
-    // export let owners = [];
+    export let user = {_id: ""};
     export let form
 
     export let animal = {
@@ -33,7 +33,11 @@
 		};
 	}}
 >
-    <div class="flex gap-4">
+    {#if editMode}
+        <Button class="w-full" type="submit">Uložit změny</Button>
+    {:else}
+        <Button class="w-full" type="button" on:click={() => editMode = true}>Upravit zvíře</Button>
+    {/if}
     <Label class="space-y-2">
         <span>Jméno</span>
         <Input type="text" name="name" bind:value={animal.name} disabled={!editMode}/>
@@ -54,4 +58,8 @@
         <span>Datum úmrtí</span>
         <Input type="date" name="deathDate" bind:value={animal.deathDate} disabled={!editMode} />
     </Label>
+    <Input type="hidden" class="hidden" name="owner" value={user._id} />
+    {#if form && !form?.success}
+        <Helper class="text-sm text-center mb-4" color="red">{getErrorText(form?.reason)}</Helper>
+    {/if}
 </form>

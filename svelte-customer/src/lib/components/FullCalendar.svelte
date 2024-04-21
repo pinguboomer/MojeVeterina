@@ -1,12 +1,11 @@
 <script>
     import Calendar from "$lib/components/Calendar.svelte";
     import CalendarHeader from "$lib/components/CalendarHeader.svelte";
+    import {createEventDispatcher} from "svelte";
 
-    export let day_click = () => {}
+    const dispatch = createEventDispatcher()
 
-    export let event_click = () => {}
-
-    export let date = new Date()
+    export let date = removeTime(new Date())
     export let active = null
     export let month = date.getMonth()
     export let year = date.getFullYear()
@@ -28,6 +27,14 @@
             year++;
         }
     }
+
+    function removeTime(date) {
+        // Přičtení časové zóny
+        let timezoneOffsetMinutes = date.getTimezoneOffset();
+        date.setMinutes(date.getMinutes() - timezoneOffsetMinutes);
+
+        return new Date(date.getFullYear(), date.getMonth(), date.getDate());
+    }
 </script>
 
 <div class="w-full">
@@ -45,8 +52,8 @@
             bind:active={active}
             offset={1}
             labels={["Ne", "Po", "Út", "St", "Čt", "Pá", "So"]}
-            on:day_click={day_click}
-            on:event_click={event_click}
+            on:day_click={(e) => dispatch('day_click', { date: e.detail.date })}
+            on:event_click={(e) => dispatch('event_click', { event: e.detail })}
             dayLabels={dayLabels}
             disableDaysOutsideMonth={disableDaysOutsideMonth}
     />

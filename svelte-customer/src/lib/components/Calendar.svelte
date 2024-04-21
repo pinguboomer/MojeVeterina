@@ -1,21 +1,17 @@
 <script>
     import {createEventDispatcher} from "svelte"
     import {twMerge} from "tailwind-merge";
-    import {goto} from "$app/navigation";
-
 
     const dispatch = createEventDispatcher()
 
     const SATURDAY = 6;
     const SUNDAY = 0;
 
-    let todayDate =  new Date()
-    todayDate.setDate(todayDate.getDate() - 1)
-
     export let month = 12;
     export let year = 2022;
     export let today = null; // Date
     export let active = null; // Date
+
     export let offset = 0;
 
     export let disableDaysOutsideMonth = true;
@@ -99,21 +95,21 @@
 
     {#each calendarArray as cell}
         <div
-                data-day="{cell.date.toISOString()}"
-                class=""
+            data-day="{cell.date.toISOString()}"
+            class=""
         >
             <button
-                    class={twMerge(
+                class={twMerge(
 /* base */               "font-semibold w-full rounded-lg p-4 hover:bg-gray-100 transition-colors",
 /* is saturday */        (cell.date.getDay() === SATURDAY)? " " : "",
 /* is sunday */          (cell.date.getDay() === SUNDAY)? " " : "",
 /* is not this month */  (!sameMonth(cell.date, thisMonth))? "text-gray-400 hover:text-gray-500" : "",
 /* is today */           (sameDay(cell.date, today))? "bg-gray-100": "",
-/* active day */         (cell.date === active)? "bg-primary-600 text-white hover:bg-primary-600 hover:text-white": "",
+/* active day */         (cell.date.getTime() === active.getTime())? "bg-primary-600 text-white hover:bg-primary-600 hover:text-white": "",
                          "disabled:cursor-default disabled:bg-transparent disabled:text-gray-400"
                 )}
-                    on:click|self={() => { dispatch("day_click", {date: cell.date}); active = cell.date; goto("?date=" + cell.date.toISOString()) }}
-                    disabled={disableDaysOutsideMonth && !sameMonth(cell.date, thisMonth) || cell.date.getDay() === SATURDAY || cell.date.getDay() === SUNDAY ||  cell.date < todayDate}
+                on:click|self={() => { dispatch("day_click", {date: cell.date}); active = cell.date;}}
+                disabled={disableDaysOutsideMonth && !sameMonth(cell.date, thisMonth)}
             >
                 {cell.date.getDate()}
             </button>

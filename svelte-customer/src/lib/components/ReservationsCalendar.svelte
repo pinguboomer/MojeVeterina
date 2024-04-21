@@ -31,7 +31,7 @@
     }
 
 </script>
-<Heading tag="h3">{formatDate(date)}</Heading>
+<Heading tag="h2" class="mb-4 text-2xl">{formatDate(date)}</Heading>
 <Table>
     <TableHead>
         <TableHeadCell>
@@ -46,13 +46,13 @@
     <TableBody>
         {#each Array.from(Array(18).keys()).slice(7) as i}
             <TableBodyRow>
-                <TableBodyCell class="border-solid border-2 border-gray-300">
+                <TableBodyCell width="85">
                     {String((i + 1) + ':00')}
                 </TableBodyCell>
-                <TableBodyCell class="border-solid border-2 border-gray-300">
+                <TableBodyCell>
                     <P>{reservations.find(x => new Date(x.date).getHours() === i + 1) ? "obsazeno" : "volno"}</P>
                 </TableBodyCell>
-                <TableBodyCell class="border-solid border-2 border-gray-300">
+                <TableBodyCell width="140">
                     {#if !reservations.find(x => new Date(x.date).getHours() === i + 1)}
                         <NewReservations
                                 form={form}
