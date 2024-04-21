@@ -5,8 +5,6 @@
     export let data
 
     let hideNav = true
-
-    console.log(hideNav)
 </script>
 
 <div class="w-full h-[100dvg] relative md:flex">

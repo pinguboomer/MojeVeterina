@@ -3,6 +3,7 @@
     import ReservationsCalendar from "$lib/components/ReservationsCalendar.svelte";
     import {page} from "$app/stores";
     import {goto, invalidateAll} from "$app/navigation";
+    import {Heading} from "flowbite-svelte";
 
 
     const monthLabels = ["Leden", "Únor", "Březen", "Duben", "Květen", "Červen", "Červenec", "Srpen", "Září", "Říjen", "Listopad", "Prosinec"]
@@ -28,18 +29,22 @@
 </script>
 
 
+<Heading class="mb-8">Rezervace</Heading>
 <div>
-    <FullCalendar
-            bind:active={dateForReservations}
-            monthLabels={monthLabels}
-            dayLabels={dayLabels}
-            on:day_click={(e) => {
+    <div class="max-w-96">
+        <FullCalendar
+                bind:active={dateForReservations}
+                monthLabels={monthLabels}
+                dayLabels={dayLabels}
+                on:day_click={(e) => {
                 let timezoneOffsetMinutes = e.detail.date.getTimezoneOffset();
                 const date = e.detail.date.setMinutes(e.detail.date.getMinutes() - timezoneOffsetMinutes);
                 goto('?date=' + new Date(date).toISOString().split('T')[0])
                 //invalidateAll()
             }}
-    />
+        />
+    </div>
+
     {#if dateForReservations !== undefined}
         <ReservationsCalendar
                 date={dateForReservations}

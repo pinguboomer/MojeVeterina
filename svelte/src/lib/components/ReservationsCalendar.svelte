@@ -1,5 +1,6 @@
 <script>
     import {
+        A,
         Button,
         Heading,
         P, Table,
@@ -22,10 +23,10 @@
 
 
 </script>
-<Heading tag="h3">{formatDate(date)}</Heading>
+<Heading tag="h2" class="mb-4 text-2xl">{formatDate(date)}</Heading>
 <Table>
     <TableHead>
-        <TableHeadCell>
+        <TableHeadCell width="80">
             Čas
         </TableHeadCell>
         <TableHeadCell>
@@ -37,10 +38,10 @@
     <TableBody>
         {#each Array.from(Array(18).keys()).slice(7) as i}
             <TableBodyRow>
-                <TableBodyCell class="border-solid border-2 border-gray-300">
+                <TableBodyCell>
                     {String((i + 1) + ':00')}
                 </TableBodyCell>
-                <TableBodyCell class="border-solid border-2 border-gray-300">
+                <TableBodyCell>
                     {#if reservations.find(x => new Date(x.date).getHours() === i + 1)}
                         <P>{clients.find(x => x._id === reservations.find(x => new Date(x.date).getHours() === i + 1).user).name}
                             {clients.find(x => x._id === reservations.find(x => new Date(x.date).getHours() === i + 1).user).surname}
@@ -53,12 +54,12 @@
                         </P>
                     {/if}
                 </TableBodyCell>
-                <TableBodyCell class="border-solid border-2 border-gray-300">
+                <TableBodyCell>
                     {#if reservations.find(x => new Date(x.date).getHours() === i + 1)}
-                    <Button href="/animals/{animals.find(x => x._id === reservations.find(x => new Date(x.date).getHours() === i + 1).animal)._id}">
-                       Detail zvířete
-                    </Button>
-                        {/if}
+                        <A href="/animals/{animals.find(x => x._id === reservations.find(x => new Date(x.date).getHours() === i + 1).animal)._id}">
+                           Detail
+                        </A>
+                    {/if}
                 </TableBodyCell>
             </TableBodyRow>
         {/each}

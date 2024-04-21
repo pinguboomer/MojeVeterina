@@ -13,7 +13,7 @@
         phone: '',
         address: '',
         city: '',
-        zip: '',
+        zip_code: '',
         email: '',
         _id: '',
         role: ''
@@ -72,7 +72,7 @@
     </Label>
     <Label class="space-y-2">
         <span>PSČ</span>
-        <Input type="text" name="zip" bind:value={customer.zip} disabled={!editMode} />
+        <Input type="text" name="zip" bind:value={customer.zip_code} disabled={!editMode} />
     </Label>
     <Label class="space-y-2">
         <span>Role</span>

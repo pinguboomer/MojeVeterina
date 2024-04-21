@@ -22,8 +22,6 @@ export const actions = {
             extend: formData.get('extend') === "on",
         }
 
-        console.log(body)
-
         const res = await fetch(SECRET_API_URL + '/users-service/v1/auth/login', {
             method: 'POST',
             headers: {
@@ -40,13 +38,9 @@ export const actions = {
 
         const user = JSON.parse(Base64.decode(data.token.split('.')[1]))
 
-        console.log(user)
-
         if (user.role === 'CUSTOMER') {
             return { success: false }
         }
-
-        console.log("TAK CO DO RITI")
 
         cookies.set(SECRET_TOKEN_COOKIE_NAME, data.token, {
             path: env.SECRET_COOKIE_PATH,
