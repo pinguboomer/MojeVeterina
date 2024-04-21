@@ -9,7 +9,7 @@
     if (data?.animal?.deathDate) data.animal.deathDate = data.animal.deathDate.split('T')[0]
 </script>
 
-<Heading tag="h1" class="mb-8">Detail zvířete</Heading>
+<Heading tag="h1" class="mb-8">Detail mazlíčka</Heading>
 <div class="space-y-8 xl:flex xl:gap-8">
     <FormDetailAnimal
             owners={data.owners.map((owner) => { return { name: `${owner.name} ${owner.surname} (${owner.email})`, value: owner._id } })}

@@ -14,7 +14,7 @@ export const load = async ({ parent, cookies, params }) => {
         ])
 
         if (examination.animal !== params.id) {
-            redirect(302, '/animals/' + params.id + '/examinations')
+            redirect(302, '/animals/' + params.id)
         }
         else {
             return {

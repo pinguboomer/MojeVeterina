@@ -11,7 +11,7 @@
     export let form
 </script>
 
-<Heading>Detail vyšetření</Heading>
+<Heading class="mb-8">Detail vyšetření</Heading>
 <FormDetailExamination
         animal={data.animal}
         data={data.examination}

@@ -33,11 +33,14 @@
 		};
 	}}
 >
-    {#if editMode}
-        <Button class="w-full" type="submit">Uložit změny</Button>
-    {:else}
-        <Button class="w-full" type="button" on:click={() => editMode = true}>Upravit zvíře</Button>
-    {/if}
+    <div class="flex gap-6">
+        {#if editMode}
+            <Button class="w-full" type="submit">Uložit změny</Button>
+        {:else}
+            <Button class="w-full" type="button" on:click={() => editMode = true}>Upravit mazlíčka</Button>
+        {/if}
+        <Button class="w-full" href="/animals/{animal._id}/examinations/add">Přidat vyšetření</Button>
+    </div>
 
     <Label class="space-y-2">
         <span>Jméno</span>

@@ -37,11 +37,11 @@
                 monthLabels={monthLabels}
                 dayLabels={dayLabels}
                 on:day_click={(e) => {
-                let timezoneOffsetMinutes = e.detail.date.getTimezoneOffset();
-                const date = e.detail.date.setMinutes(e.detail.date.getMinutes() - timezoneOffsetMinutes);
-                goto('?date=' + new Date(date).toISOString().split('T')[0])
-                //invalidateAll()
-            }}
+                    let timezoneOffsetMinutes = e.detail.date.getTimezoneOffset();
+                    const date = e.detail.date.setMinutes(e.detail.date.getMinutes() - timezoneOffsetMinutes);
+                    goto('?date=' + new Date(date).toISOString().split('T')[0])
+                    //invalidateAll()
+                }}
         />
     </div>
 
