@@ -79,7 +79,6 @@
 
 
         doc.text('Datum vytvoření: ' + formatDate(new Date(invoice.creationDate)) , 10, 49);
-        //TODO dodělat
         doc.text('Datum splatnosti: ' + formatDate(new Date(invoice.dueDate)), 10, 54);
 
         doc.text(String('Číslo faktury: ' + invoice.number), 105, 49)
