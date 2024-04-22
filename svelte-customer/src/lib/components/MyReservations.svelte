@@ -25,8 +25,6 @@
         const animal = animals.find(x => x._id === id)
         return `${animal.name} (${animal.species})`;
     }
-
-    console.log('Res', reservations)
 </script>
 
 <Button on:click={() => (formModal = true)}>Zobrazit rezervace</Button>

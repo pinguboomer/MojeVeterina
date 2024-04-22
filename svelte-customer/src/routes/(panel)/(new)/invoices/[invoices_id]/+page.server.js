@@ -17,7 +17,6 @@ export const load = async ({parent, cookies, params, locals}) => {
             user: locals.user
         }
     } catch (e) {
-        console.log(e)
         redirect(302, '/invoices')
     }
 }

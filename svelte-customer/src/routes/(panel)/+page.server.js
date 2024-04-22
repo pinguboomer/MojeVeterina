@@ -38,7 +38,6 @@ export const actions = {
         })
 
         if (!res.ok) {
-            console.log(res.status)
             return { success: false, reason: "unknown" }
         }
 

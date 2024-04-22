@@ -7,7 +7,6 @@ import {getUserFromToken} from "$lib/server/getUserFromToken.js";
 export const load = async ({parent, cookies, locals}) => {
     await parent();
 
-    console.log('LOAD LOCALS', locals)
     try {
         const [user] = await Promise.all([
             fetchData(env.SECRET_API_URL + `/users-service/v1/users/${locals.user._id}`, cookies),

@@ -27,7 +27,6 @@ export const load = async ({ parent, cookies, url,locals }) => {
             reservations
         }
     }catch (e) {
-        console.log(e)
         redirect(302, '/')
     }
 

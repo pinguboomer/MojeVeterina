@@ -12,9 +12,6 @@ export const load = async ({parent, cookies, params}) => {
             fetchData(env.SECRET_API_URL + '/animal-examinations-service/v1/animal-examinations/animal/' + params.id, cookies)
         ])
 
-        console.log('/animal-examinations-service/v1/animal-examinations/animal/' + params.id)
-        console.log(examinations)
-
         return {
             animal,
             examinations
@@ -54,8 +51,6 @@ export const actions = {
         if (body.deathDate === '') {
             delete body.deathDate
         }
-
-        console.log(body)
 
         const res = await fetch(env.SECRET_API_URL + '/animal-examinations-service/v1/animals/' + params.id, {
             method: 'PUT',

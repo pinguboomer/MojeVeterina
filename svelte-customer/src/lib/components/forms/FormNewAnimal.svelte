@@ -22,7 +22,6 @@
 </script>
 
 <form class="flex flex-col space-y-6" method="post" use:enhance>
-    <Heading tag="h1" class="mb-4">Přidání nového zvířete</Heading>
     <Label class="space-y-2">
         <span>Jméno</span>
         <Input type="text" name="name" bind:value={animal.name} />

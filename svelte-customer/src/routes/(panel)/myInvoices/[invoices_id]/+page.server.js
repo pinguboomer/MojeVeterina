@@ -14,7 +14,6 @@ export const load = async ({parent, cookies, params, locals}) => {
         ])
 
         if (invoice._id !== params.invoices_id) {
-            console.log(invoice, params.invoices_id)
             redirect(302, '/myInvoices')
         } else {
             return {invoice, user}

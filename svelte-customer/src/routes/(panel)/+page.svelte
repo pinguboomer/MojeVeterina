@@ -1,10 +1,14 @@
 <script>
     import {Card, Heading, Button, P} from 'flowbite-svelte';
     import MyReservations from "$lib/components/MyReservations.svelte";
+    import {TITLE_PREFIX} from "$lib/constants";
 
     export let data;
 </script>
 
+<svelte:head>
+    <title>{TITLE_PREFIX}Rychlé rozhraní</title>
+</svelte:head>
 
 <div class="h-[93dvh] flex flex-col">
     <div class="flex-1 flex flex-col items-center justify-center">

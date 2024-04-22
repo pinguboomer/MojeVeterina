@@ -30,8 +30,6 @@
         }
     }
     setSuma();
-
-    console.log(invoice)
 </script>
 
 <div class="flex flex-col space-y-6">

@@ -3,6 +3,8 @@
     import ReservationsCalendar from "$lib/components/ReservationsCalendar.svelte";
     import {goto} from "$app/navigation";
     import {page} from "$app/stores";
+    import {Heading} from "flowbite-svelte";
+    import {TITLE_PREFIX} from "$lib/constants";
 
     export let data;
     export let form;
@@ -32,25 +34,27 @@
     }
 </script>
 
+<svelte:head>
+    <title>{TITLE_PREFIX}Rezervace</title>
+</svelte:head>
 
-<div>
-    <FullCalendar
-            bind:active={dateForReservations}
-            monthLabels={monthLabels}
-            dayLabels={dayLabels}
-            on:day_click={(e) => {
+<Heading class="mb-8">Rezervace</Heading>
+<FullCalendar
+        bind:active={dateForReservations}
+        monthLabels={monthLabels}
+        dayLabels={dayLabels}
+        on:day_click={(e) => {
                 let timezoneOffsetMinutes = e.detail.date.getTimezoneOffset();
                 const date = e.detail.date.setMinutes(e.detail.date.getMinutes() - timezoneOffsetMinutes);
                 goto('?date=' + new Date(date).toISOString().split('T')[0])
                 //invalidateAll()
             }}
+/>
+{#if dateForReservations !== undefined}
+    <ReservationsCalendar
+            date={dateForReservations}
+            form={form}
+            animals={data.animals}
+            reservations={data.reservations}
     />
-    {#if dateForReservations !== undefined}
-        <ReservationsCalendar
-                date={dateForReservations}
-                form={form}
-                animals={data.animals}
-                reservations={data.reservations}
-        />
-    {/if}
-</div>
+{/if}

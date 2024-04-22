@@ -3,8 +3,6 @@ import {redirect} from "@sveltejs/kit";
 
 /** @type {import('./$types').PageServerLoad} */
 export const load = async ({ url, cookies, locals }) => {
-    console.log(url)
-
     const res = await fetch(SECRET_API_URL + '/users-service/v1/auth/google/callback' + url.search, {method: "POST"})
 
     if (!res.ok) {

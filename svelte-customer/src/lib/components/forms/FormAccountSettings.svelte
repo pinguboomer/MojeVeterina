@@ -17,8 +17,6 @@
         role: ''
     }
 
-    console.log(user)
-
     let editMode = false
 
     function getErrorText(reason) {

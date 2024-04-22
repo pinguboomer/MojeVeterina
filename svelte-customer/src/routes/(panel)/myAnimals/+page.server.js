@@ -13,7 +13,6 @@ export const load = async ({parent,cookies, locals}) => {
         }
 
     } catch (e) {
-        console.log(e);
         redirect(302, '/')
     }
 }

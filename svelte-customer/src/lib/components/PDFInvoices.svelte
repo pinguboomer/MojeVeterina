@@ -7,7 +7,6 @@
     import {formatDate} from "$lib/formatDate.js"
     import {env} from "$env/dynamic/public";
 
-    console.log('env', env)
 
     export let invoice;
     export let client;
@@ -16,7 +15,6 @@
         generateInvoice(false);
     })
 
-    console.log(invoice)
 
     function get_items() {
         let items = [];
@@ -117,7 +115,6 @@
 </script>
 
 <iframe src={pdfURL} width="800px" height="700px" class="mb-2"></iframe>
-<Button href="/invoices/{invoice._id}">Zpět na Detail</Button>
 {#if invoice.paid === false}
     <Button href={env.PUBLIC_REVOLUT_PAYMENT_URL + invoice.transactionPublicId}>Zaplatit</Button>
 {:else}
