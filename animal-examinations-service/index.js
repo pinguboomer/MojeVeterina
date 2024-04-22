@@ -16,11 +16,10 @@ app.use(cookieParser())
 app.use(cors())
 
 // Logging
-const accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' })
 if (process.env.NODE_ENV === 'production') {
+    const accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' })
     app.use(morgan(':method :url :status :response-time ms - :res[content-length]', { stream: accessLogStream }))
-}
-else if (process.env.NODE_ENV === 'development') {
+} else {
     app.use(morgan('dev'))
 }
 

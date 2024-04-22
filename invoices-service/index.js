@@ -16,20 +16,25 @@ app.use(cookieParser())
 app.use(cors())
 
 // Logging
-const accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' })
-app.use(morgan(':method :url :status :response-time ms - :res[content-length]', { stream: accessLogStream }))
+if (process.env.NODE_ENV === 'production') {
+    const accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' })
+    app.use(morgan(':method :url :status :response-time ms - :res[content-length]', { stream: accessLogStream }))
+} else {
+    app.use(morgan('dev'))
+}
 
 // Routes
 app.use(require('./src/routes/routes'))
 
 /** Mongoose initialization */
 const {INVOICE_NUMBER_COUNTER} = require("./src/constants");
-const {Counter, createCounter} = require('./src/model/Counter')
+const {createCounter} = require('./src/model/Counter')
 const mongoose = require('mongoose')
 mongoose.connect(process.env.DB_URI)
     .then(async () => {
         console.log('Connected to MongoDB')
 
+        await createCounter(INVOICE_NUMBER_COUNTER)
         await createCounter(INVOICE_NUMBER_COUNTER)
 
         // Start the Express server

@@ -48,11 +48,12 @@ services:
       JWT_SECRET: ${JWT_SECRET}
       PORT: ${ANIMAL_EXAMINATIONS_SERVICE_PORT}
       NODE_ENV: ${NODE_ENV}
+      VALIDATE_USER_URL: ${VALIDATE_USER_URL}
     depends_on:
       - mv_mongo
     volumes:
       - ./animal-examinations-service/:/home/node/app
-      - ./animal-examinations-service/node_modules:/home/node/app/node_modules
+#      - ./animal-examinations-service/node_modules:/home/node/app/node_modules
       - ./_lib:/home/node/app/src/_lib
 
   mv_invoices_node:
@@ -71,11 +72,12 @@ services:
       JWT_SECRET: ${JWT_SECRET}
       PORT: ${INVOICES_SERVICE_PORT}
       NODE_ENV: ${NODE_ENV}
+      VALIDATE_USER_URL: ${VALIDATE_USER_URL}
     depends_on:
       - mv_mongo
     volumes:
       - ./invoices-service/:/home/node/app
-      - ./invoices-service/node_modules:/home/node/app/node_modules
+#      - ./invoices-service/node_modules:/home/node/app/node_modules
       - ./_lib:/home/node/app/src/_lib
 
   mv_reservations_node:
@@ -94,11 +96,12 @@ services:
       JWT_SECRET: ${JWT_SECRET}
       PORT: ${RESERVATIONS_SERVICE_PORT}
       NODE_ENV: ${NODE_ENV}
+      VALIDATE_USER_URL: ${VALIDATE_USER_URL}
     depends_on:
       - mv_mongo
     volumes:
       - ./reservations-service/:/home/node/app
-      - ./reservations-service/node_modules:/home/node/app/node_modules
+#      - ./reservations-service/node_modules:/home/node/app/node_modules
       - ./_lib:/home/node/app/src/_lib
 
   mv_users_node:
@@ -117,11 +120,15 @@ services:
       JWT_SECRET: ${JWT_SECRET}
       PORT: ${USERS_SERVICE_PORT}
       NODE_ENV: ${NODE_ENV}
+      GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID}
+      GOOGLE_CLIENT_SECRET: ${GOOGLE_CLIENT_SECRET}
+      GOOGLE_REDIRECT_URI: ${GOOGLE_REDIRECT_URI}
+      VALIDATE_USER_URL: ${VALIDATE_USER_URL}
     depends_on:
       - mv_mongo
     volumes:
       - ./users-service/:/home/node/app
-      - ./users-service/node_modules:/home/node/app/node_modules
+#      - ./users-service/node_modules:/home/node/app/node_modules
       - ./_lib:/home/node/app/src/_lib
 
   mv_api-gateway_node:
@@ -147,8 +154,75 @@ services:
       - mv_mongo
     volumes:
       - ./api-gateway-service/:/home/node/app
-      - ./api-gateway-service/node_modules:/home/node/app/node_modules
+#      - ./api-gateway-service/node_modules:/home/node/app/node_modules
       - ./_lib:/home/node/app/src/_lib
+
+  mv_svelte_admin:
+    build:
+      dockerfile: svelte/Dockerfile
+      args:
+        NODE_ENV: ${NODE_ENV}
+        PROJECT_PATH: ./svelte
+    command: npm run dev
+    container_name: mv_svelte_admin
+    restart: always
+    ports:
+      - '${ADMIN_PORT}:5173'
+    environment:
+        NODE_ENV: ${NODE_ENV}
+        SECRET_API_URL: ${ADMIN_SECRET_API_URL}
+        SECRET_TOKEN_COOKIE_NAME: ${ADMIN_SECRET_TOKEN_COOKIE_NAME}
+        SECRET_GOOGLE_CLIENT_ID: ${ADMIN_SECRET_GOOGLE_CLIENT_ID}
+        SECRET_GOOGLE_REDIRECT_URI: ${ADMIN_SECRET_GOOGLE_REDIRECT_URI}
+        SECRET_COOKIE_DOMAIN: ${ADMIN_SECRET_COOKIE_DOMAIN}
+        SECRET_COOKIE_PATH: ${ADMIN_SECRET_COOKIE_PATH}
+        SECRET_COOKIE_MAX_AGE: ${ADMIN_SECRET_COOKIE_MAX_AGE}
+        SECRET_COOKIE_HTTP_ONLY: ${ADMIN_SECRET_COOKIE_HTTP_ONLY}
+        SECRET_COOKIE_SAME_SITE: ${ADMIN_SECRET_COOKIE_SAME_SITE}
+        SECRET_COOKIE_SECURE: ${ADMIN_SECRET_COOKIE_SECURE}
+    depends_on:
+      - mv_api-gateway_node
+      - mv_users_node
+      - mv_animal-examinations_node
+      - mv_invoices_node
+      - mv_reservations_node
+    volumes:
+      - ./svelte/:/home/node/app
+#      - ./svelte/node_modules:/home/node/app/node_modules
+
+  mv_svelte_customers:
+    build:
+      dockerfile: svelte-customer/Dockerfile
+      args:
+        NODE_ENV: ${NODE_ENV}
+        PROJECT_PATH: ./svelte-customer
+    command: npm run dev
+    container_name: mv_svelte_customers
+    restart: always
+    ports:
+      - '${CUSTOMERS_PORT}:5173'
+    environment:
+      NODE_ENV: ${NODE_ENV}
+      SECRET_API_URL: ${CUSTOMERS_SECRET_API_URL}
+      SECRET_TOKEN_COOKIE_NAME: ${CUSTOMERS_SECRET_TOKEN_COOKIE_NAME}
+      SECRET_GOOGLE_CLIENT_ID: ${CUSTOMERS_SECRET_GOOGLE_CLIENT_ID}
+      SECRET_GOOGLE_REDIRECT_URI: ${CUSTOMERS_SECRET_GOOGLE_REDIRECT_URI}
+      SECRET_COOKIE_DOMAIN: ${CUSTOMERS_SECRET_COOKIE_DOMAIN}
+      SECRET_COOKIE_PATH: ${CUSTOMERS_SECRET_COOKIE_PATH}
+      SECRET_COOKIE_MAX_AGE: ${CUSTOMERS_SECRET_COOKIE_MAX_AGE}
+      SECRET_COOKIE_HTTP_ONLY: ${CUSTOMERS_SECRET_COOKIE_HTTP_ONLY}
+      SECRET_COOKIE_SAME_SITE: ${CUSTOMERS_SECRET_COOKIE_SAME_SITE}
+      SECRET_COOKIE_SECURE: ${CUSTOMERS_SECRET_COOKIE_SECURE}
+      PUBLIC_REVOLUT_PAYMENT_URL: ${PUBLIC_REVOLUT_PAYMENT_URL}
+    depends_on:
+      - mv_api-gateway_node
+      - mv_users_node
+      - mv_animal-examinations_node
+      - mv_invoices_node
+      - mv_reservations_node
+    volumes:
+      - ./svelte-customer/:/home/node/app
+#      - ./svelte-customer/node_modules:/home/node/app/node_modules
 
 volumes:  #slouží k perzistentnímu ukládání obsahu kontejnerů / images - pouze deklarace umístění záznamů, provázání v samotném kontejneru
   mv_mongodb:

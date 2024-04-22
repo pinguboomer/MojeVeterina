@@ -16,7 +16,7 @@ const jwt = require('jsonwebtoken');
  *  @throws {401} - Token expired
  *  @throws {403} - Forbidden
  **/
-const FETCH_URL = 'http://localhost:3004/v1/users/validate'
+const FETCH_URL = process.env.VALIDATE_USER_URL || 'http://localhost:3004/v1/users/validate'
 
 module.exports = async function auth(req, res, next) {
     // Check if the bearer token is present

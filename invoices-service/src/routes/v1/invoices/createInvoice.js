@@ -20,7 +20,7 @@ async function createInvoice(req, res) {
         // Count total price for Revolut
         let totalPrice = 0;
         value.items.forEach((item) => {
-            totalPrice += item.price;
+            totalPrice += item.price * item.quantity;
         });
         totalPrice = totalPrice * 100;
 
@@ -45,7 +45,7 @@ async function createInvoice(req, res) {
 
         try {
             const response = await axios(config)
-            console.log(JSON.stringify(response.data));
+            // console.log(JSON.stringify(response.data));
 
             invoice.transactionId = response.data.id;
             invoice.transactionPublicId = response.data.public_id;
@@ -54,12 +54,12 @@ async function createInvoice(req, res) {
             res.status(200).send(invoice);
         }
         catch (e) {
-            console.error(e);
+            // console.error(e);
             res.sendStatus(500);
         }
 
     } catch (e) {
-        console.error(e)
+        // console.error(e)
         res.sendStatus(500)
     }
 }
