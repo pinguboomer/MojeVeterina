@@ -75,7 +75,7 @@
                     <CalendarMonthSolid class={iconClass}/>
                 </svelte:fragment>
             </SidebarItem>
-            <SidebarItem href="/myInvoices" label="Moje platby">
+            <SidebarItem href="/invoices" label="Moje platby">
                 <svelte:fragment slot="icon">
                     <FileIcvoiceSolid class={iconClass}/>
                 </svelte:fragment>

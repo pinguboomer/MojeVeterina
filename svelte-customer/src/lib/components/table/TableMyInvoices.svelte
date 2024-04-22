@@ -1,7 +1,6 @@
 <script>
     import {
-        Button,
-        Heading,
+        A,
         Table,
         TableBody,
         TableBodyCell,
@@ -25,9 +24,9 @@
 
 </script>
 
-<Heading tag="h1">Moje Platby</Heading>
 
-<Table hoverable={true} striped={true}>
+
+<Table>
     <TableHead>
         <TableHeadCell>Datum vytvoření</TableHeadCell>
         <TableHeadCell>Datum splatnosti</TableHeadCell>
@@ -41,18 +40,17 @@
                 <TableBodyCell>
                     {formatDate(new Date(invoice.creationDate))}
                 </TableBodyCell>
-                <!--    TODO dodlěat datum splatnosti-->
                 <TableBodyCell>
-                    {invoice.dueDate}
+                    {formatDate(new Date(invoice.dueDate))}
                 </TableBodyCell>
                 <TableBodyCell>
                     {getFullPrice(invoice.items)}
                 </TableBodyCell>
                 <TableBodyCell>
-                    {invoice.paid ? "ano": "ne"}
+                    {invoice.paid ? "Ano": "Ne"}
                 </TableBodyCell>
                 <TableBodyCell>
-                    <Button href="/myInvoices/{invoice._id}">Zobrazit detail1</Button>
+                    <A href="/invoices/{invoice._id}">Detail</A>
                 </TableBodyCell>
             </TableBodyRow>
         {/each}

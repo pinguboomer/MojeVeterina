@@ -1,6 +1,7 @@
 import {env} from "$env/dynamic/private";
 import {fetchData} from "$lib/server/fetchData.js";
 import {redirect} from "@sveltejs/kit";
+import {getUserFromToken} from "$lib/server/getUserFromToken.js";
 
 /** @type {import('../../../../../.svelte-kit/types/src/routes').PageServerLoad} */
 export const load = async ({parent, cookies, locals}) => {
@@ -34,8 +35,10 @@ export const actions = {
             return {success: false, reason: "empty"}
         }
 
+        const user = getUserFromToken(cookies.get(env.SECRET_TOKEN_COOKIE_NAME))
+
         const body = {
-            email: formData.get('email'),
+            email: user.email,
             name: formData.get('name'),
             surname: formData.get('surname'),
             phone: formData.get('phone'),
@@ -57,7 +60,7 @@ export const actions = {
             body.city = null
         }
 
-        const res = await fetch(env.SECRET_API_URL + `/users-service/v1/users/${formData.get('id')}`, {
+        const res = await fetch(env.SECRET_API_URL + `/users-service/v1/users/${user._id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',

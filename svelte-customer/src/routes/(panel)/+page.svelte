@@ -29,7 +29,7 @@
             <div class="flex flex-col justify-center items-center p-8 text-center border-b md:border-b-0">
                 <Heading tag="h3" class="text-lg font-semibold text-gray-900 dark:text-white">Moje faktury</Heading>
                 <P class="my-4 font-light">Zobrazit moje faktury</P>
-                <Button href="/myInvoices">Zobrazit</Button>
+                <Button href="/invoices">Zobrazit</Button>
             </div>
 
             <!--    Nová faktura-->

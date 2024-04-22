@@ -16,8 +16,7 @@ export const load = async ({parent, cookies, locals}) => {
         }
     }
     catch (e) {
-        console.error(e)
-        // redirect(302, '/')
+        redirect(302, '/')
         // return {
         //     status: 500,
         //     error: e

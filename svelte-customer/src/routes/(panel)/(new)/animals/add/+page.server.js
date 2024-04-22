@@ -1,6 +1,7 @@
 import {env} from "$env/dynamic/private";
 import {fetchData} from "$lib/server/fetchData.js";
 import {redirect} from "@sveltejs/kit";
+import {getUserFromToken} from "$lib/server/getUserFromToken.js";
 
 /** @type {import('./$types').PageServerLoad} */
 export const load = async ({ parent }) => {
@@ -10,6 +11,7 @@ export const load = async ({ parent }) => {
 export const actions = {
     default: async ({ request, cookies }) => {
         const formData = await request.formData();
+        const user = getUserFromToken(cookies.get(env.SECRET_TOKEN_COOKIE_NAME))
 
         const body = {
             name: formData.get('name'),
@@ -17,7 +19,7 @@ export const actions = {
             sex: formData.get('sex'),
             birthDate: formData.get('birthDate'),
             deathDate: formData.get('deathDate'),
-            owner: formData.get('owner'),
+            owner: user._id,
         }
 
         if (body.name === '') {
@@ -32,8 +34,6 @@ export const actions = {
         if (body.deathDate === '') {
             delete body.deathDate
         }
-
-        console.log(body)
 
         const res = await fetch(env.SECRET_API_URL + '/animal-examinations-service/v1/animals', {
             method: 'POST',
