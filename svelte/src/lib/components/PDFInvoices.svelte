@@ -113,5 +113,5 @@
 </script>
 
 <iframe src={pdfURL} width="800px" height="700px" class="mb-2"></iframe>
-<Button href="/invoices/{invoice._id}">Zpět na Detail</Button>
+<Button href="/invoices/{invoice._id}">Zpět na detail</Button>
 <Button on:click={downloadPDF}>Stáhnout</Button>

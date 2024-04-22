@@ -3,6 +3,7 @@
     import {enhance} from "$app/forms";
 
     export let editButtonText = 'Upravit klienta'
+    export let showCreateInvoice = false
 
     export let form
 
@@ -43,6 +44,9 @@
             <Button class="w-full" type="submit">Uložit změny</Button>
         {:else}
             <Button class="w-full" type="button" on:click={() => editMode = true}>{editButtonText}</Button>
+        {/if}
+        {#if showCreateInvoice}
+            <Button class="w-full" href="/invoices/add?owner={customer._id}">Vytvořit fakturu</Button>
         {/if}
     </div>
     <Input type="hidden" hidden name="id" bind:value={customer._id} />

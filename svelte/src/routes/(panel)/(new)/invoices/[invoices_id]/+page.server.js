@@ -35,8 +35,6 @@ export const actions = {
 
         const id = formData.get('id')
 
-        console.log(id)
-
         const res = await fetch(env.SECRET_API_URL + `/invoices-service/v1/invoices/${id}`, {
             method: 'DELETE',
             headers: {

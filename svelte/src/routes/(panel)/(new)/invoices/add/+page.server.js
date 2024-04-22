@@ -42,8 +42,6 @@ export const actions = {
              items: items
         }
 
-        console.log(body)
-
         const res = await fetch(env.SECRET_API_URL + '/invoices-service/v1/invoices', {
             method: 'POST',
             headers: {
@@ -60,7 +58,7 @@ export const actions = {
         const data = await res.json()
 
         redirect(302, `/invoices/${data._id}`)
-        console.log("REDIRECT TO INVOICE")
+
         return { success: true, redirect: `/invoices/${data._id}`}
     }
 }

@@ -13,7 +13,6 @@
     const getFullPrice = function (items) {
         let fullPrice = 0;
         for (let item of items) {
-            console.log(item[2])
             let price = item.price * item.quantity;
             fullPrice = fullPrice + price
         }

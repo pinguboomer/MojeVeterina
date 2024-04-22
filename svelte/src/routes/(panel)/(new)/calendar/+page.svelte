@@ -4,6 +4,7 @@
     import {page} from "$app/stores";
     import {goto, invalidateAll} from "$app/navigation";
     import {Heading} from "flowbite-svelte";
+    import {TITLE_PREFIX} from "$lib/constants.js";
 
 
     const monthLabels = ["Leden", "Únor", "Březen", "Duben", "Květen", "Červen", "Červenec", "Srpen", "Září", "Říjen", "Listopad", "Prosinec"]
@@ -27,6 +28,10 @@
         return new Date(date.getFullYear(), date.getMonth(), date.getDate());
     }
 </script>
+
+<svelte:head>
+    <title>{TITLE_PREFIX}Rezervace</title>
+</svelte:head>
 
 
 <Heading class="mb-8">Rezervace</Heading>

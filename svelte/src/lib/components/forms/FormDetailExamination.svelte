@@ -45,7 +45,7 @@
     </Label>
     <Label class="space-y-2">
         <span>Váha zvířete</span>
-        <Input type="number" name="weight" min="0" bind:value={data.weight} disabled={!editMode}/>
+        <Input type="number" name="weight" min="0" step="0.01" bind:value={data.weight} disabled={!editMode}/>
     </Label>
     <Label class="space-y-2">
         <span>Diagnóza</span>

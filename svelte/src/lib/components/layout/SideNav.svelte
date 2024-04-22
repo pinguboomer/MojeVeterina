@@ -74,8 +74,8 @@
                     <ClipboardSolid class={iconClass}/>
                 </svelte:fragment>
                 <SidebarDropdownItem href="/customers"  label="Klienti"/>
-                <SidebarDropdownItem href="/animals"  label="Vyhledat zvíře"/>
-                <SidebarDropdownItem href="/animals/add" label="Přidat zvíře"/>
+                <SidebarDropdownItem href="/animals"  label="Vyhledat pacienta"/>
+                <SidebarDropdownItem href="/animals/add" label="Přidat pacienta"/>
             </SidebarDropdownWrapper>
             <SidebarDropdownWrapper label="Faktury">
                 <svelte:fragment slot="icon">

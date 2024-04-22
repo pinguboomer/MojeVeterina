@@ -46,8 +46,6 @@ export const actions = {
             delete body.deathDate
         }
 
-        console.log(body)
-
         const res = await fetch(env.SECRET_API_URL + '/animal-examinations-service/v1/animals', {
             method: 'POST',
             headers: {

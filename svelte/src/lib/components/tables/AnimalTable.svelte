@@ -66,7 +66,7 @@
                     {(animal.deathDate)? formatDate(new Date(animal.deathDate)) : '-'}
                 </TableBodyCell>
                 <TableBodyCell>
-                    <A href="animals/{animal._id}">Detail</A>
+                    <A href="/animals/{animal._id}">Detail</A>
                 </TableBodyCell>
             </TableBodyRow>
         {/each}

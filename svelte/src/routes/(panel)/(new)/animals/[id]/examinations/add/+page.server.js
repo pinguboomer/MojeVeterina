@@ -51,8 +51,6 @@ export const actions = {
             delete body.recommendation
         }
 
-        console.log(body)
-
         const res = await fetch(env.SECRET_API_URL + '/animal-examinations-service/v1/animal-examinations', {
             method: 'POST',
             headers: {
@@ -63,7 +61,6 @@ export const actions = {
         })
 
         if (!res.ok) {
-            console.log(res.status)
             return { success: false, reason: "unknown" }
         }
 

@@ -36,8 +36,6 @@ export const actions = {
     default: async ({ request, cookies, params }) => {
         const formData = await request.formData();
 
-        console.log(formData.get('animal'))
-
         const body = {
             author: getUserFromToken(cookies.get(env.SECRET_TOKEN_COOKIE_NAME))._id,
             animal: formData.get('animal'),
@@ -58,8 +56,6 @@ export const actions = {
         if (body.recommendation === '') {
             delete body.recommendation
         }
-
-        console.log(body)
 
         const res = await fetch(env.SECRET_API_URL + '/animal-examinations-service/v1/animal-examinations/' + params.examination_id, {
             method: 'PUT',

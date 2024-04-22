@@ -1,6 +1,6 @@
 <script>
 
-    import {Button, Heading, Helper, Input, Label, Textarea} from "flowbite-svelte";
+    import {Button, Helper, Input, Label, Textarea} from "flowbite-svelte";
     import {enhance} from "$app/forms";
 
     export let animal
@@ -25,7 +25,6 @@
 </script>
 
 <form class="flex flex-col space-y-6" method="post" use:enhance>
-    <Heading tag="h1" class="mb-4">Nové vyšetření</Heading>
     <Input class="hidden" type="text" name="animal" value={data.animal}></Input>
     <Label class="space-y-2">
         <span>Datum</span>
@@ -37,7 +36,7 @@
     </Label>
     <Label class="space-y-2">
         <span>Váha zvířete</span>
-        <Input type="number" name="weight" min="0" bind:value={data.weight}/>
+        <Input type="number" name="weight" min="0" step="0.01" bind:value={data.weight}/>
     </Label>
     <Label class="space-y-2">
         <span>Diagnóza</span>

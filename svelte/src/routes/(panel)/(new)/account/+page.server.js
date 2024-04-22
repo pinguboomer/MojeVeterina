@@ -1,12 +1,12 @@
 import {env} from "$env/dynamic/private";
 import {fetchData} from "$lib/server/fetchData.js";
 import {redirect} from "@sveltejs/kit";
+import {getUserFromToken} from "$lib/server/getUserFromToken.js";
 
 /** @type {import('../../../../../.svelte-kit/types/src/routes').PageServerLoad} */
 export const load = async ({parent, cookies, locals}) => {
     await parent();
 
-    console.log('LOAD LOCALS', locals)
     try {
         const [user] = await Promise.all([
             fetchData(env.SECRET_API_URL + `/users-service/v1/users/${locals.user._id}`, cookies),
