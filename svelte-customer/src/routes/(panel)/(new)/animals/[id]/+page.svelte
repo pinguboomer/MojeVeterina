@@ -1,7 +1,7 @@
 <script>
     import FormDetailAnimal from "$lib/components/forms/FormDetailAnimal.svelte";
     import ExaminationsTable from "$lib/components/tables/ExaminationsTable.svelte";
-    import {Heading} from "flowbite-svelte";
+    import {A, Heading} from "flowbite-svelte";
     import {TITLE_PREFIX} from "$lib/constants";
     export let data
     export let form
@@ -15,6 +15,7 @@
 </svelte:head>
 
 <Heading tag="h1" class="mb-8">Detail mazlíčka</Heading>
+<A href="/animals" class="mb-6">Zpět na moje mazlíčky</A>
 <div class="space-y-8 xl:flex xl:gap-8">
     <FormDetailAnimal
             user={data.user}

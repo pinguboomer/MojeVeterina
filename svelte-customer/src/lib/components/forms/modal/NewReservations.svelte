@@ -42,6 +42,6 @@
         {#if form && !form?.success}
             <Helper class="text-sm text-center mb-4" color="red">{getErrorText(form?.reason)}</Helper>
         {/if}
-        <Button class="w-full" type="submit" disabled={!!form?.success}>Provést rezervaci</Button>
+        <Button class="w-full" type="submit">Provést rezervaci</Button>
     </form>
 </Modal>
