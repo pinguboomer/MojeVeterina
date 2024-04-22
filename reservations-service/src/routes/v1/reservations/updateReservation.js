@@ -9,7 +9,7 @@ async function updateReservation(req, res) {
         const {value, error} = ReservationSchema.validate(req.body)
 
         if(error) {
-            console.log(error)
+            // console.log(error)
             return res.sendStatus(400)
         }
 

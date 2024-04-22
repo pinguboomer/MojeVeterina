@@ -9,7 +9,7 @@ async function updateAnimal(req, res) {
         const {value, error} = AnimalSchema.validate(req.body)
 
         if(error) {
-            console.log(error)
+            // console.log(error)
             return res.sendStatus(400)
         }
 
@@ -19,7 +19,7 @@ async function updateAnimal(req, res) {
             return res.sendStatus(404)
         }
 
-        console.log(updated)
+        // console.log(updated)
 
         res.sendStatus(204)
     }

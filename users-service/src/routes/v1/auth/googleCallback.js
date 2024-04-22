@@ -25,7 +25,7 @@ async function googleCallback(req, res) {
     }
 
     const data = await response.json();
-    console.log('DATA', data)
+    // console.log('DATA', data)
 
     const { access_token, id_token } = data;
 
@@ -45,14 +45,14 @@ async function googleCallback(req, res) {
     const profile = await response1.json();
 
     // Code to handle user authentication and retrieval using the profile data
-    console.log(profile)
+    // console.log(profile)
 
     let user
     if (!await User.exists({google_id: profile.id})) {  // if user with profile id not exists
         user = await User.findOne({email: profile.email})
 
         if (user) {   // if user with email exists = local account => add google_id
-            console.log('LOCAL USER EXISTS')
+            // console.log('LOCAL USER EXISTS')
             try {
                 user.google_id = profile.id
                 await user.save()
@@ -61,7 +61,7 @@ async function googleCallback(req, res) {
             }
         }
         else{   // if user with email not exists = create new user
-            console.log('USER NOT EXISTS')
+            // console.log('USER NOT EXISTS')
             try {
                 user = new User({
                     email: profile.email,
@@ -77,7 +77,7 @@ async function googleCallback(req, res) {
         }
     }
     else {  // user with profile id exists
-        console.log('GOOGLE USER EXISTS')
+        // console.log('GOOGLE USER EXISTS')
         user = await User.findOne({google_id: profile.id}).lean()
     }
 

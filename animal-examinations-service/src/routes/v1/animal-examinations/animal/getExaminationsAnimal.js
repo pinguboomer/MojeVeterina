@@ -12,7 +12,7 @@ async function getExaminationAnimal(req, res) {
         res.status(200).json(examinations)
     }
     catch (e) {
-        console.log(e)
+        // console.log(e)
         res.status(500)
     }
 }

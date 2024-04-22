@@ -9,7 +9,7 @@ async function updateExamination(req, res) {
         const {value, error} = AnimalExaminationSchema.validate(req.body)
 
         if(error) {
-            console.log(error)
+            // console.log(error)
             return res.sendStatus(400)
         }
 
