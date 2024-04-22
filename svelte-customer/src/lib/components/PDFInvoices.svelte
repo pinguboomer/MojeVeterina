@@ -116,7 +116,7 @@
 
 <iframe src={pdfURL} width="800px" height="700px" class="mb-2"></iframe>
 {#if invoice.paid === false}
-    <Button href={env.PUBLIC_REVOLUT_PAYMENT_URL + invoice.transactionPublicId}>Zaplatit</Button>
+    <Button href={env.PUBLIC_REVOLUT_PAYMENT_URL + invoice.transactionPublicId} target="_blank">Zaplatit</Button>
 {:else}
     <Button href="#" disabled>Zaplaceno</Button>
 {/if}
