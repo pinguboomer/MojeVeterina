@@ -2,7 +2,8 @@
     import FormNewAnimal from "$lib/components/forms/FormNewAnimal.svelte";
     import {goto} from "$app/navigation";
     import {Heading} from "flowbite-svelte";
-    import {TITLE_PREFIX} from "$lib/env";
+    import {TITLE_PREFIX} from "$lib/constants.js"
+
     export let data
     export let form
 

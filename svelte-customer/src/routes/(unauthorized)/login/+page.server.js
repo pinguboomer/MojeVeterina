@@ -13,7 +13,7 @@ export const load = async () => { //profile email
 
 /** @type {import('./$types').Actions} */
 export const actions = {
-    default: async ({ request, cookies }) => {  // TODO implement proper login
+    default: async ({ request, cookies }) => {
         const formData = await request.formData();
 
         const body = {
@@ -36,11 +36,6 @@ export const actions = {
 
         const data = await res.json()
 
-        // const user = JSON.parse(Base64.decode(data.token.split('.')[1]))
-        //
-        // if (user.role === 'CUSTOMER') {
-        //     return { success: false }
-        // }
 
         cookies.set(SECRET_TOKEN_COOKIE_NAME, data.token, {
             path: env.SECRET_COOKIE_PATH,
