@@ -5,7 +5,7 @@ import {getUserFromToken} from "$lib/server/getUserFromToken.js";
 
 /** @type {import('./$types').PageServerLoad} */
 export const load = async ({ url, cookies, locals }) => {
-    const res = await fetch(SECRET_API_URL + '/users-service/v1/auth/google/callback' + url.search + '&mv_redirect=http://localhost:5174/api/auth/google/callback', {method: "POST"})
+    const res = await fetch(SECRET_API_URL + '/users-service/v1/auth/google/callback' + url.search + '&mv_redirect=' + env.SECRET_GOOGLE_REDIRECT_URI, {method: "POST"})
 
     if (!res.ok) {
         throw new Error('GOOGLE ERROR' + res.statusText)
@@ -16,7 +16,9 @@ export const load = async ({ url, cookies, locals }) => {
     const user = getUserFromToken(data.token)
 
     if (user.role === 'CUSTOMER') {
-        return { success: false }
+        redirect(302, '/login')
+        return
+        // return { success: false }
     }
 
     console.log(data)
@@ -28,8 +30,6 @@ export const load = async ({ url, cookies, locals }) => {
         httpOnly: env.SECRET_COOKIE_HTTP_ONLY === "true",
         maxAge: parseInt(env.SECRET_COOKIE_MAX_AGE),
     })
-
-    locals.user = data.token
 
     redirect(302, '/');
 
