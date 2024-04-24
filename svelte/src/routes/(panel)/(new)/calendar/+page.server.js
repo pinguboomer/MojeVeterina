@@ -19,7 +19,7 @@ export const load = async ({ parent, cookies, url}) => {
         const [animals, reservations, users] = await Promise.all([
             fetchData(env.SECRET_API_URL + '/animal-examinations-service/v1/animals', cookies),
             fetchData(env.SECRET_API_URL + '/reservations-service/v1/reservations/date/' + date, cookies),
-            fetchData(env.SECRET_API_URL + '/users-service/v1/users?role=CUSTOMER', cookies)
+            fetchData(env.SECRET_API_URL + '/users-service/v1/users', cookies) //?role=CUSTOMER
         ])
 
         return {

@@ -56,7 +56,7 @@
                     {#if !reservations.find(x => new Date(x.date).getHours() === i + 1)}
                         <NewReservations
                                 form={form}
-                                animals={animals.map((animal) => { return { name: `${animal.name}`, value: animal._id } })}
+                                animals={animals.map((animal) => { return { name: `${animal.name? animal.name + ' + ' : ''}${animal.species}`, value: animal._id } })}
                                 date={setHour(date,i)}
                         />
                     {/if}

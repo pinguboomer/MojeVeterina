@@ -54,7 +54,7 @@
         <ReservationsCalendar
                 date={dateForReservations}
                 animals={data.animals}
-                reservations={data.reservations}
+                reservations={data.reservations || []}
                 clients={data.users}
         />
     {/if}

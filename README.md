@@ -1,12 +1,17 @@
 # Moje veterina
 
 ## Instalace a spuštění
-Pro lokální instalaci a spuštění projektu je nutné ve složkách 
-jednotlivých service zadat následující sekvenci příkazů:
+Pro lokální instalaci a spuštění projektu je nutné nejprve spustit
+instanci MongoDB (třeba z přiloženého souboru `docker-compose.mongo.yml`), 
+nastavit `.env` soubory ve složkách jednotlivých service 
+a zadat v každé z nich následující sekvenci příkazů:
 
 1. `npm install`
 2. `npm install -g nodemon`
 3. `npm run dev`
+
+Po spuštění je nutné provést registraci uživatele a pomocí nástroje, 
+jako například MongoDBCompass, změnit jeho roli z `CUSTOMER` na `ADMIN`.
 
 Rozložení microservice je následující:
 - `api-gateway-service` - API gateway

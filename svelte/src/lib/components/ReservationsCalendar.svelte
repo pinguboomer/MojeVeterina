@@ -1,7 +1,6 @@
 <script>
     import {
         A,
-        Button,
         Heading,
         P, Table,
         TableBody,
@@ -16,12 +15,17 @@
     export let date;
 
     export let animals
-    export let reservations
+    export let reservations = []
 
     export let clients
 
+    let reservationsExtended
 
-
+    $: reservationsExtended = reservations.map(reservation => {
+        const client = clients.find(client => client._id === reservation.user);
+        const animal = animals.find(animal => animal._id === reservation.animal);
+        return {...reservation, client, animal};
+    });
 </script>
 <Heading tag="h2" class="mb-4 text-2xl">{formatDate(date)}</Heading>
 <Table>
@@ -42,21 +46,21 @@
                     {String((i + 1) + ':00')}
                 </TableBodyCell>
                 <TableBodyCell>
-                    {#if reservations.find(x => new Date(x.date).getHours() === i + 1)}
-                        <P>{clients.find(x => x._id === reservations.find(x => new Date(x.date).getHours() === i + 1).user).name}
-                            {clients.find(x => x._id === reservations.find(x => new Date(x.date).getHours() === i + 1).user).surname}
+                    {#if reservationsExtended.find(x => new Date(x.date).getHours() === i + 1)}
+                        <P class="mb-2">
+                            {reservationsExtended.find(x => new Date(x.date).getHours() === i + 1)?.reason ?? ''}
                         </P>
-                        <P>{
-                            animals.find(x => x._id === reservations.find(x => new Date(x.date).getHours() === i + 1).animal).species
-                        }</P>
-                        <P>
-                            {reservations.find(x => new Date(x.date).getHours() === i + 1).reason}
+                        <P class="text-sm">
+                            {reservationsExtended.find(x => new Date(x.date).getHours() === i + 1)?.animal?.species ?? ''} - {reservationsExtended.find(x => new Date(x.date).getHours() === i + 1)?.animal?.name ?? ''}
+                        </P>
+                        <P class="text-sm text-gray-500">
+                            {reservationsExtended.find(x => new Date(x.date).getHours() === i + 1)?.client?.name ?? ''} {reservationsExtended.find(x => new Date(x.date).getHours() === i + 1)?.client?.surname ?? ''} ({reservationsExtended.find(x => new Date(x.date).getHours() === i + 1)?.client?.email ?? ''})
                         </P>
                     {/if}
                 </TableBodyCell>
                 <TableBodyCell>
                     {#if reservations.find(x => new Date(x.date).getHours() === i + 1)}
-                        <A href="/animals/{animals.find(x => x._id === reservations.find(x => new Date(x.date).getHours() === i + 1).animal)._id}">
+                        <A href="/animals/{animals.find(x => x._id === reservations.find(x => new Date(x.date).getHours() === i + 1).animal)?._id}">
                            Detail
                         </A>
                     {/if}

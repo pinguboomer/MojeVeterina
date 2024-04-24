@@ -23,7 +23,7 @@
 
     function getNameAnimal(id){
         const animal = animals.find(x => x._id === id)
-        return `${animal.name} (${animal.species})`;
+        return `${animal.name ?? ''} (${animal.species})`;
     }
 </script>
 
