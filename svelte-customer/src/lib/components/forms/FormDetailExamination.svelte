@@ -1,6 +1,6 @@
 <script>
 
-    import {A, Input, Label, Textarea} from "flowbite-svelte";
+    import {Input, Label, Textarea} from "flowbite-svelte";
 
     export let animal
 
@@ -14,7 +14,6 @@
     }
 </script>
 
-<A href="/animals/{animal._id}">Zpět na mazlíčka</A>
 <div class="flex flex-col space-y-6">
     <Input type="text" name="animal" bind:value={animal._id} hidden class="hidden" disabled></Input>
     <Label class="space-y-2">
