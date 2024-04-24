@@ -40,8 +40,8 @@ export const actions = {
         cookies.set(SECRET_TOKEN_COOKIE_NAME, data.token, {
             path: env.SECRET_COOKIE_PATH,
             sameSite: env.SECRET_COOKIE_SAME_SITE,
-            secure: !!env.SECRET_COOKIE_SECURE,
-            httpOnly: !!env.SECRET_COOKIE_HTTP_ONLY,
+            secure: env.SECRET_COOKIE_SECURE === "true",
+            httpOnly: env.SECRET_COOKIE_HTTP_ONLY === "true",
             maxAge: parseInt(env.SECRET_COOKIE_MAX_AGE),
         })
 

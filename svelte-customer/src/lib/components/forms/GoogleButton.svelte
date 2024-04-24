@@ -1,9 +1,7 @@
 <script>
-    import {goto} from "$app/navigation";
-
     export let url
     async function handleGoogleLogin() {
-        await goto(url)
+        await window.location.replace(url)
     }
 </script>
 

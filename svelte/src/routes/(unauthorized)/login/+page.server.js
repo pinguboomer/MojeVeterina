@@ -2,6 +2,7 @@ import { SECRET_API_URL, SECRET_TOKEN_COOKIE_NAME, SECRET_GOOGLE_CLIENT_ID, SECR
 import {redirect} from "@sveltejs/kit";
 import {env} from "$env/dynamic/private";
 import {Base64} from "js-base64";
+import {getUserFromToken} from "$lib/server/getUserFromToken.js";
 
 /** @type {import('./$types').PageServerLoad} */
 export const load = async () => { //profile email
@@ -36,7 +37,7 @@ export const actions = {
 
         const data = await res.json()
 
-        const user = JSON.parse(Base64.decode(data.token.split('.')[1]))
+        const user = getUserFromToken(data.token)
 
         if (user.role === 'CUSTOMER') {
             return { success: false }
@@ -45,8 +46,8 @@ export const actions = {
         cookies.set(SECRET_TOKEN_COOKIE_NAME, data.token, {
             path: env.SECRET_COOKIE_PATH,
             sameSite: env.SECRET_COOKIE_SAME_SITE,
-            secure: !!env.SECRET_COOKIE_SECURE,
-            httpOnly: !!env.SECRET_COOKIE_HTTP_ONLY,
+            secure: env.SECRET_COOKIE_SECURE === "true",
+            httpOnly: env.SECRET_COOKIE_HTTP_ONLY === "true",
             maxAge: parseInt(env.SECRET_COOKIE_MAX_AGE),
         })
 

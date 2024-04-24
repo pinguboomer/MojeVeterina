@@ -2,7 +2,7 @@ const {User} = require("../../../model/User");
 const signToken = require("../../../functions/signToken");
 
 async function googleCallback(req, res) {
-    const { code } = req.query;
+    const { code, mv_redirect } = req.query;
 
     const response = await fetch('https://oauth2.googleapis.com/token', {
         method: 'POST',
@@ -11,7 +11,7 @@ async function googleCallback(req, res) {
             client_id: process.env.GOOGLE_CLIENT_ID,
             client_secret: process.env.GOOGLE_CLIENT_SECRET,
             code,
-            redirect_uri: process.env.GOOGLE_REDIRECT_URI,
+            redirect_uri: mv_redirect,
             grant_type: 'authorization_code',
         }),
     })
